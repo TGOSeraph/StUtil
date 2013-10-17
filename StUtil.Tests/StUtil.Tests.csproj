@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0E264438-CE1E-4417-B548-1E76EE167A9B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StUtil.Tests</RootNamespace>
+    <AssemblyName>StUtil.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StUtil.Automation\StUtil.Automation.csproj">
+      <Project>{a8425d60-c18a-4177-8361-5b1501042b5a}</Project>
+      <Name>StUtil.Automation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Console\StUtil.Console.csproj">
+      <Project>{e1c6d3e6-688e-40ac-b94f-b02466fef20e}</Project>
+      <Name>StUtil.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Debugging\StUtil.Debugging.csproj">
+      <Project>{b26efbd2-3066-458f-a65c-6d05db9267e1}</Project>
+      <Name>StUtil.Debugging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Imaging\StUtil.Imaging.csproj">
+      <Project>{5ad8a626-a154-4fbb-89ac-72348258ea63}</Project>
+      <Name>StUtil.Imaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
+      <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
+      <Name>StUtil.Native</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Net\StUtil.Net.csproj">
+      <Project>{0cd752b9-b072-4c76-b64d-eb8873dc666f}</Project>
+      <Name>StUtil.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Reflection\StUtil.Reflection.csproj">
+      <Project>{2a845b03-fb29-46be-92dc-8345e47443c9}</Project>
+      <Name>StUtil.Reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.UI\StUtil.UI.csproj">
+      <Project>{d82c9d9c-eb79-4c4b-afbf-60811f1540e0}</Project>
+      <Name>StUtil.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Video\StUtil.Video.csproj">
+      <Project>{115776a2-4f01-46fa-a335-a829a0f51509}</Project>
+      <Name>StUtil.Video</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
