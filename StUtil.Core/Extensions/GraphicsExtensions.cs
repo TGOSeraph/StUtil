@@ -51,6 +51,12 @@ namespace StUtil.Extensions
             }
             return path;
         }
+        /// <summary>
+        /// Creates a graphics path for a capsule
+        /// </summary>
+        /// <param name="graphics">The graphics object to use to create the path</param>
+        /// <param name="baseRect">The rectangle to create the path at</param>
+        /// <returns>A graphics path representing the capsule</returns>
         private static GraphicsPath GenerateCapsule(this Graphics graphics, RectangleF baseRect)
         {
             float diameter;
@@ -87,6 +93,7 @@ namespace StUtil.Extensions
         /// Draws a rounded rectangle specified by a pair of coordinates, a width, a height and the radius 
         /// for the arcs that make the rounded edges.
         /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
         /// <param name="pen">System.Drawing.Pen that determines the color, width and style of the rectangle.</param>
         /// <param name="x">The x-coordinate of the upper-left corner of the rectangle to draw.</param>
         /// <param name="y">The y-coordinate of the upper-left corner of the rectangle to draw.</param>
@@ -127,6 +134,7 @@ namespace StUtil.Extensions
         /// <summary>
         /// Draws a rounded rectangle at the specified rectangle with the supplied radius
         /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
         /// <param name="pen">The color to draw the rounded rectangle</param>
         /// <param name="rect">The location and size of the rounded rectangle</param>
         /// <param name="radius">The radius of the arcs used for the rounded corners</param>
@@ -145,6 +153,7 @@ namespace StUtil.Extensions
         /// Fills the interior of a rounded rectangle specified by a pair of coordinates, a width, a height
         /// and the radius for the arcs that make the rounded edges.
         /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
         /// <param name="brush">System.Drawing.Brush that determines the characteristics of the fill.</param>
         /// <param name="x">The x-coordinate of the upper-left corner of the rectangle to fill.</param>
         /// <param name="y">The y-coordinate of the upper-left corner of the rectangle to fill.</param>
@@ -161,6 +170,12 @@ namespace StUtil.Extensions
             graphics.SmoothingMode = old;
         }
 
+        /// <summary>
+        /// Fills the interior of a rounded rectangle
+        /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
+        /// <param name="brush">System.Drawing.Brush that determines the characteristics of the fill.</param>
+        /// <param name="radius">The radius of the arc used for the rounded edges.</param>
         public static void FillRoundedRectangle(this Graphics graphics, Brush brush, Rectangle rect, int radius)
         {
             graphics.FillRoundedRectangle(
@@ -172,6 +187,17 @@ namespace StUtil.Extensions
                 Convert.ToSingle(radius));
         }
 
+        /// <summary>
+        /// Fills the interior of a rounded rectangle specified by a pair of coordinates, a width, a height
+        /// and the radius for the arcs that make the rounded edges.
+        /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
+        /// <param name="brush">System.Drawing.Brush that determines the characteristics of the fill.</param>
+        /// <param name="x">The x-coordinate of the upper-left corner of the rectangle to fill.</param>
+        /// <param name="y">The y-coordinate of the upper-left corner of the rectangle to fill.</param>
+        /// <param name="width">Width of the rectangle to fill.</param>
+        /// <param name="height">Height of the rectangle to fill.</param>
+        /// <param name="radius">The radius of the arc used for the rounded edges.</param>
         public static void FillRoundedRectangle(this Graphics graphics, Brush brush, int x, int y, int width, int height, int radius)
         {
             graphics.FillRoundedRectangle(
@@ -183,11 +209,30 @@ namespace StUtil.Extensions
                 Convert.ToSingle(radius));
         }
 
+        /// <summary>
+        /// Fills a triangle with the specified brush with the triangle pointing in the specified direction
+        /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
+        /// <param name="brush">System.Drawing.Brush that determines the characteristics of the fill.</param>
+        /// <param name="direction">The direction the point of the arrow should face</param>
+        /// <param name="rect">The rectangle containing the triangle</param>
+        /// <param name="addLineBase">If a base line should be added to the triangle</param>
         public static void FillTriangle(this Graphics g, Brush brush, ArrowDirection direction, Rectangle rect, bool addLineBase = false)
         {
             FillTriangle(g, brush, direction, rect.X, rect.Y, rect.Width, rect.Height, addLineBase);
         }
 
+        /// <summary>
+        /// Fills a triangle with the specified brush with the triangle pointing in the specified direction
+        /// </summary>
+        /// <param name="graphics">The graphics object used to draw</param>
+        /// <param name="brush">System.Drawing.Brush that determines the characteristics of the fill.</param>
+        /// <param name="direction">The direction the point of the arrow should face</param>
+        /// <param name="x">The X coordinate of the rectangle containin the arrow</param>
+        /// <param name="y">The Y coordinate of the rectangle containin the arrow</param>
+        /// <param name="w">The width of the rectangle containin the arrow</param>
+        /// <param name="h">The height of the rectangle containin the arrow</param>
+        /// <param name="addLineBase"></param>
         public static void FillTriangle(this Graphics g, Brush brush, ArrowDirection direction, int x, int y, int w, int h, bool addLineBase = false)
         {
             PointF[] path = null;

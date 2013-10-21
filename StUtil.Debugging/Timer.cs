@@ -6,11 +6,25 @@ using System.Text;
 using StUtil.Extensions;
 namespace StUtil.Debugging
 {
+    /// <summary>
+    /// Class to make the timing of events easier
+    /// </summary>
     public static class Timer
     {
+        /// <summary>
+        /// The static ID to be given to the next started timer
+        /// </summary>
         private static int id = 0;
+        /// <summary>
+        /// Store of IDs and their stopwatches and tagged strings
+        /// </summary>
         private static Dictionary<int, KeyValuePair<string, Stopwatch>> store = new Dictionary<int, KeyValuePair<string, Stopwatch>>();
 
+        /// <summary>
+        /// Start a new timer
+        /// </summary>
+        /// <param name="tag">The tag or description to give the timer</param>
+        /// <returns>The ID of the timer used to stop it</returns>
         public static int Start(string tag = null)
         {
             lock (store)

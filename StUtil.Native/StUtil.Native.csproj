@@ -36,10 +36,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StUtil.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StUtil\bin\Debug\StUtil.Core.dll</HintPath>
-    </Reference>
     <Reference Include="StUtil.Reflection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\StUtil.Reflection\bin\Debug\StUtil.Reflection.dll</HintPath>
@@ -76,7 +72,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

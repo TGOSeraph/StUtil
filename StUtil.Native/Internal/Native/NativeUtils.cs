@@ -30,14 +30,13 @@ namespace StUtil.Internal.Native
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                return NativeMethods.SetWindowsHookEx(NativeConsts.WH_KEYBOARD_LL, proc,
-                    NativeMethods.GetModuleHandle(curModule.ModuleName), 0);
+                return NativeMethods.SetWindowsHookEx(NativeConsts.WH_KEYBOARD_LL, proc, NativeMethods.GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
         public static void SetTopMost(Control control)
         {
-                NativeMethods.SetWindowPos(control.Handle, NativeConsts.HWND_TOPMOST, 0, 0, 0, 0, 0x13);
+            NativeMethods.SetWindowPos(control.Handle, NativeConsts.HWND_TOPMOST, 0, 0, 0, 0, 0x13);
         }
 
         public static NativeStructs.SCROLLINFO GetScrollInfo(Control ctrl, NativeEnums.ScrollBarDirection direction)

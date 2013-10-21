@@ -65,6 +65,13 @@ namespace StUtil.Extensions
             return ResizeImage(b, sz.Width, sz.Height);
         }
 
+        /// <summary>
+        /// Get the scaled size while maintaining the aspect ratio
+        /// </summary>
+        /// <param name="b">The image to get the scaled dimensions of</param>
+        /// <param name="maxW">The maximum width of the output size</param>
+        /// <param name="maxH">The maximum height of the output size</param>
+        /// <returns>The min(maxW,maxH) while scaled maintaining aspect ratio</returns>
         public static Size GetResizedMaintainedAspectRatio(this System.Drawing.Image b, int maxW, int maxH)
         {
             int w = b.Width;

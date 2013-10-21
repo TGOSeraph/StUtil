@@ -18,8 +18,5 @@ namespace StUtil.Extensions
             list.Add(item);
             return list;
         }
-
-     
-        
     }
 }

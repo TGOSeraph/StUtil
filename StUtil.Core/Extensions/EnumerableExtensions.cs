@@ -87,8 +87,7 @@ namespace StUtil.Extensions
         /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
         /// <exception cref="InvalidOperationException"><paramref name="source"/> is empty</exception>
         /// <![CDATA[From: http://code.google.com/p/morelinq/source/browse/MoreLinq/MinBy.cs]]>
-        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source,
-            Func<TSource, TKey> selector)
+        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector)
         {
             return source.MinBy(selector, Comparer<TKey>.Default);
         }
@@ -113,8 +112,7 @@ namespace StUtil.Extensions
         /// or <paramref name="comparer"/> is null</exception>
         /// <exception cref="InvalidOperationException"><paramref name="source"/> is empty</exception>
         /// <![CDATA[From: http://code.google.com/p/morelinq/source/browse/MoreLinq/MinBy.cs]]>
-        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source,
-            Func<TSource, TKey> selector, IComparer<TKey> comparer)
+        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector, IComparer<TKey> comparer)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -141,14 +139,48 @@ namespace StUtil.Extensions
             }
         }
 
-        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
-          Func<TSource, TKey> selector)
+        /// <summary>
+        /// Returns the maximum element of the given sequence, based on
+        /// the given projection.
+        /// </summary>
+        /// <remarks>
+        /// If more than one element has the maximum projected value, the first
+        /// one encountered will be returned. This overload uses the default comparer
+        /// for the projected type. This operator uses immediate execution, but
+        /// only buffers a single result (the current maximum element).
+        /// </remarks>
+        /// <typeparam name="TSource">Type of the source sequence</typeparam>
+        /// <typeparam name="TKey">Type of the projected element</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <param name="selector">Selector to use to pick the results to compare</param>
+        /// <returns>The maximum element, according to the projection.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> or <paramref name="selector"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> is empty</exception>
+        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector)
         {
             return source.MaxBy(selector, Comparer<TKey>.Default);
         }
 
-        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
-    Func<TSource, TKey> selector, IComparer<TKey> comparer)
+        /// <summary>
+        /// Returns the maximum element of the given sequence, based on
+        /// the given projection and the specified comparer for projected values.
+        /// </summary>
+        /// <remarks>
+        /// If more than one element has the maximum projected value, the first
+        /// one encountered will be returned. This overload uses the default comparer
+        /// for the projected type. This operator uses immediate execution, but
+        /// only buffers a single result (the current maximum element).
+        /// </remarks>
+        /// <typeparam name="TSource">Type of the source sequence</typeparam>
+        /// <typeparam name="TKey">Type of the projected element</typeparam>
+        /// <param name="source">Source sequence</param>
+        /// <param name="selector">Selector to use to pick the results to compare</param>
+        /// <param name="comparer">Comparer to use to compare projected values</param>
+        /// <returns>The maximum element, according to the projection.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/>, <paramref name="selector"/>
+        /// or <paramref name="comparer"/> is null</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="source"/> is empty</exception>
+        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector, IComparer<TKey> comparer)
         {
             if (source == null) throw new ArgumentNullException("source");
             if (selector == null) throw new ArgumentNullException("selector");
@@ -175,6 +207,12 @@ namespace StUtil.Extensions
             }
         }
 
+        /// <summary>
+        /// Returns the most frequently seen element in the collection
+        /// </summary>
+        /// <typeparam name="TSource">The type of the collection</typeparam>
+        /// <param name="source">The collection to search</param>
+        /// <returns>The most frequently seen element in the collection</returns>
         public static TSource MostFrequent<TSource>(this IEnumerable<TSource> source)
         {
             Dictionary<TSource, int> counts = new Dictionary<TSource, int>();
@@ -280,10 +318,22 @@ namespace StUtil.Extensions
             return items;
         }
 
+        /// <summary>
+        /// Get the first element of the sequence
+        /// </summary>
+        /// <typeparam name="T">The type of the sequence</typeparam>
+        /// <param name="source">The sequence to get the first element from</param>
+        /// <returns>The first element in the sequence</returns>
         public static T FirstElement<T>(this IEnumerable source)
         {
             return (T)FirstElement(source);
         }
+        /// <summary>
+        /// Get the first element of the sequence
+        /// </summary>
+        /// <typeparam name="T">The type of the sequence</typeparam>
+        /// <param name="source">The sequence to get the first element from</param>
+        /// <returns>The first element in the sequence</returns>
         public static object FirstElement(this IEnumerable source)
         {
             if (source == null)
