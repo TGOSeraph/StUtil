@@ -20,12 +20,12 @@ namespace StUtil.CodeGen.CSharp
         public CSharpCodeGenerator()
         {
             base.CodeFormatter = new CSharpCodeFormatter();
-            string memberContainer = "{Regions}{-\n\n}{Classes}{-\n\n}{Events}{-\n\n}{Fields}{-\n}";
+            string memberContainer = "{Regions}{-\n\n}{Classes}{-\n\n}{Events}{-\n\n}{Fields}{-\n\n}{Methods}{-\n}";
 
             RegisterDefinition<AttributeSection>("[{Attributes}]");
             RegisterDefinition<StUtil.CodeGen.CodeObjects.Attributes.Attribute>("{Name}({Parameters}{+, }{NamedParameters})");
             RegisterDefinition<GenericConstraint>("{GenericArgument} : {TypeConstraints}");
-            
+
             RegisterDefinition<Namespace>("{Usings}{-\n\n}namespace {Name}\n\\{\n" + memberContainer + "\\}");
             RegisterDefinition<Using>("using {Value};");
             RegisterDefinition<Region>("#region {Name}\n" + memberContainer + "#endregion");
@@ -33,7 +33,7 @@ namespace StUtil.CodeGen.CSharp
             RegisterDefinition<Class>("{Attributes}{-\n}{AccessModifier}{- }{ClassModifier}{- }class {Name}{+<}{GenericArguments}{->}{+ : }{Inherits}{+ where }{GenericConstraints}\n\\{\n" + memberContainer + "\\}");
             RegisterDefinition<Field>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }{ReturnType} {Name}{+ = }{Value};");
             RegisterDefinition<Event>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }event {HandlerType} {Name};");
-            RegisterDefinition<Method>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }{Implements}{- }{Type} {Name}{+<}{GenericArguments}{->}({Parameters}){+ where }{GenericConstraints}\\{\n\\}");
+            RegisterDefinition<Method>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }{Implements}{- }{ReturnType} {Name}{+<}{GenericArguments}{->}({Parameters}){+ where }{GenericConstraints}\n\\{\n\\}");
         }
 
         protected override string ConvertFromType(Type obj, Type[] type, object owner)
@@ -100,6 +100,24 @@ namespace StUtil.CodeGen.CSharp
             {
                 case EventModifiers.Static:
                     return "static";
+            }
+            return "";
+        }
+
+        protected override string ConvertFromMethodModifiers(MethodModifiers obj, object owner)
+        {
+            switch (obj)
+            {
+                case MethodModifiers.Abstract:
+                    return "abstract";
+                case MethodModifiers.New:
+                    return "new";
+                case MethodModifiers.Override:
+                    return "override";
+                case MethodModifiers.Static:
+                    return "static";
+                case MethodModifiers.Virtual:
+                    return "virtual";
             }
             return "";
         }

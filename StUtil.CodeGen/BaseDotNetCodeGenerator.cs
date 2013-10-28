@@ -28,6 +28,7 @@ namespace StUtil.CodeGen
             RegisterObjectConverter<ClassModifiers>(ConvertFromClassModifiers);
             RegisterObjectConverter<FieldModifiers>(ConvertFromFieldModifiers);
             RegisterObjectConverter<EventModifiers>(ConvertFromEventModifiers);
+            RegisterObjectConverter<MethodModifiers>(ConvertFromMethodModifiers);
             RegisterObjectConverter<string>(ConvertFromString);
             RegisterObjectConverter<Type>(CovertFromType);
         }
@@ -303,6 +304,7 @@ namespace StUtil.CodeGen
         protected abstract string ConvertFromClassModifiers(ClassModifiers obj, object owner);
         protected abstract string ConvertFromFieldModifiers(FieldModifiers obj, object owner);
         protected abstract string ConvertFromEventModifiers(EventModifiers obj, object owner);
+        protected abstract string ConvertFromMethodModifiers(MethodModifiers obj, object owner);
 
         protected string ConvertFromString(string obj, object owner)
         {
@@ -318,6 +320,10 @@ namespace StUtil.CodeGen
 
         private string CovertFromType(Type obj, object owner)
         {
+            if (obj == typeof(void))
+            {
+                return "void";
+            }
             if (obj.GetGenericArguments().Length > 0)
             {
                 return ConvertFromType(obj, obj.GetGenericArguments(), owner);
