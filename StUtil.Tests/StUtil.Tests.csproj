@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClass.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +83,10 @@
     <ProjectReference Include="..\StUtil.Automation\StUtil.Automation.csproj">
       <Project>{a8425d60-c18a-4177-8361-5b1501042b5a}</Project>
       <Name>StUtil.Automation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.CodeGen\StUtil.CodeGen.csproj">
+      <Project>{36f2544b-4556-49ce-bf13-e49a9d278756}</Project>
+      <Name>StUtil.CodeGen</Name>
     </ProjectReference>
     <ProjectReference Include="..\StUtil.Console\StUtil.Console.csproj">
       <Project>{e1c6d3e6-688e-40ac-b94f-b02466fef20e}</Project>

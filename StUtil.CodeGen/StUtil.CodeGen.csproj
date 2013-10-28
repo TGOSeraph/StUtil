@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{36F2544B-4556-49CE-BF13-E49A9D278756}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StUtil.CodeGen</RootNamespace>
+    <AssemblyName>StUtil.CodeGen</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseDotNetCodeGenerator.cs" />
+    <Compile Include="CodeObjects\Attributes\Attribute.cs" />
+    <Compile Include="CodeObjects\Attributes\AttributeSection.cs" />
+    <Compile Include="CodeObjects\BaseCodeObject.cs" />
+    <Compile Include="CodeObjects\Base\AccessAttributedNamedObject.cs" />
+    <Compile Include="CodeObjects\Base\AccessNamedObject.cs" />
+    <Compile Include="CodeObjects\Base\AttributedNamedObject.cs" />
+    <Compile Include="CodeObjects\Base\MemberContainerObject.cs" />
+    <Compile Include="CodeObjects\Base\NamedObject.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Class.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Event.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Field.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Method.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Namespace.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Region.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Using.cs" />
+    <Compile Include="CodeObjects\Data\DataObject.cs" />
+    <Compile Include="CodeObjects\Data\Parameter.cs" />
+    <Compile Include="CodeObjects\Data\TextObject.cs" />
+    <Compile Include="CodeObjects\Data\TypeObject.cs" />
+    <Compile Include="CodeObjects\Generic\GenericArgument.cs" />
+    <Compile Include="CodeObjects\Generic\GenericConstraint.cs" />
+    <Compile Include="CodeObjects\Generic\GenericParameter.cs" />
+    <Compile Include="CodeObjects\ICodeObject.cs" />
+    <Compile Include="CodeObjects\KeywordAttribute.cs" />
+    <Compile Include="CodeObjects\Misc\AccessModifiers.cs" />
+    <Compile Include="CodeObjects\Misc\ClassModifiers.cs" />
+    <Compile Include="CodeObjects\Misc\CodeObjectDictionary.cs" />
+    <Compile Include="CodeObjects\Misc\CodeObjectList.cs" />
+    <Compile Include="CodeObjects\Misc\EventModifiers.cs" />
+    <Compile Include="CodeObjects\Misc\FieldModifiers.cs" />
+    <Compile Include="CodeObjects\Misc\ICodeObjectDictionary.cs" />
+    <Compile Include="CodeObjects\Misc\ICodeObjectList.cs" />
+    <Compile Include="CodeObjects\Misc\MethodModifiers.cs" />
+    <Compile Include="CSharp\CSharpCodeFormatter.cs" />
+    <Compile Include="CSharp\CSharpCodeGenerator.cs" />
+    <Compile Include="IDotNetCodeFormatter.cs" />
+    <Compile Include="IDotNetCodeGenerator.cs" />
+    <Compile Include="KeyMatch.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeDefinition.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Reflection\StUtil.Reflection.csproj">
+      <Project>{2a845b03-fb29-46be-92dc-8345e47443c9}</Project>
+      <Name>StUtil.Reflection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
