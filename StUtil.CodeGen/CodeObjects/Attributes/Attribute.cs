@@ -9,12 +9,26 @@ using System.Threading.Tasks;
 
 namespace StUtil.CodeGen.CodeObjects.Attributes
 {
+    /// <summary>
+    /// Code object representing an Attribute
+    /// </summary>
     [Keyword]
     public class Attribute : NamedObject
     {
+        /// <summary>
+        /// The parameters to pass to the attributes constructor
+        /// </summary>
         public CodeObjectList<DataObject> Parameters { get; set; }
+        /// <summary>
+        /// The properties on the attribute to set by name
+        /// </summary>
         public CodeObjectDictionary<string, DataObject> NamedParameters { get; set; }
 
+        /// <summary>
+        /// Create a new attribute object
+        /// </summary>
+        /// <param name="name">The name of the attribute</param>
+        /// <param name="parameters">The parameters to pass to the attributes constructor</param>
         public Attribute(string name, params DataObject[] parameters)
             :base(name)
         {
