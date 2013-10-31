@@ -53,8 +53,13 @@
     <Compile Include="CodeObjects\CodeStructures\Field.cs" />
     <Compile Include="CodeObjects\CodeStructures\Method.cs" />
     <Compile Include="CodeObjects\CodeStructures\Namespace.cs" />
+    <Compile Include="CodeObjects\CodeStructures\Property.cs" />
+    <Compile Include="CodeObjects\CodeStructures\PropertyGetter.cs" />
+    <Compile Include="CodeObjects\CodeStructures\PropertyMethod.cs" />
+    <Compile Include="CodeObjects\CodeStructures\PropertySetter.cs" />
     <Compile Include="CodeObjects\CodeStructures\Region.cs" />
     <Compile Include="CodeObjects\CodeStructures\Using.cs" />
+    <Compile Include="CodeObjects\Syntax\BaseSyntaxObject.cs" />
     <Compile Include="CodeObjects\Data\DataObject.cs" />
     <Compile Include="CodeObjects\Data\Parameter.cs" />
     <Compile Include="CodeObjects\Data\TextObject.cs" />
@@ -73,6 +78,7 @@
     <Compile Include="CodeObjects\Misc\ICodeObjectDictionary.cs" />
     <Compile Include="CodeObjects\Misc\ICodeObjectList.cs" />
     <Compile Include="CodeObjects\Misc\MethodModifiers.cs" />
+    <Compile Include="CodeObjects\Syntax\TextSyntax.cs" />
     <Compile Include="CSharp\CSharpCodeFormatter.cs" />
     <Compile Include="CSharp\CSharpCodeGenerator.cs" />
     <Compile Include="IDotNetCodeFormatter.cs" />

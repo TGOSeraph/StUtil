@@ -33,6 +33,7 @@ namespace StUtil.CodeGen.CodeObjects.Base
         /// The Methods to place within the container
         /// </summary>
         public CodeObjectList<Method> Methods { get; set; }
+        public CodeObjectList<Property> Properties { get; set; }
 
         /// <summary>
         /// Create a new member container with a name
@@ -46,6 +47,7 @@ namespace StUtil.CodeGen.CodeObjects.Base
             Fields = new CodeObjectList<Field>("\n");
             Events = new CodeObjectList<Event>("\n");
             Methods = new CodeObjectList<Method>("\n");
+            Properties = new CodeObjectList<Property>("\n");
         }
     }
 }

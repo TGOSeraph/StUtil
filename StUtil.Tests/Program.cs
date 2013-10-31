@@ -10,6 +10,7 @@ namespace StUtil.Tests
     using StUtil.CodeGen.CodeObjects.Generic;
     using StUtil.CodeGen.CodeObjects.Data;
     using StUtil.CodeGen.CodeObjects.Attributes;
+    using StUtil.CodeGen.CodeObjects.Syntax;
 
     static class Program
     {
@@ -26,7 +27,7 @@ namespace StUtil.Tests
             Class clsHelloWorld = new Class("HelloWorld")
             {
                 AccessModifier = AccessModifiers.Public,
-                ClassModifier = ClassModifiers.Abstract,
+                Modifier = ClassModifiers.Abstract,
                 GenericArguments = new CodeObjectList<GenericArgument>(", ", "T"),
                 GenericConstraints = new CodeObjectList<GenericConstraint>(", ", new GenericConstraint("T", "class")),
             };
@@ -36,7 +37,7 @@ namespace StUtil.Tests
             regPublicMethods.Events.Add(new Event("TestEvent", typeof(EventHandler<FormClosedEventArgs>), AccessModifiers.Public));
             Class clsHelloWorldInternal = new Class("HelloWorldUtilities")
             {
-                ClassModifier = ClassModifiers.Static,
+                Modifier = ClassModifiers.Static,
                 AccessModifier = AccessModifiers.Private
             };
             clsHelloWorldInternal.Fields.Add(new Field("MESSAGE", typeof(string), AccessModifiers.Internal, new AttributeSection(new Attribute("Description", new DataObject("Debug"))))
@@ -47,12 +48,19 @@ namespace StUtil.Tests
 
             Class clsHelloWorldRegioned = new Class("HelloWorldConstants")
             {
-                ClassModifier = ClassModifiers.Static,
+                Modifier = ClassModifiers.Static,
                 AccessModifier = AccessModifiers.Private
             };
             clsHelloWorldRegioned.Methods.Add(new Method("Hi", typeof(void), AccessModifiers.Public));
 
             regPublicMethods.Classes.Add(clsHelloWorldRegioned);
+            regPublicMethods.Methods.Add(new Method("Hello", typeof(void), AccessModifiers.Public)
+            {
+                Code = new TextSyntax("Console.WriteLine(\"Hello world\");")
+            });
+            regPublicMethods.Properties.Add(new Property("Test", typeof(string), AccessModifiers.Public));
+            string stxsr = regPublicMethods.Methods.Items[0].ToSyntax(csharp);
+            
             clsHelloWorld.Classes.Add(clsHelloWorldInternal);
             clsHelloWorld.Regions.Add(regPublicMethods);
             regHelloWorld.Classes.Add(clsHelloWorld);

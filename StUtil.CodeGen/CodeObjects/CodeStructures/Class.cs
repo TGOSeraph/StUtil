@@ -15,7 +15,7 @@ namespace StUtil.CodeGen.CodeObjects.CodeStructures
     {
         public AccessModifiers AccessModifier { get; set; }
         public CodeObjectList<AttributeSection> Attributes { get; set; }
-        public ClassModifiers ClassModifier { get; set; }
+        public ClassModifiers Modifier { get; set; }
         public CodeObjectList<GenericArgument> GenericArguments { get; set; }
         public CodeObjectList<TypeObject> Inherits { get; set; }
 

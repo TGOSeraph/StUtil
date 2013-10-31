@@ -20,7 +20,8 @@ namespace StUtil.CodeGen.CSharp
         public CSharpCodeGenerator()
         {
             base.CodeFormatter = new CSharpCodeFormatter();
-            string memberContainer = "{Regions}{-\n\n}{Classes}{-\n\n}{Events}{-\n\n}{Fields}{-\n\n}{Methods}{-\n}";
+            string memberContainer = "{Regions}{-\n\n}{Classes}{-\n\n}{Events}{-\n\n}{Fields}{-\n\n}{Properties}{-\n\n}{Methods}{-\n}";
+            string attributeAccessModModifier = "{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }";
 
             RegisterDefinition<AttributeSection>("[{Attributes}]");
             RegisterDefinition<StUtil.CodeGen.CodeObjects.Attributes.Attribute>("{Name}({Parameters}{+, }{NamedParameters})");
@@ -30,10 +31,11 @@ namespace StUtil.CodeGen.CSharp
             RegisterDefinition<Using>("using {Value};");
             RegisterDefinition<Region>("#region {Name}\n" + memberContainer + "#endregion");
 
-            RegisterDefinition<Class>("{Attributes}{-\n}{AccessModifier}{- }{ClassModifier}{- }class {Name}{+<}{GenericArguments}{->}{+ : }{Inherits}{+ where }{GenericConstraints}\n\\{\n" + memberContainer + "\\}");
-            RegisterDefinition<Field>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }{ReturnType} {Name}{+ = }{Value};");
-            RegisterDefinition<Event>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }event {HandlerType} {Name};");
-            RegisterDefinition<Method>("{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }{Implements}{- }{ReturnType} {Name}{+<}{GenericArguments}{->}({Parameters}){+ where }{GenericConstraints}\n\\{\n\\}");
+            RegisterDefinition<Class>(attributeAccessModModifier + "class {Name}{+<}{GenericArguments}{->}{+ : }{Inherits}{+ where }{GenericConstraints}\n\\{\n" + memberContainer + "\\}");
+            RegisterDefinition<Field>(attributeAccessModModifier + "{ReturnType} {Name}{+ = }{Value};");
+            RegisterDefinition<Event>(attributeAccessModModifier + "event {HandlerType} {Name};");
+            RegisterDefinition<Method>(attributeAccessModModifier + "{Implements}{- }{ReturnType} {Name}{+<}{GenericArguments}{->}({Parameters}){+ where }{GenericConstraints}\n\\{\n{Code}{-\n}\\}");
+            RegisterDefinition<Property>(attributeAccessModModifier + "{ReturnType} {Name}\\{\n{Getter}\n{Setter}\n\\}");
         }
 
         protected override string ConvertFromType(Type obj, Type[] type, object owner)
