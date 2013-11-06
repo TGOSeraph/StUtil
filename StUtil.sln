@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Video", "StUtil.Vide
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.CodeGen", "StUtil.CodeGen\StUtil.CodeGen.csproj", "{36F2544B-4556-49CE-BF13-E49A9D278756}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Parser", "StUtil.Parser\StUtil.Parser.csproj", "{875EC893-4727-453E-97B0-DAAEBB0F53C6}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -83,6 +85,10 @@ Global
 		{36F2544B-4556-49CE-BF13-E49A9D278756}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36F2544B-4556-49CE-BF13-E49A9D278756}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36F2544B-4556-49CE-BF13-E49A9D278756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{875EC893-4727-453E-97B0-DAAEBB0F53C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{875EC893-4727-453E-97B0-DAAEBB0F53C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{875EC893-4727-453E-97B0-DAAEBB0F53C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{875EC893-4727-453E-97B0-DAAEBB0F53C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
