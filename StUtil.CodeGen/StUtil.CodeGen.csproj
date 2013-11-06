@@ -95,11 +95,6 @@
       <Name>StUtil.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\StUtil.Parser\StUtil.Parser.csproj">
-      <Project>{875ec893-4727-453e-97b0-daaebb0f53c6}</Project>
-      <Name>StUtil.Parser</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\StUtil.Reflection\StUtil.Reflection.csproj">
       <Project>{2a845b03-fb29-46be-92dc-8345e47443c9}</Project>
       <Name>StUtil.Reflection</Name>
