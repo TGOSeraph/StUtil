@@ -1,4 +1,5 @@
 ﻿using StUtil.CodeGen.CodeObjects;
+using StUtil.Parser;
 using StUtil.Reflection;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace StUtil.CodeGen
 {
     public class TypeDefinition
     {
-        public List<KeyMatch> Matches { get; set; }
+        public List<Token> Matches { get; set; }
         public ReflectionHelper Reflector { get; set; }
         public Delegate Converter { get; set; }
         public string Definition { get; set; }

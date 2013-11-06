@@ -23,19 +23,18 @@ namespace StUtil.CodeGen.CSharp
             string memberContainer = "{Regions}{-\n\n}{Classes}{-\n\n}{Events}{-\n\n}{Fields}{-\n\n}{Properties}{-\n\n}{Methods}{-\n}";
             string attributeAccessModModifier = "{Attributes}{-\n}{AccessModifier}{- }{Modifier}{- }";
 
-            RegisterDefinition<AttributeSection>("[{Attributes}]");
-            RegisterDefinition<StUtil.CodeGen.CodeObjects.Attributes.Attribute>("{Name}({Parameters}{+, }{NamedParameters})");
-            RegisterDefinition<GenericConstraint>("{GenericArgument} : {TypeConstraints}");
-
-            RegisterDefinition<Namespace>("{Usings}{-\n\n}namespace {Name}\n\\{\n" + memberContainer + "\\}");
-            RegisterDefinition<Using>("using {Value};");
-            RegisterDefinition<Region>("#region {Name}\n" + memberContainer + "#endregion");
-
-            RegisterDefinition<Class>(attributeAccessModModifier + "class {Name}{+<}{GenericArguments}{->}{+ : }{Inherits}{+ where }{GenericConstraints}\n\\{\n" + memberContainer + "\\}");
-            RegisterDefinition<Field>(attributeAccessModModifier + "{ReturnType} {Name}{+ = }{Value};");
-            RegisterDefinition<Event>(attributeAccessModModifier + "event {HandlerType} {Name};");
-            RegisterDefinition<Method>(attributeAccessModModifier + "{Implements}{- }{ReturnType} {Name}{+<}{GenericArguments}{->}({Parameters}){+ where }{GenericConstraints}\n\\{\n{Code}{-\n}\\}");
-            RegisterDefinition<Property>(attributeAccessModModifier + "{ReturnType} {Name}\\{\n{Getter}\n{Setter}\n\\}");
+            base.RegisterDefinition<AttributeSection>("\\[{Attributes}\\]");
+            base.RegisterDefinition<StUtil.CodeGen.CodeObjects.Attributes.Attribute>("{Name}({Parameters}{+, }{NamedParameters})");
+            base.RegisterDefinition<GenericConstraint>("{GenericArgument} : {TypeConstraints}");
+            base.RegisterDefinition<StUtil.CodeGen.CodeObjects.Data.Parameter>("{Type} {Name}{+ = }{Default}");
+            base.RegisterDefinition<Namespace>("{Usings}{-\n\n}namespace {Name}\n\\{\n" + memberContainer + "\\}");
+            base.RegisterDefinition<Using>("using {Value};");
+            base.RegisterDefinition<Region>("#region {Name}\n" + memberContainer + "#endregion");
+            base.RegisterDefinition<Class>(attributeAccessModModifier + "class {Name}{+<}{GenericArguments}{->}{+ : }{Inherits}{+ where }{GenericConstraints}\n\\{\n" + memberContainer + "\\}");
+            base.RegisterDefinition<Field>(attributeAccessModModifier + "{ReturnType} {Name}{+ = }{Value};");
+            base.RegisterDefinition<Event>(attributeAccessModModifier + "event {HandlerType} {Name};");
+            base.RegisterDefinition<Method>(attributeAccessModModifier + "{Implements}{- }{ReturnType} {Name}{+<}{GenericArguments}{->}({Parameters}){+ where }{GenericConstraints}[Modifier != abstract -> \n\\{\n{Code}{-\n}\\} | ;]");
+            base.RegisterDefinition<Property>(attributeAccessModModifier + "{ReturnType} {Name}\n\\{\n{Getter}\n{Setter}\n\\}");
         }
 
         protected override string ConvertFromType(Type obj, Type[] type, object owner)

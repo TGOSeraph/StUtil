@@ -13,6 +13,7 @@ namespace StUtil.CodeGen.CodeObjects.CodeStructures
         public TypeObject ReturnType { get; set; }
         public PropertyGetter Getter { get; set; }
         public PropertySetter Setter { get; set; }
+        public MethodModifiers Modifier { get; set; }
 
         public Property(string name, TypeObject type, AccessModifiers access)
             : base(name, access)

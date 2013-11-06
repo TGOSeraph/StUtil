@@ -2,11 +2,13 @@
 using StUtil.CodeGen.CodeObjects.CodeStructures;
 using StUtil.CodeGen.CodeObjects.Generic;
 using StUtil.CodeGen.CodeObjects.Misc;
+using StUtil.Parser;
 using StUtil.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace StUtil.CodeGen
@@ -17,8 +19,12 @@ namespace StUtil.CodeGen
         public delegate string CodeConversionDelegate<T>(T obj) where T : ICodeObject;
         public delegate string ObjectConversionDelegate<T>(T obj, object owner);
 
-        protected static Dictionary<Type, TypeDefinition> definitions = new Dictionary<Type, TypeDefinition>();
-        protected static Dictionary<Type, Delegate> objConverters = new Dictionary<Type, Delegate>();
+        protected Dictionary<Type, TypeDefinition> definitions = new Dictionary<Type, TypeDefinition>();
+        protected Dictionary<Type, Delegate> objConverters = new Dictionary<Type, Delegate>();
+        protected Dictionary<string, List<Token>> parsedTokens = new Dictionary<string, List<Token>>();
+
+        protected static Regex definitionIfParser = new Regex(@"([^\!\=\s]+)\s*([\!\=]+)\s*([^\s]+)\s*\-\>\ *([^\]\|]+)(?:\|\s*(.*))?");
+        protected static DefinitionParser parser = new DefinitionParser();
 
         public BaseDotNetCodeGenerator()
         {
@@ -56,7 +62,8 @@ namespace StUtil.CodeGen
         {
             TypeDefinition def = GetOrAddTypeDef<T>();
             def.Definition = definition;
-            def.Matches = Parse(definition);
+            parser.Parse(definition);
+            def.Matches = parser.GetResults();
         }
         public void RegisterCodeConverter<T>(CodeConversionDelegate<T> converter) where T : ICodeObject
         {
@@ -65,61 +72,6 @@ namespace StUtil.CodeGen
         public void RegisterObjectConverter<T>(ObjectConversionDelegate<T> converter)
         {
             objConverters.Add(typeof(T), converter);
-        }
-
-        protected static List<KeyMatch> Parse(string format)
-        {
-            bool inKey = false;
-            string currKey = "";
-            List<KeyMatch> keys = new List<KeyMatch>();
-            char lastChar = '\0';
-            for (int i = 0; i < format.Length; i++)
-            {
-                char c = format[i];
-                switch (c)
-                {
-                    case '{':
-                        if (inKey)
-                        {
-                            currKey += c;
-                        }
-                        else
-                        {
-                            if (lastChar != '\\')
-                            {
-                                inKey = true;
-                            }
-                        }
-                        break;
-                    case '}':
-                        if (inKey)
-                        {
-                            if (lastChar == '\\')
-                            {
-                                currKey += c;
-                            }
-                            else
-                            {
-                                inKey = false;
-                                keys.Add(new KeyMatch
-                                {
-                                    Index = i - currKey.Length - 1,
-                                    Text = currKey
-                                });
-                                currKey = "";
-                            }
-                        }
-                        break;
-                    default:
-                        if (inKey)
-                        {
-                            currKey += c;
-                        }
-                        break;
-                }
-                lastChar = c;
-            }
-            return keys;
         }
 
         protected ReflectionHelper GetReflector(Type t)
@@ -223,37 +175,38 @@ namespace StUtil.CodeGen
             return output.Length > 0 ? output.Substring(0, output.Length - obj.JoinString.Length) : output;
         }
 
-
-        protected virtual string ToSyntaxFromDefinition(ICodeObject obj, string definition, List<KeyMatch> matches)
+        protected virtual string ToSyntaxFromDefinition(ICodeObject obj, string definition, List<Token> matches)
         {
             ReflectionHelper reflector = GetReflector(obj.GetType());
             int offset = 0;
             string last = null;
             for (int i = 0; i < matches.Count; i++)
             {
-                KeyMatch match = matches[i];
+                Token match = matches[i];
                 HandleMatch(match, matches, obj, ref i, reflector, ref last, ref offset, ref definition);
             }
 
-            return definition.Replace("\\{", "{").Replace("\\}", "}");
+            return definition.Replace("\\{", "{").Replace("\\}", "}").Replace("\\[", "[").Replace("\\]", "]");
         }
 
-        protected virtual void HandleMatch(KeyMatch match, List<KeyMatch> matches, object obj, ref int index, ReflectionHelper reflector, ref string last, ref int offset, ref string definition)
+        protected virtual void HandleMatch(Token match, List<Token> matches, object obj, ref int index, ReflectionHelper reflector, ref string last, ref int offset, ref string definition)
         {
-            switch (match.Text[0])
+            switch (match.Type)
             {
-                case '-':
+                case null:
+                    break;
+                case "BOUNDED_STRING_IF_BEFORE":
                     if (string.IsNullOrEmpty(last))
                     {
                         last = UpdateDefinition(match, ref definition, "", ref offset);
                     }
                     else
                     {
-                        last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Text.Substring(1), obj), ref offset);
+                        last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Value.Substring(1), obj), ref offset);
                     }
                     break;
-                case '+':
-                    KeyMatch nextMatch = matches[index + 1];
+                case "BOUNDED_STRING_IF_AFTER":
+                    Token nextMatch = matches[index + 1];
                     string last2 = last;
                     string def2 = definition;
                     int offset2 = offset;
@@ -265,17 +218,74 @@ namespace StUtil.CodeGen
                     }
                     else
                     {
-                        last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Text.Substring(1), obj), ref offset);
+                        last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Value.Substring(1), obj), ref offset);
                     }
                     break;
-                case '#':
-                    last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Text.Substring(1), obj), ref offset);
+                case "BOUNDED_STRING":
+                    if (((StringBounding)match.Tag).BoundingStartCharacter == '[')
+                    {
+                        last = UpdateDefinition(match, ref definition, HandleIfDefinition(match, obj, reflector), ref offset);
+                    }
+                    else
+                    {
+                        last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Value, obj), ref offset);
+                    }
                     break;
                 default:
-                    last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Text, obj), ref offset);
-                    break;
+                    throw new NotImplementedException("Match type not implemented:" + match.Type);
             }
+
+            /*    case '#':
+                    last = UpdateDefinition(match, ref definition, GetPropertyOrValue(reflector, match.Value.Substring(1), obj), ref offset);
+             */
         }
+
+        protected virtual string HandleIfDefinition(Token token, object obj, ReflectionHelper reflector)
+        {
+            Match match = definitionIfParser.Match(token.Value);
+            string ifWhere = GetPropertyOrValue(reflector, match.Groups[1].Captures[0].Value, obj);
+            string ifValue = GetPropertyOrValue(reflector, match.Groups[3].Captures[0].Value, obj);
+
+            bool result = false;
+            switch (match.Groups[2].Captures[0].Value)
+            {
+                case "!=":
+                    result = ifWhere != ifValue;
+                    break;
+                case "==":
+                    result = ifWhere == ifValue;
+                    break;
+                default:
+                    throw new NotImplementedException("Unknown operator");
+            }
+
+            string output = "";
+            if (result)
+            {
+                output = match.Groups[4].Captures[0].Value;
+            }
+            else
+            {
+                if (match.Groups[5].Captures.Count > 0)
+                {
+                    output = match.Groups[5].Captures[0].Value;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+
+            if (!parsedTokens.ContainsKey(output))
+            {
+                parser.Parse(output);
+                parsedTokens.Add(output, parser.GetResults());
+            }
+            List<Token> tokens = parsedTokens[output];
+            output = ToSyntaxFromDefinition(obj as ICodeObject, output, tokens);
+            return output;
+        }
+
         protected virtual string GetPropertyOrValue(ReflectionHelper reflector, string match, object obj)
         {
             ReflectedProperty prop = reflector.GetProperty(match);
@@ -288,14 +298,21 @@ namespace StUtil.CodeGen
                 return ObjectToString(prop.Get(obj), obj);
             }
         }
-        private static string UpdateDefinition(KeyMatch match, ref string definition, string value, ref int offset)
+        private static string UpdateDefinition(Token match, ref string definition, string value, ref int offset)
         {
-            definition = definition.Substring(0, match.Index - offset)
+            int length = match.Value.Length;
+            int index = match.Index;
+            if (match.Type != null && match.Type.IndexOf("BOUNDED") > -1)
+            {
+                length += 2;
+                index -= 2;
+            }
+            definition = definition.Substring(0, index - offset)
                 + value
-                + (match.Index + match.Length - offset > definition.Length
+                + (index + length - offset > definition.Length
                     ? ""
-                    : definition.Substring(match.Index + match.Length - offset));
-            offset += match.Length - value.Length;
+                    : definition.Substring(index + length - offset));
+            offset += length - value.Length;
             return value;
         }
 

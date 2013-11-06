@@ -78,7 +78,7 @@ namespace StUtil.CodeGen.CSharp
                         }
                         break;
                     case '\n':
-                        if (code[i + 1] != '\r')
+                        if (code.Length > i + 1 && code[i + 1] != '\r')
                         {
                             added = true;
                             str += c + "".PadLeft(depth, '\t');

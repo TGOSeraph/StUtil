@@ -8,6 +8,7 @@ namespace StUtil.CodeGen.CodeObjects.Misc
 {
     public enum MethodModifiers
     {
+        None,
         Abstract,
         Override,
         Static,
