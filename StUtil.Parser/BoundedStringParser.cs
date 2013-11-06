@@ -6,65 +6,8 @@ using System.Threading.Tasks;
 
 namespace StUtil.Parser
 {
-    public abstract class BoundedStringParser : BaseParser
+    public abstract class BoundedStringParser<T> : BaseParser<T>
     {
-        public class StringBounding
-        {
-            public char BoundingStartCharacter { get; set; }
-            public char BoundingEndCharacter { get; set; }
-
-            public char? EscapeCharacter { get; set; }
-
-            public StringBounding(char boundingStartCharacter, char boundingEndCharacter, char? escapeCharacter = null)
-            {
-                this.BoundingStartCharacter = boundingStartCharacter;
-                this.BoundingEndCharacter = boundingEndCharacter;
-                this.EscapeCharacter = escapeCharacter;
-            }
-
-            public static StringBounding Quotes
-            {
-                get
-                {
-                    return new StringBounding('"', '"');
-                }
-            }
-            public static StringBounding Apostrophes
-            {
-                get
-                {
-                    return new StringBounding('\'', '\'');
-                }
-            }
-            public static StringBounding Brackets
-            {
-                get
-                {
-                    return new StringBounding('(', ')');
-                }
-            }
-            public static StringBounding SquareBrackets
-            {
-                get
-                {
-                    return new StringBounding('[', ']');
-                }
-            }
-            public static StringBounding Braces
-            {
-                get
-                {
-                    return new StringBounding('{', '}');
-                }
-            }
-
-            public StringBounding SetEscapeCharacter(char c)
-            {
-                this.EscapeCharacter = c;
-                return this;
-            }
-        }
-
         public List<StringBounding> StringBoundings { get; set; }
 
         public StringBounding CurrentBounding = null;
@@ -80,7 +23,7 @@ namespace StUtil.Parser
             {
                 foreach (StringBounding bounding in StringBoundings)
                 {
-                    if (bounding.BoundingStartCharacter == c)
+                    if (bounding.BoundingStartCharacter == c && (ParseIndex > 1 ? PreviousCharacter(1) != bounding.EscapeCharacter : true))
                     {
                         StoreCurrentToken();
                         CurrentBounding = bounding;
@@ -94,7 +37,7 @@ namespace StUtil.Parser
                 if (c == CurrentBounding.BoundingEndCharacter)
                 {
                     int escapeChars = 0;
-                    while (CurrentBounding.EscapeCharacter.HasValue && PreviousCharacter(escapeChars + 2) == CurrentBounding.EscapeCharacter)
+                    while (CurrentBounding.EscapeCharacter.HasValue && PreviousCharacter(escapeChars + 1) == CurrentBounding.EscapeCharacter)
                     {
                         escapeChars++;
                     }

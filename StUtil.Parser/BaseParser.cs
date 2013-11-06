@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace StUtil.Parser
 {
-    public abstract class BaseParser<T> : BaseParser
-    {
-        public abstract object GetResults(char c);
-
-    }
-    public abstract class BaseParser
+    public abstract class BaseParser<T>
     {
         public string ParseString { get; set; }
         public int ParseIndex { get; set; }
@@ -19,6 +14,13 @@ namespace StUtil.Parser
 
         protected string CurrentToken { get; set; }
         protected int CurrentTokenIndex { get; set; }
+        public Token LastToken
+        {
+            get
+            {
+                return Tokens.LastOrDefault();
+            }
+        }
 
         public bool IsEOF
         {
@@ -50,7 +52,7 @@ namespace StUtil.Parser
                     AppendToCurrentToken(c.Value);
                 }
             }
-            StoreCurrentToken(CurrentToken);
+            StoreCurrentToken();
         }
 
         public char NextCharacter(int count = 1, bool consume = true)
@@ -83,7 +85,7 @@ namespace StUtil.Parser
             {
                 throw new IndexOutOfRangeException("BOF");
             }
-            return ParseString[ParseIndex - count];
+            return ParseString[ParseIndex - count - 1];
         }
 
         public void ConsumeCharacters(int count)
@@ -121,6 +123,6 @@ namespace StUtil.Parser
         }
             
         public abstract char? HandleCharacter(char c);
-        public abstract T GetResults<T>() where T : class;
+        public abstract T GetResults();
     }
 }

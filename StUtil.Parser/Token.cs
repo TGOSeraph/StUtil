@@ -10,7 +10,7 @@ namespace StUtil.Parser
     {
         public string Value { get; set; }
         public int Index { get; set; }
-
+        
         public string Type { get; set; }
         public object Tag { get; set; }
     }
