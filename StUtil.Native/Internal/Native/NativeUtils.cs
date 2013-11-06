@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 namespace StUtil.Internal.Native
 {
-    internal static class NativeUtils
+    public static class NativeUtils
     {
         public delegate IntPtr LowLevelKeyboardProc(int nCode, UIntPtr wParam, IntPtr lParam);
         public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
@@ -64,6 +64,7 @@ namespace StUtil.Internal.Native
             }
             return result;
         }
+
         private static bool GetChildrenProc(IntPtr handle, IntPtr pointer)
         {
             GCHandle gch = GCHandle.FromIntPtr(pointer);
@@ -74,6 +75,24 @@ namespace StUtil.Internal.Native
             }
             list.Add(handle);
             return true;
+        }
+
+        // This static method is required because Win32 does not support
+        // GetWindowLongPtr directly
+        public static IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex)
+        {
+            if (IntPtr.Size == 8)
+                return NativeMethods.GetWindowLongPtr64(hWnd, nIndex);
+            else
+                return NativeMethods.GetWindowLongPtr32(hWnd, nIndex);
+        }
+
+        public static IntPtr SetWindowLongPtr(IntPtr hWnd, int nIndex, IntPtr dwNewLong)
+        {
+            if (IntPtr.Size == 8)
+                return NativeMethods.SetWindowLongPtr64(hWnd, nIndex, dwNewLong);
+            else
+                return new IntPtr(NativeMethods.SetWindowLongPtr32(hWnd, nIndex, dwNewLong.ToInt32()));
         }
     }
 }

@@ -2,7 +2,7 @@
 using System;
 namespace StUtil.Internal.Native
 {
-    internal static class NativeConsts
+    public static class NativeConsts
     {
         public const int MAX_CAPTION_LENGTH = 100;
         public const int WM_SETREDRAW = 11;

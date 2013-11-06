@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace StUtil.Internal.Native
 {
-    internal static class NativeStructs
+    public static class NativeStructs
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct MINMAXINFO
@@ -45,6 +45,26 @@ namespace StUtil.Internal.Native
             public int cChildren;
             public int lParam;
             public int iIntegral;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct APPBARDATA
+        {
+            public int cbSize;
+            public IntPtr hWnd;
+            public int uCallbackMessage;
+            public int uEdge;
+            public RECT rc;
+            public IntPtr lParam;
         }
     }
 }

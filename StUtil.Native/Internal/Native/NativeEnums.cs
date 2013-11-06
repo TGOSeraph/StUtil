@@ -2,7 +2,7 @@
 
 namespace StUtil.Internal.Native
 {
-    internal static class NativeEnums
+    public static class NativeEnums
     {
         [Flags()]
         public enum ProcessAccess : int
@@ -97,6 +97,43 @@ namespace StUtil.Internal.Native
             SIF_DISABLENOSCROLL = 0x8,
             SIF_TRACKPOS = 0x16,
             SIF_ALL = SIF_RANGE + SIF_PAGE + SIF_POS + SIF_TRACKPOS
+        }
+
+        [Flags]
+        public enum WindowLongFlags : int
+        {
+            GWL_EXSTYLE = -20,
+            GWLP_HINSTANCE = -6,
+            GWLP_HWNDPARENT = -8,
+            GWL_ID = -12,
+            GWL_STYLE = -16,
+            GWL_USERDATA = -21,
+            GWL_WNDPROC = -4,
+            DWLP_USER = 0x8,
+            DWLP_MSGRESULT = 0x0,
+            DWLP_DLGPROC = 0x4
+        }
+
+        public enum ABMsg : int
+        {
+            ABM_NEW = 0,
+            ABM_REMOVE,
+            ABM_QUERYPOS,
+            ABM_SETPOS,
+            ABM_GETSTATE,
+            ABM_GETTASKBARPOS,
+            ABM_ACTIVATE,
+            ABM_GETAUTOHIDEBAR,
+            ABM_SETAUTOHIDEBAR,
+            ABM_WINDOWPOSCHANGED,
+            ABM_SETSTATE
+        }
+        public enum ABNotify : int
+        {
+            ABN_STATECHANGE = 0,
+            ABN_POSCHANGED,
+            ABN_FULLSCREENAPP,
+            ABN_WINDOWARRANGE
         }
     }
 }
