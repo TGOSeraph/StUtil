@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleArgsParser.cs" />
+    <Compile Include="ConsoleArgument.cs" />
     <Compile Include="ConsoleDataRecievedEventArgs.cs" />
     <Compile Include="ConsoleProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
