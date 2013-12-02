@@ -21,7 +21,7 @@ namespace StUtil.UI.Forms.Utilities
             None
         }
 
-        private static Dictionary<Form, NativeStructs.APPBARDATA> registrations = new Dictionary<Form, NativeStructs.APPBARDATA>();
+        private static Dictionary<Form, Tuple<NativeStructs.APPBARDATA, bool>> registrations = new Dictionary<Form, Tuple<NativeStructs.APPBARDATA, bool>>();
 
         public static void SetStyles(Form form)
         {
@@ -53,7 +53,7 @@ namespace StUtil.UI.Forms.Utilities
                 })));
 
                 uint ret = NativeMethods.SHAppBarMessage((int)NativeEnums.ABMsg.ABM_NEW, ref abd);
-                registrations.Add(form, abd);
+                registrations.Add(form, new Tuple<NativeStructs.APPBARDATA,bool>(abd, false));
                 SetStyles(form);
 
                 ABSetPos(form, screen, size);
@@ -62,14 +62,19 @@ namespace StUtil.UI.Forms.Utilities
 
         public static void UnregisterBar(Form form)
         {
-            StUtil.Internal.Native.NativeStructs.APPBARDATA abd = registrations[form];
+            StUtil.Internal.Native.NativeStructs.APPBARDATA abd = registrations[form].Item1;
             NativeMethods.SHAppBarMessage((int)NativeEnums.ABMsg.ABM_REMOVE, ref abd);
             registrations.Remove(form);
         }
 
         private static void ABSetPos(Form form, Screen screen, int size)
         {
-            NativeStructs.APPBARDATA abd = registrations[form];
+            var tup = registrations[form];
+            NativeStructs.APPBARDATA abd = tup.Item1;
+            if (tup.Item2)
+            {
+                return;
+            }
 
             if (abd.uEdge == (int)Edge.Left || abd.uEdge == (int)Edge.Right)
             {
@@ -134,7 +139,7 @@ namespace StUtil.UI.Forms.Utilities
             form.Height = abd.rc.bottom - abd.rc.top;
             form.Width = abd.rc.right - abd.rc.left;
 
-            registrations[form] = abd;
+            registrations[form] = new Tuple<NativeStructs.APPBARDATA, bool>(abd, true);
         }
     }
 }
