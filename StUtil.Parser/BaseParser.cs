@@ -38,7 +38,7 @@ namespace StUtil.Parser
             }
         }
 
-        public void Parse(string text)
+        public virtual void Parse(string text)
         {
             ParseIndex = 0;
             ParseString = text;
