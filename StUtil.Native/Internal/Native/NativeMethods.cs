@@ -139,5 +139,8 @@ namespace StUtil.Internal.Native
             [In] [MarshalAs(UnmanagedType.U4)] int UndecoratedLength,
             [In] [MarshalAs(UnmanagedType.U4)] NativeEnums.UnDecorateFlags Flags);
 
+        [DllImport("user32.dll", EntryPoint = "SendMessageA", CallingConvention = CallingConvention.StdCall)]
+        public static extern IntPtr SendMessage(IntPtr Hdc, uint Msg_Const, IntPtr wParam, IntPtr lParam);
+
     }
 }

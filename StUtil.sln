@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Parser", "StUtil.Par
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Native.PE", "StUtil.Native.PE\StUtil.Native.PE.csproj", "{3DF5D6FE-3A74-4C1B-A927-52BAD2C9FD56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Native.Windows", "StUtil.Native.Windows\StUtil.Native.Windows.csproj", "{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -95,6 +97,10 @@ Global
 		{3DF5D6FE-3A74-4C1B-A927-52BAD2C9FD56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DF5D6FE-3A74-4C1B-A927-52BAD2C9FD56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DF5D6FE-3A74-4C1B-A927-52BAD2C9FD56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

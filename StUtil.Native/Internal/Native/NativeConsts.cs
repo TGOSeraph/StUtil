@@ -8,6 +8,8 @@ namespace StUtil.Internal.Native
         public const int WM_SETREDRAW = 11;
         public const int WH_KEYBOARD_LL = 13;
         public static IntPtr HWND_TOPMOST = IntPtr.Zero;
+        public const uint TB_GETBUTTON = 0x0417;
+        public const uint TB_BUTTONCOUNT = 0x0418;
 
         public const int WM_NCHITTEST = 0x0084,
                            WM_NCACTIVATE = 0x0086,
