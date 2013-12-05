@@ -13,5 +13,10 @@ namespace StUtil.Parser
         
         public string Type { get; set; }
         public object Tag { get; set; }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 }
