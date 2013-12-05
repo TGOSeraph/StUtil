@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace StUtil.Parser
 {
+    public class BoundedStringParser : BoundedStringParser<List<Token>>
+    {
+        public override List<Token> GetResults()
+        {
+            return base.Tokens;
+        }
+    }
+
     public abstract class BoundedStringParser<T> : BaseParser<T>
     {
         public List<StringBounding> StringBoundings { get; set; }
