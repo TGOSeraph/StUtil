@@ -131,5 +131,13 @@ namespace StUtil.Internal.Native
 
         [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
         public static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true)]
+        public static extern int UnDecorateSymbolName(
+            [In] [MarshalAs(UnmanagedType.LPStr)] string DecoratedName,
+            [Out] StringBuilder UnDecoratedName,
+            [In] [MarshalAs(UnmanagedType.U4)] int UndecoratedLength,
+            [In] [MarshalAs(UnmanagedType.U4)] NativeEnums.UnDecorateFlags Flags);
+
     }
 }
