@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -9,6 +10,19 @@ namespace StUtil.Imaging
 {
     public static class Utilities
     {
+        public enum ImageFileFormat
+        {
+            Unknown,
+            Bmp,
+            Emf,
+            Wmf,
+            Gif,
+            Jpeg,
+            Png,
+            Tiff,
+            Icon
+        }
+
         public static Bitmap MergeImages(int w, int h, params IntPtr[] scan0s)
         {
             int c = scan0s.Length;
@@ -106,5 +120,99 @@ namespace StUtil.Imaging
             return img;
         }
 
+        public static ImageFileFormat ImageFormat(System.Drawing.Image Image)
+        {
+            try
+            {
+                return (ImageFileFormat)Enum.Parse(typeof(ImageFileFormat), System.Drawing.Imaging.ImageCodecInfo.GetImageDecoders().ToList().Single(ImageCodecInfo => ImageCodecInfo.FormatID == Image.RawFormat.Guid).FormatDescription, true);
+            }
+            catch (Exception)
+            {
+            }
+            return ImageFileFormat.Unknown;
+        }
+
+        public static ImageFileFormat ImageFormat(string file, bool useFileExtFallback = true)
+        {
+            byte[] buffer;
+            using (Stream s = System.IO.File.OpenRead(file))
+            {
+                using (BinaryReader br = new BinaryReader(s))
+                {
+                    buffer = br.ReadBytes(10);
+                }
+            }
+
+            if (buffer[0] == 0x42 && buffer[1] == 0x4d)
+            {
+                return ImageFileFormat.Bmp;
+            }
+            else if (buffer[0] == 0x47 && buffer[1] == 0x49 && buffer[2] == 0x46 && buffer[3] == 0x38)
+            {
+                return ImageFileFormat.Gif;
+            }
+            else if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && buffer[3] == 0xe0)
+            {
+                return ImageFileFormat.Jpeg;
+            }
+            else if (buffer[0] == 0x89 && buffer[1] == 0x50 && buffer[2] == 0x4e && buffer[3] == 0x47)
+            {
+                return ImageFileFormat.Png;
+            }
+            else if ((buffer[0] == 0x4d && buffer[1] == 0x4d && buffer[2] == 0x00 && buffer[3] == 0x2a) | (buffer[0] == 0x49 && buffer[1] == 0x49 && buffer[2] == 0x2a && buffer[3] == 0x00))
+            {
+                return ImageFileFormat.Tiff;
+            }
+            else if (buffer[0] == 0x01 && buffer[1] == 0x00 && buffer[2] == 0x00 && buffer[3] == 0x00)
+            {
+                return ImageFileFormat.Emf;
+            }
+            else if (buffer[0] == 0x01 && buffer[1] == 0x00 && buffer[2] == 0x09 && buffer[3] == 0x00 && buffer[4] == 0x00 && buffer[5] == 0x03)
+            {
+                return ImageFileFormat.Wmf;
+            }
+            else if (buffer[0] == 0x00 && buffer[1] == 0x00 && buffer[2] == 0x01 && buffer[3] == 0x00)
+            {
+                return ImageFileFormat.Icon;
+            }
+
+            if (useFileExtFallback)
+            {
+                try
+                {
+                    return (ImageFileFormat)Enum.Parse(typeof(ImageFileFormat), System.IO.Path.GetExtension(file).Substring(1).Replace("jpg", "jpeg").Replace("ico", "icon"), true);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return ImageFileFormat.Unknown;
+        }
+
+        public static string ImageFormatExtension(ImageFileFormat format, bool includeDot = true)
+        {
+            string ext = "";
+            if (format == ImageFileFormat.Jpeg)
+            {
+                ext = "jpg";
+            }
+            else if (format == ImageFileFormat.Icon)
+            {
+                ext = "ico";
+            }
+            else if (format == ImageFileFormat.Unknown)
+            {
+                return null;
+            }
+            else
+            {
+                ext = format.ToString().ToLower();
+            }
+            if (includeDot)
+            {
+                ext = "." + ext;
+            }
+            return ext;
+        }
     }
 }
