@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace StUtil.Core.Misc
+namespace StUtil.Misc
 {
     public static class Math
     {

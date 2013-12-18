@@ -23,7 +23,7 @@ namespace StUtil.Extensions
         /// <param name="rectangle">The rectangle to create the path at</param>
         /// <param name="radius">The radius of the rounded corners</param>
         /// <returns>A graphics path representing the rounded rectangle</returns>
-        private static GraphicsPath GenerateRoundedRectangle(this Graphics graphics, RectangleF rectangle, float radius)
+        public static GraphicsPath GenerateRoundedRectangle(this Graphics graphics, RectangleF rectangle, float radius)
         {
             float diameter;
             GraphicsPath path = new GraphicsPath();
@@ -36,7 +36,7 @@ namespace StUtil.Extensions
             else
             {
                 if (radius >= (Math.Min(rectangle.Width, rectangle.Height)) / 2.0)
-                    return graphics.GenerateCapsule(rectangle);
+                    return GenerateCapsule(graphics, rectangle);
                 diameter = radius * 2.0F;
                 SizeF sizeF = new SizeF(diameter, diameter);
                 RectangleF arc = new RectangleF(rectangle.Location, sizeF);
