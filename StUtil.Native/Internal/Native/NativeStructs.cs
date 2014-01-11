@@ -53,13 +53,13 @@ namespace StUtil.Internal.Native
             public int nTrackPos;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct TV_ITEM
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct TVITEMEX
         {
-            public int mask;
-            public int hItem;
-            public int state;
-            public int stateMask;
+            public uint mask;
+            public IntPtr hItem;
+            public uint state;
+            public uint stateMask;
             public IntPtr pszText;
             public int cchTextMax;
             public int iImage;
@@ -87,6 +87,28 @@ namespace StUtil.Internal.Native
             public int uEdge;
             public RECT rc;
             public IntPtr lParam;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct LUID
+        {
+            public UInt32 LowPart;
+            public Int32 HighPart;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TOKEN_PRIVILEGES
+        {
+            public UInt32 PrivilegeCount;
+            public LUID Luid;
+            public UInt32 Attributes;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct LUID_AND_ATTRIBUTES
+        {
+            public LUID Luid;
+            public UInt32 Attributes;
         }
     }
 }

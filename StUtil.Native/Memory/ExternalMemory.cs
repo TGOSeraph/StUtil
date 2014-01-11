@@ -109,7 +109,7 @@ namespace StUtil.Native.Memory
         {
             int dwRead = 0;
             byte[] lpBuffer = new byte[readLength];
-            if (!NativeMethods.ReadProcessMemory(Process.hProcess, Address.Increment(pointerOffset), lpBuffer, readLength, out dwRead))
+            if (!NativeMethods.ReadProcessMemory(Process.hProcess, Address.Increment(pointerOffset), lpBuffer, (int)readLength, out dwRead))
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
@@ -142,6 +142,8 @@ namespace StUtil.Native.Memory
 
         public string Read(Encoding encoding)
         {
+            if (encoding == null)
+                encoding = Encoding.Unicode;
             return encoding.GetString(Read(Size, 0));
         }
 

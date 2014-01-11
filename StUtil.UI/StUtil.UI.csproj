@@ -73,6 +73,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Extensions\SplitterPanelExtensions.cs" />
+    <Compile Include="FastRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Forms\InputBox.cs" />
     <Compile Include="Forms\Utilities\AppBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -27,5 +27,10 @@ namespace StUtil.Internal.Native
                            HTBOTTOM = 15,
                            HTBOTTOMLEFT = 16,
                            HTBOTTOMRIGHT = 17;
+
+        public const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
+        public const uint TOKEN_QUERY = 0x0008;
+        public const string SE_DEBUG_NAME = "SeDebugPrivilege";
+        public const UInt32 SE_PRIVILEGE_ENABLED = 0x00000002;
     }
 }

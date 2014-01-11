@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -100,6 +100,10 @@
       <Project>{5ad8a626-a154-4fbb-89ac-72348258ea63}</Project>
       <Name>StUtil.Imaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StUtil.Native.PE\StUtil.Native.PE.csproj">
+      <Project>{3df5d6fe-3a74-4c1b-a927-52bad2c9fd56}</Project>
+      <Name>StUtil.Native.PE</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
       <Name>StUtil.Native</Name>
@@ -107,6 +111,10 @@
     <ProjectReference Include="..\StUtil.Net\StUtil.Net.csproj">
       <Project>{0cd752b9-b072-4c76-b64d-eb8873dc666f}</Project>
       <Name>StUtil.Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Parser\StUtil.Parser.csproj">
+      <Project>{875ec893-4727-453e-97b0-daaebb0f53c6}</Project>
+      <Name>StUtil.Parser</Name>
     </ProjectReference>
     <ProjectReference Include="..\StUtil.Reflection\StUtil.Reflection.csproj">
       <Project>{2a845b03-fb29-46be-92dc-8345e47443c9}</Project>

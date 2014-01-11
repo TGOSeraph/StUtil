@@ -1,8 +1,10 @@
 ﻿using StUtil.Internal.Native;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace StUtil.Native
@@ -81,5 +83,48 @@ namespace StUtil.Native
            return (NativeMethods.GetProcAddress(moduleHandle, methodName) != IntPtr.Zero);
        }
 
+       /// <summary>
+       /// Loads the specified library into the calling processes memory
+       /// </summary>
+       /// <param name="s_File">The library to load</param>
+       /// <returns>The handle of the module that was loaded</returns>
+       public static IntPtr LoadLibrary(string s_File)
+       {
+           IntPtr h_Module = NativeMethods.LoadLibrary(s_File);
+           if (h_Module != IntPtr.Zero)
+               return h_Module;
+
+           int s32_Error = Marshal.GetLastWin32Error();
+           throw new Win32Exception(s32_Error);
+       }
+
+       public static bool EnableSeDebugPrivilege()
+       {
+           IntPtr hToken;
+           NativeStructs.LUID luidSEDebugNameValue;
+           NativeStructs.TOKEN_PRIVILEGES tkpPrivileges;
+
+           if (!NativeMethods.OpenProcessToken(NativeMethods.GetCurrentProcess(), NativeConsts.TOKEN_ADJUST_PRIVILEGES | NativeConsts.TOKEN_QUERY, out hToken))
+           {
+               return false;
+           }
+
+           if (!NativeMethods.LookupPrivilegeValue(null, NativeConsts.SE_DEBUG_NAME, out luidSEDebugNameValue))
+           {
+               NativeMethods.CloseHandle(hToken);
+               return false;
+           }
+
+           tkpPrivileges.PrivilegeCount = 1;
+           tkpPrivileges.Luid = luidSEDebugNameValue;
+           tkpPrivileges.Attributes = NativeConsts.SE_PRIVILEGE_ENABLED;
+
+           if (!NativeMethods.AdjustTokenPrivileges(hToken, false, ref tkpPrivileges, 0, IntPtr.Zero, IntPtr.Zero))
+           {
+               return false;
+           }
+           NativeMethods.CloseHandle(hToken);
+           return true;
+       }
     }
 }

@@ -2,6 +2,7 @@
 using StUtil.Native.Memory;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -34,7 +35,8 @@ namespace StUtil.Native.Controls
 
         private const int TV_FIRST = 0x1100;
         private const int TVM_GETNEXTITEM = (TV_FIRST + 10);
-        private const int TVM_GETITEM = (TV_FIRST + 12);
+        private const int TVM_GETITEMA = (TV_FIRST + 12);
+        private const int TVM_GETITEMW = 0x113E;
         private const int TVGN_ROOT = 0x0;
         private const int TVGN_NEXT = 0x1;
         private const int TVGN_CHILD = 0x4;
@@ -94,15 +96,22 @@ namespace StUtil.Native.Controls
                 {
                     using (ExternalMemory stringMemory = this.Tree.Process.Allocate((uint)255))
                     {
-                        NativeStructs.TV_ITEM tvItem = new NativeStructs.TV_ITEM();
+                        NativeStructs.TVITEMEX tvItem = new NativeStructs.TVITEMEX();
                         tvItem.mask = TVIF_TEXT;
-                        tvItem.hItem = (int)this.Handle;
+                        tvItem.hItem = new IntPtr(this.Handle);
                         //Set the text to point to our allocated memory
                         tvItem.pszText = stringMemory.Address;
                         tvItem.cchTextMax = 255;
                         using (ExternalMemory itemMemory = this.Tree.Process.Allocate(tvItem))
                         {
-                            int success = NativeMethods.SendMessage(this.Tree.Handle, TVM_GETITEM, 0, itemMemory.Address);
+                            NativeStructs.TVITEMEX item = itemMemory.Read<NativeStructs.TVITEMEX>();
+
+
+                            int success = NativeMethods.SendMessage(this.Tree.Handle, TVM_GETITEMW, 0, itemMemory.Address.ToInt32());
+                            if (success != 1)
+                            {
+                                throw new Win32Exception();
+                            }
                             return stringMemory.Read(Encoding.Unicode);
                         }
                     }

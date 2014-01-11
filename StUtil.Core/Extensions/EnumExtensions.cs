@@ -15,6 +15,8 @@ namespace StUtil.Extensions
     /// </remarks>
     public static class EnumExtensions
     {
+
+
         /// <summary>
         /// Gets the Description attribute from an enum
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿using StUtil.Native.Memory;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -45,6 +46,9 @@ namespace StUtil.Native
                 Internal.Native.NativeEnums.ProcessAccess.VMWrite |
                 Internal.Native.NativeEnums.ProcessAccess.VMOperation,
                 false, (uint)this.TargetProcess.Id);
+
+            if(this.hProcess == IntPtr.Zero)
+                throw new Win32Exception();
 
             return this.IsOpen;
         }

@@ -6,7 +6,7 @@ namespace StUtil.Internal.Native
 {
     public static class NativeMethods
     {
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr OpenProcess(NativeEnums.ProcessAccess dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, uint dwProcessId);
 
         [DllImport("kernel32.dll")]
@@ -101,9 +101,6 @@ namespace StUtil.Internal.Native
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
 
-        [DllImport("kernel32.dll")]
-        public static extern IntPtr GetCurrentProcess();
-
         [DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern IntPtr GetProcAddress(IntPtr hModule, [MarshalAs(UnmanagedType.LPStr)]string procName);
 
@@ -142,5 +139,29 @@ namespace StUtil.Internal.Native
         [DllImport("user32.dll", EntryPoint = "SendMessageA", CallingConvention = CallingConvention.StdCall)]
         public static extern IntPtr SendMessage(IntPtr Hdc, uint Msg_Const, IntPtr wParam, IntPtr lParam);
 
+        [DllImport("kernel32.dll", EntryPoint = "LoadLibrary", SetLastError = true)]
+        public static extern IntPtr LoadLibrary(string s_File);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr GetCurrentProcess();
+
+        [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool LookupPrivilegeValue(string lpSystemName, string lpName,
+            out StUtil.Internal.Native.NativeStructs.LUID lpLuid);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool OpenProcessToken(IntPtr ProcessHandle,
+            UInt32 DesiredAccess, out IntPtr TokenHandle);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool AdjustTokenPrivileges(IntPtr TokenHandle,
+           [MarshalAs(UnmanagedType.Bool)]bool DisableAllPrivileges,
+           ref StUtil.Internal.Native.NativeStructs.TOKEN_PRIVILEGES NewState,
+           UInt32 Zero,
+           IntPtr Null1,
+           IntPtr Null2);
     }
 }
