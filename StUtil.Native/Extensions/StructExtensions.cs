@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 
-namespace StUtil.Native.Extensions
+namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for structs

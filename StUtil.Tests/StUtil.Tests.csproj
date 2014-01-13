@@ -53,7 +53,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestClass.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,14 +118,6 @@
     <ProjectReference Include="..\StUtil.Reflection\StUtil.Reflection.csproj">
       <Project>{2a845b03-fb29-46be-92dc-8345e47443c9}</Project>
       <Name>StUtil.Reflection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StUtil.UI\StUtil.UI.csproj">
-      <Project>{d82c9d9c-eb79-4c4b-afbf-60811f1540e0}</Project>
-      <Name>StUtil.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StUtil.Video\StUtil.Video.csproj">
-      <Project>{115776a2-4f01-46fa-a335-a829a0f51509}</Project>
-      <Name>StUtil.Video</Name>
     </ProjectReference>
     <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
       <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>

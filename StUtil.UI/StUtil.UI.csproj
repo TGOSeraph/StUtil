@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StUtil.UI</RootNamespace>
     <AssemblyName>StUtil.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -54,7 +56,25 @@
     <Compile Include="Controls\DualImageToolStripRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\FileSystemSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\FileSystemSelector.Designer.cs">
+      <DependentUpon>FileSystemSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\InterpolatedPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MultiSplitContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NonFlickerListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressBar\CustomProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ProgressBar\DarkBlueProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\SystemPopup\FooterPanel.cs">
@@ -86,6 +106,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\DrawingCanvas.resx">
       <DependentUpon>DrawingCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\FileSystemSelector.resx">
+      <DependentUpon>FileSystemSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SystemPopup\FooterPanel.resx">
       <DependentUpon>FooterPanel.cs</DependentUpon>

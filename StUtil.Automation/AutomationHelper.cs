@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
 using System.Windows.Automation;
 
 namespace StUtil.Automation
@@ -24,6 +20,7 @@ namespace StUtil.Automation
         {
             base.element = element;
         }
+
         /// <summary>
         /// Create an instance of the class to wrap an element
         /// </summary>
@@ -43,6 +40,7 @@ namespace StUtil.Automation
         {
             return FromHandle(proc.MainWindowHandle);
         }
+
         /// <summary>
         /// Create an automation helper from a specified process
         /// </summary>
@@ -77,15 +75,15 @@ namespace StUtil.Automation
         /// <returns>A helper for the main window of the specified process</returns>
         public static AutomationHelper WaitForProcessHandle(Process proc, int timeout)
         {
-             DateTime dt = DateTime.Now.Add(TimeSpan.FromMilliseconds(timeout));
-             while (DateTime.Now < dt)
-             {
-                 if (proc.MainWindowHandle != IntPtr.Zero)
-                 {
-                     return FromHandle(proc.MainWindowHandle);
-                 }
-             }
-             throw new TimeoutException();
+            DateTime dt = DateTime.Now.Add(TimeSpan.FromMilliseconds(timeout));
+            while (DateTime.Now < dt)
+            {
+                if (proc.MainWindowHandle != IntPtr.Zero)
+                {
+                    return FromHandle(proc.MainWindowHandle);
+                }
+            }
+            throw new TimeoutException();
         }
     }
 }

@@ -53,13 +53,13 @@ namespace StUtil.Internal.Native
             public int nTrackPos;
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        public struct TVITEMEX
+        [StructLayout(LayoutKind.Sequential)]
+        public struct TV_ITEM
         {
-            public uint mask;
-            public IntPtr hItem;
-            public uint state;
-            public uint stateMask;
+            public int mask;
+            public int hItem;
+            public int state;
+            public int stateMask;
             public IntPtr pszText;
             public int cchTextMax;
             public int iImage;
@@ -90,25 +90,28 @@ namespace StUtil.Internal.Native
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct LUID
+        public struct POINT
         {
-            public UInt32 LowPart;
-            public Int32 HighPart;
-        }
+            public int X;
+            public int Y;
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct TOKEN_PRIVILEGES
-        {
-            public UInt32 PrivilegeCount;
-            public LUID Luid;
-            public UInt32 Attributes;
-        }
+            public POINT(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct LUID_AND_ATTRIBUTES
-        {
-            public LUID Luid;
-            public UInt32 Attributes;
+            public POINT(System.Drawing.Point pt) : this(pt.X, pt.Y) { }
+
+            public static implicit operator System.Drawing.Point(POINT p)
+            {
+                return new System.Drawing.Point(p.X, p.Y);
+            }
+
+            public static implicit operator POINT(System.Drawing.Point p)
+            {
+                return new POINT(p.X, p.Y);
+            }
         }
     }
 }
