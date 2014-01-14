@@ -145,23 +145,23 @@ namespace StUtil.Internal.Native
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr GetCurrentProcess();
 
-        [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool LookupPrivilegeValue(string lpSystemName, string lpName,
-            out StUtil.Internal.Native.NativeStructs.LUID lpLuid);
+        //[DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //public static extern bool LookupPrivilegeValue(string lpSystemName, string lpName,
+        //    out StUtil.Internal.Native.NativeStructs.LUID lpLuid);
 
-        [DllImport("advapi32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool OpenProcessToken(IntPtr ProcessHandle,
-            UInt32 DesiredAccess, out IntPtr TokenHandle);
+        //[DllImport("advapi32.dll", SetLastError = true)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //public static extern bool OpenProcessToken(IntPtr ProcessHandle,
+        //    UInt32 DesiredAccess, out IntPtr TokenHandle);
 
-        [DllImport("advapi32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool AdjustTokenPrivileges(IntPtr TokenHandle,
-           [MarshalAs(UnmanagedType.Bool)]bool DisableAllPrivileges,
-           ref StUtil.Internal.Native.NativeStructs.TOKEN_PRIVILEGES NewState,
-           UInt32 Zero,
-           IntPtr Null1,
-           IntPtr Null2);
+        //[DllImport("advapi32.dll", SetLastError = true)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //public static extern bool AdjustTokenPrivileges(IntPtr TokenHandle,
+        //   [MarshalAs(UnmanagedType.Bool)]bool DisableAllPrivileges,
+        //   ref StUtil.Internal.Native.NativeStructs.TOKEN_PRIVILEGES NewState,
+        //   UInt32 Zero,
+        //   IntPtr Null1,
+        //   IntPtr Null2);
     }
 }

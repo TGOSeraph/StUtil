@@ -69,6 +69,22 @@ namespace StUtil.Internal.Native
             public int iIntegral;
         }
 
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct TVITEMEX
+        {
+            public uint mask;
+            public IntPtr hItem;
+            public uint state;
+            public uint stateMask;
+            public IntPtr pszText;
+            public int cchTextMax;
+            public int iImage;
+            public int iSelectedImage;
+            public int cChildren;
+            public int lParam;
+            public int iIntegral;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
