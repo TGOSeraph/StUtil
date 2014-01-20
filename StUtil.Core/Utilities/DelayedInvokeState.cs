@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 
 
-namespace StUtil.Misc
+namespace StUtil.Utilities
 {
     /// <summary>
     /// A state object for a Delayed Invoke

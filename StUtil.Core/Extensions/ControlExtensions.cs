@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using System;
 using System.Reflection;
-using StUtil.Misc;
 
 namespace StUtil.Extensions
 {

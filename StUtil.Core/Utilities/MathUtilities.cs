@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 
-namespace StUtil.Misc
+namespace StUtil.Utilities
 {
-    public static class Math
+    public static class MathUtilities
     {
         private static double GreatestCommonDivisor(double a, double b)
         {

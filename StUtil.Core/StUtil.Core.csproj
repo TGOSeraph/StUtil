@@ -77,11 +77,13 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="File\Utilities.cs" />
     <Compile Include="Generic\EventArgsGeneric.cs" />
+    <Compile Include="Generic\Progressable\IProgressable.cs" />
+    <Compile Include="Generic\Progressable\ProgressableProcess.cs" />
     <Compile Include="Generic\Serialization.cs" />
-    <Compile Include="Misc\DelayedInvokeState.cs" />
-    <Compile Include="Misc\Helpers.cs" />
-    <Compile Include="Misc\Math.cs" />
-    <Compile Include="Misc\TypeHelper.cs" />
+    <Compile Include="Utilities\DelayedInvokeState.cs" />
+    <Compile Include="Utilities\ColorUtilities.cs" />
+    <Compile Include="Utilities\MathUtilities.cs" />
+    <Compile Include="Utilities\TypeUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\RandomStringGenerator.cs" />
   </ItemGroup>

@@ -20,7 +20,7 @@ namespace StUtil.Extensions
         /// </summary>
         /// <param name="handler">The handler to raise</param>
         /// <param name="sender">The sender of the event to pass to the handler raise</param>
-        public static void RaiseEvent(this EventHandler handler, object sender)
+        public static void RaiseEvent(this EventHandler handler, object sender) 
         {
             EventHandler copy = handler;
             if (copy != null)

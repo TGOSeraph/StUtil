@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StUtil.Misc
+namespace StUtil.Utilities
 {
-    public static class TypeHelper
+    public static class TypeUtilities
     {
         /// <summary>
         /// Gets a type from a type name

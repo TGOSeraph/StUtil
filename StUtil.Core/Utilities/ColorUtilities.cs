@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace StUtil.Misc
+namespace StUtil.Utilities
 {
-    public static class Helpers
+    public static class ColorUtilities
     {
         [ThreadStatic]
         private static Random random = new Random();
