@@ -32,5 +32,7 @@ namespace StUtil.Internal.Native
         public const uint TOKEN_QUERY = 0x0008;
         public const string SE_DEBUG_NAME = "SeDebugPrivilege";
         public const UInt32 SE_PRIVILEGE_ENABLED = 0x00000002;
+        public const long HSCROLL = 0x100000;
+        public const long VSCROLL = 0x200000;
     }
 }

@@ -55,5 +55,17 @@ namespace StUtil.Native.Extensions
         {
             return new ScrollbarInfo(ctrl, ScrollOrientation.HorizontalScroll);
         }
+
+        public static bool IsHScrollVisible(this Control ctrl)
+        {
+            long style = NativeUtils.GetWindowLongPtr(ctrl.Handle, -16).ToInt64();
+            return (style & NativeConsts.HSCROLL) != 0;
+        }
+
+        public static bool IsVScrollVisible(this Control ctrl)
+        {
+            long style = NativeUtils.GetWindowLongPtr(ctrl.Handle, -16).ToInt64();
+            return (style & NativeConsts.VSCROLL) != 0;
+        }
     }
 }
