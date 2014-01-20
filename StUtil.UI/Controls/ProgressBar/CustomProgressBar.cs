@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using StUtil.UI.Utilities;
 
 namespace StUtil.UI.Controls
 {
@@ -58,15 +59,39 @@ namespace StUtil.UI.Controls
         private long value;
         public long Value
         {
-            get { return this.value; }
+            get
+            {
+                return value;
+            }
             set
             {
-                if (value < 0)
+                if (!this.InDesignMode() && EnableAnimation)
                 {
-                    throw new ArgumentOutOfRangeException("Value must be positive");
+                    if (valueAnimator.IsRunning)
+                    {
+                        valueAnimator.PerformAnimation(valueAnimator.EndValue, value);
+                    }
+                    else
+                    {
+                        valueAnimator.PerformAnimation(value);
+                    }
                 }
+                else
+                {
+                    this.value = value;
+                }
+                this.Refresh();
+            }
+        }
+        private long BaseValue
+        {
+            get
+            {
+                return this.value;
+            }
+            set
+            {
                 this.value = value;
-               
                 this.Refresh();
             }
         }
@@ -138,6 +163,10 @@ namespace StUtil.UI.Controls
             }
         }
 
+        public bool EnableAnimation { get; set; }
+
+        private ControlLongAnimator valueAnimator;
+
         public CustomProgressBar()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
@@ -151,6 +180,8 @@ namespace StUtil.UI.Controls
             this.labelOffsetX = LabelXOffsetEnum.FromBarRight;
 
             this.Step = 1;
+
+            this.valueAnimator = new ControlLongAnimator(this, () => BaseValue);
         }
 
         public void PerformStep(bool boundCheck = true)

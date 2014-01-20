@@ -52,7 +52,6 @@ namespace StUtil.UI.Controls
             this.containers.Add(container);
             this.Controls.Add(container);
             this.panels.Add(container.Panel1);
-
         }
 
         private void MultiSplitContainer_SizeChanged(object sender, EventArgs e)

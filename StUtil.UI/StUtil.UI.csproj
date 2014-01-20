@@ -35,6 +35,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StUtil.Reflection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\StUtil.Reflection\bin\Debug\StUtil.Reflection.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -46,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ColorFaderLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ColorFaderTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\DrawingAddedEventArgs.cs" />
     <Compile Include="Controls\DrawingCanvas.cs">
       <SubType>UserControl</SubType>
@@ -56,11 +66,26 @@
     <Compile Include="Controls\DualImageToolStripRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Explorer\ExplorerTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Explorer\ExplorerTreeView.designer.cs">
+      <DependentUpon>ExplorerTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Explorer\ExplorerTreeViewWnd.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Explorer\ShellAPI.cs" />
+    <Compile Include="Controls\Explorer\ShellItem.cs" />
+    <Compile Include="Controls\Explorer\SystemImageList.cs" />
     <Compile Include="Controls\FileSystemSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\FileSystemSelector.Designer.cs">
       <DependentUpon>FileSystemSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FormTextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\InterpolatedPictureBox.cs">
       <SubType>Component</SubType>
@@ -71,10 +96,28 @@
     <Compile Include="Controls\NonFlickerListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\PlaceholderTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\PopupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ProgressBar\CustomProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\ProgressBar\DarkBlueProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RoundedCornersTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\RoundedCornersTextBox.designer.cs">
+      <DependentUpon>RoundedCornersTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ShadowLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\SystemPopup\FooterPanel.cs">
@@ -92,8 +135,11 @@
     <Compile Include="Controls\ToolStripRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TopDockPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extensions\SplitterPanelExtensions.cs" />
-    <Compile Include="FastRichTextBox.cs">
+    <Compile Include="Controls\FastRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\InputBox.cs" />
@@ -102,10 +148,23 @@
     <Compile Include="Forms\SystemPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ControlColorAnimator.cs" />
+    <Compile Include="Utilities\ControlIntegerAnimator.cs" />
+    <Compile Include="Utilities\ControlLongAnimator.cs" />
+    <Compile Include="Utilities\ControlPropertyAnimator.cs" />
+    <Compile Include="Utilities\PropertyAnimator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\DrawingCanvas.resx">
       <DependentUpon>DrawingCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Explorer\ExplorerTreeView.resx">
+      <DependentUpon>ExplorerTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\FileSystemSelector.resx">
       <DependentUpon>FileSystemSelector.cs</DependentUpon>
@@ -115,6 +174,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SystemPopup\HeaderPanel.resx">
       <DependentUpon>HeaderPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +193,9 @@
       <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
       <Name>StUtil.Native</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pgbbg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

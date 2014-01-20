@@ -6,8 +6,7 @@ namespace StUtil.UI.Controls
 {
     public class DarkBlueProgressBar : CustomProgressBar
     {
-        //TODO: Fix this
-        private System.Drawing.Image barImage = null;//(System.Drawing.Image)StUtil.Properties.Resources.pgbbg;
+        private System.Drawing.Image barImage = (System.Drawing.Image)Properties.Resources.pgbbg;
 
         public System.Drawing.Image BarImage
         {
