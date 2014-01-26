@@ -136,14 +136,37 @@ namespace StUtil.Internal.Native
             [In] [MarshalAs(UnmanagedType.U4)] int UndecoratedLength,
             [In] [MarshalAs(UnmanagedType.U4)] NativeEnums.UnDecorateFlags Flags);
 
-        [DllImport("user32.dll", EntryPoint = "SendMessageA", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("user32.dll", EntryPoint = "SendMessage", CallingConvention = CallingConvention.StdCall)]
         public static extern IntPtr SendMessage(IntPtr Hdc, uint Msg_Const, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal extern static bool PostMessage(IntPtr handle, uint msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("kernel32.dll", EntryPoint = "LoadLibrary", SetLastError = true)]
         public static extern IntPtr LoadLibrary(string s_File);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr GetCurrentProcess();
+
+        [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
+        public static extern bool UpdateLayeredWindow(IntPtr hwnd, IntPtr hdcDst, ref NativeStructs.POINT pptDst, ref NativeStructs.SIZE psize, IntPtr hdcSrc, ref NativeStructs.POINT pprSrc, Int32 crKey, ref NativeStructs.BLENDFUNCTION pblend, Int32 dwFlags);
+
+        [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
+        public static extern IntPtr GetDC(IntPtr hWnd);
+        [DllImport("user32.dll", ExactSpelling = true)]
+        public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+
+        [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
+        public static extern IntPtr CreateCompatibleDC(IntPtr hDC);
+
+        [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
+        public static extern bool DeleteDC(IntPtr hdc);
+
+        [DllImport("gdi32.dll", ExactSpelling = true)]
+        public static extern IntPtr SelectObject(IntPtr hDC, IntPtr hObject);
+
+        [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
+        public static extern bool DeleteObject(IntPtr hObject);
 
         //[DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         //[return: MarshalAs(UnmanagedType.Bool)]

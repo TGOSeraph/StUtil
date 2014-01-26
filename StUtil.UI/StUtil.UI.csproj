@@ -142,6 +142,12 @@
     <Compile Include="Controls\FastRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\AlphaTransparencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AlphaTransparencyForm.Designer.cs">
+      <DependentUpon>AlphaTransparencyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\InputBox.cs" />
     <Compile Include="Forms\Utilities\AppBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

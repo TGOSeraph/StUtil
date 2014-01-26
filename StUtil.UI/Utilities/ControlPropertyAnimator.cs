@@ -23,7 +23,7 @@ namespace StUtil.UI.Utilities
 
         protected override bool IsValidState()
         {
-            return !(this.Instance.IsDisposed || !this.Instance.IsHandleCreated || this.Instance.Disposing || (this.Instance.Parent != null && this.Instance.Parent.IsDisposed || this.Instance.Parent.Disposing || !this.Instance.Parent.IsHandleCreated));
+            return !(this.Instance.IsDisposed || !this.Instance.IsHandleCreated || this.Instance.Disposing);
         }
 
         protected override void InvokeUpdate(T value)
@@ -32,6 +32,36 @@ namespace StUtil.UI.Utilities
             {
                 base.UpdateValue(value);
             });
+        }
+    }
+
+    public class ControlNumericPropertyAnimator<T> : ControlPropertyAnimator<T>
+    {
+        private double step;
+        private double progress;
+
+        public ControlNumericPropertyAnimator(Control ctrl, System.Linq.Expressions.Expression<Func<T>> property)
+        {
+            this.Instance = ctrl;
+            base.SetProperty(property);
+        }
+
+        protected override void PerformProcess()
+        {
+
+            double v = ((double)Convert.ChangeType(EndValue, typeof(double)) - (double)Convert.ChangeType(StartValue, typeof(double)));
+
+            step = v / Steps;
+
+            progress = (double)Convert.ChangeType(StartValue, typeof(double));
+
+            base.PerformProcess();
+        }
+
+        protected override T ComputeStep(int step)
+        {
+            progress += this.step;
+            return ((T)Convert.ChangeType(progress, typeof(T)));
         }
     }
 }

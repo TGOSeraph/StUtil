@@ -1,5 +1,6 @@
 ﻿using StUtil.Extensions;
 using StUtil.Internal.Native;
+using StUtil.Native.Controls;
 using StUtil.Reflection;
 using StUtil.Utilities;
 using System;
@@ -20,6 +21,8 @@ namespace StUtil.Native
         /// The control whos WndProc should be hooked
         /// </summary>
         public Control Control { get; set; }
+
+        public object Tag { get; set; }
 
         /// <summary>
         /// List of handlers for messages

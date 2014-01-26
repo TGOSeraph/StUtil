@@ -58,12 +58,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FocusChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\FocusChildForm.Designer.cs">
+      <DependentUpon>FocusChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\FocusParentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\FocusParentForm.Designer.cs">
+      <DependentUpon>FocusParentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SysTreeView32.cs" />
     <Compile Include="Controls\Utilities.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\StructExtensions.cs" />
     <Compile Include="ExtractIcon.cs" />
+    <Compile Include="Keyboard\HotKeyHandler.cs" />
+    <Compile Include="Keyboard\KeyboardHook.cs" />
+    <Compile Include="Keyboard\KeyboardHookHotKeys.cs" />
+    <Compile Include="Keyboard\RawKeyEventArgs.cs" />
     <Compile Include="Memory\ExternalMemory.cs" />
     <Compile Include="ExternalProcess.cs" />
     <Compile Include="Internal\Native\NativeConsts.cs" />
@@ -72,9 +88,17 @@
     <Compile Include="Internal\Native\NativeStructs.cs" />
     <Compile Include="Internal\Native\NativeUtils.cs" />
     <Compile Include="Misc\ScrollbarInfo.cs" />
+    <Compile Include="Monitor\WindowActivityData.cs" />
+    <Compile Include="Monitor\WindowActivityEventArgs.cs" />
+    <Compile Include="Monitor\WindowActivityMonitor.cs" />
     <Compile Include="ParentProcessUtilities.cs" />
+    <Compile Include="Monitor\ProcessActivityData.cs" />
+    <Compile Include="Monitor\ProcessActivityEventArgs.cs" />
+    <Compile Include="Monitor\ProcessActivityMonitor.cs" />
     <Compile Include="ProcessStartWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryQuery.cs" />
+    <Compile Include="SingleInstance.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="WindowFinder.cs" />
     <Compile Include="WndProcHandler.cs" />

@@ -27,6 +27,7 @@ namespace StUtil.Internal.Native
                            HTBOTTOM = 15,
                            HTBOTTOMLEFT = 16,
                            HTBOTTOMRIGHT = 17;
+        public const int WM_ACTIVATEAPP = 0x01C;
 
         public const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
         public const uint TOKEN_QUERY = 0x0008;
@@ -34,5 +35,11 @@ namespace StUtil.Internal.Native
         public const UInt32 SE_PRIVILEGE_ENABLED = 0x00000002;
         public const long HSCROLL = 0x100000;
         public const long VSCROLL = 0x200000;
+
+        public const Int32 ULW_COLORKEY = 0x00000001;
+        public const Int32 ULW_ALPHA = 0x00000002;
+        public const Int32 ULW_OPAQUE = 0x00000004;
+        public const byte AC_SRC_OVER = 0x00;
+        public const byte AC_SRC_ALPHA = 0x01;
     }
 }

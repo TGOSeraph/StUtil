@@ -129,5 +129,29 @@ namespace StUtil.Internal.Native
                 return new POINT(p.X, p.Y);
             }
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SIZE
+        {
+            public Int32 cx;
+            public Int32 cy;
+            public SIZE(Int32 cx, Int32 cy) { this.cx = cx; this.cy = cy; }
+        }
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        struct ARGB
+        {
+            public byte Blue;
+            public byte Green;
+            public byte Red;
+            public byte Alpha;
+        }
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public struct BLENDFUNCTION
+        {
+            public byte BlendOp;
+            public byte BlendFlags;
+            public byte SourceConstantAlpha;
+            public byte AlphaFormat;
+        }
     }
 }

@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Native.PE", "StUtil.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Native.Windows", "StUtil.Native.Windows\StUtil.Native.Windows.csproj", "{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtilEx.RegexParser", "StUtilEx.RegexParser\StUtilEx.RegexParser.csproj", "{C0FAE9FE-6051-4D54-9A74-362E31FF928F}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -101,6 +103,10 @@ Global
 		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00841EB2-4EB4-44B5-8326-8DB3D2B898FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FAE9FE-6051-4D54-9A74-362E31FF928F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FAE9FE-6051-4D54-9A74-362E31FF928F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FAE9FE-6051-4D54-9A74-362E31FF928F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FAE9FE-6051-4D54-9A74-362E31FF928F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
