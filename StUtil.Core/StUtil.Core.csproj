@@ -83,6 +83,7 @@
     <Compile Include="Utilities\DelayedInvokeState.cs" />
     <Compile Include="Utilities\ColorUtilities.cs" />
     <Compile Include="Utilities\MathUtilities.cs" />
+    <Compile Include="Utilities\PluginLoader.cs" />
     <Compile Include="Utilities\TypeUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strings\RandomStringGenerator.cs" />
