@@ -100,6 +100,7 @@ namespace StUtil.UI.Utilities
                     this.StartValue = start;
                     StartAnimation(end);
                 });
+                t.IsBackground = true;
                 t.Start();
             }
             else
@@ -123,6 +124,7 @@ namespace StUtil.UI.Utilities
                     this.StartValue = (TValue)Convert.ChangeType(property.GetValue(Instance), typeof(TValue));
                     StartAnimation(end);
                 });
+                t.IsBackground = true;
                 t.Start();
             }
             else
