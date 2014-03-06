@@ -61,5 +61,37 @@ namespace StUtil.UI.Controls
                 g.FillRoundedRectangle(tb, pgb, 10);
             }
         }
+
+        private int marqueeIndex = 0;
+        public override void DrawBarMarquee(Graphics g)
+        {
+            //int width = this.Width / 8;
+
+            //int right = this.BarMargins.Left + (width * marqueeIndex++);
+
+            int speed = 24;
+
+            int width = this.Width / 8;
+            int left = (marqueeIndex++ * (width / speed));
+            int maxR = this.Width - this.BarMargins.Left - this.BarMargins.Right - 10;
+            if (left + width > maxR)
+            {
+                width = maxR - left;
+            }
+            if (left > maxR)
+            {
+                marqueeIndex = -1;
+                width = 0;
+                left = (marqueeIndex * (width / speed));
+            }
+            if (left < this.BarMargins.Left)
+            {
+                int l = left;
+                left = this.BarMargins.Left;
+            }
+            int x = this.BarMargins.Left + left + 5;
+            Rectangle pgb = new Rectangle(x, this.BarMargins.Top + 5, width, this.Height - this.BarMargins.Top - this.BarMargins.Bottom - 10);
+            g.FillRoundedRectangle(tb, pgb, 10);
+        }
     }
 }

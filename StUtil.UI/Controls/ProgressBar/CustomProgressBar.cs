@@ -7,11 +7,18 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using StUtil.UI.Utilities;
+using System.Threading;
 
 namespace StUtil.UI.Controls
 {
     public abstract class CustomProgressBar : Panel
     {
+        public enum ProgressBarType
+        {
+            Continuous,
+            Marquee
+        }
+
         public enum LabelTypeEnum
         {
             Percent,
@@ -55,6 +62,7 @@ namespace StUtil.UI.Controls
             set { customLabel = value; this.Refresh(); }
         }
 
+        public ProgressBarType ProgressStyle { get; private set; }
 
         private long value;
         public long Value
@@ -65,6 +73,10 @@ namespace StUtil.UI.Controls
             }
             set
             {
+                if (ProgressStyle == ProgressBarType.Marquee)
+                {
+                    throw new InvalidOperationException("Value cannot be changed in Marquee mode");
+                }
                 if (!this.InDesignMode() && EnableAnimation)
                 {
                     if (valueAnimator.IsRunning)
@@ -122,7 +134,7 @@ namespace StUtil.UI.Controls
         public string LabelOfString
         {
             get { return labelOfString; }
-            set { labelOfString = value; this.Refresh();  }
+            set { labelOfString = value; this.Refresh(); }
         }
 
         private LabelTypeEnum labelType;
@@ -154,7 +166,7 @@ namespace StUtil.UI.Controls
         }
 
         public long Step { get; set; }
-        
+
         public double Percent
         {
             get
@@ -208,6 +220,45 @@ namespace StUtil.UI.Controls
             }
         }
 
+        private Thread marqueeThread = null;
+        public void StartMarquee()
+        {
+            if (marqueeThread != null)
+            {
+                throw new InvalidOperationException("Marquee already running");
+            }
+            this.ProgressStyle = ProgressBarType.Marquee;
+            Action a = () =>
+            {
+                while (true)
+                {
+                    this.Invoke((Action)delegate()
+                    {
+                        this.Refresh();
+                    });
+                    Thread.Sleep(20);
+                }
+            };
+            marqueeThread = a.RunOnNewThread();
+            marqueeThread.IsBackground = true;
+        }
+
+        public void StopMarquee()
+        {
+            this.ProgressStyle = ProgressBarType.Continuous;
+            if (marqueeThread != null && marqueeThread.IsAlive)
+            {
+                try
+                {
+                    marqueeThread.Abort();
+                    marqueeThread = null;
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -215,7 +266,14 @@ namespace StUtil.UI.Controls
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             DrawEmptyBar(e.Graphics);
-            DrawBarFill(e.Graphics);
+            if (ProgressStyle == ProgressBarType.Marquee)
+            {
+                DrawBarMarquee(e.Graphics);
+            }
+            else
+            {
+                DrawBarFill(e.Graphics);
+            }
             if (this.drawLabel)
             {
                 DrawProgressLabel(e.Graphics);
@@ -274,7 +332,8 @@ namespace StUtil.UI.Controls
             }
 
             string message = "";
-            switch(this.labelType){
+            switch (this.labelType)
+            {
                 case LabelTypeEnum.Percent:
                     message = (Math.Round(this.Percent * 100, 2).ToString() + "%").PadLeft(4);
                     break;
@@ -295,5 +354,6 @@ namespace StUtil.UI.Controls
         public abstract void DrawEmptyBar(Graphics g);
 
         public abstract void DrawBarFill(Graphics g);
+        public abstract void DrawBarMarquee(Graphics g);
     }
 }
