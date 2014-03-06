@@ -103,10 +103,11 @@ namespace StUtil.Extensions
         /// <param name="action">The method to run</param>
         /// <param name="arg">The paramater to pass to the delegate</param>
         /// <returns>The newly created thread</returns>
-        public static Thread RunOnNewThread(this Delegate action, object arg)
+        public static Thread RunOnNewThread(this Delegate action, object arg, bool isBackground = true)
         {
             Thread t = new Thread((ParameterizedThreadStart)action);
             t.Start(arg);
+            t.IsBackground = isBackground;
             return t;
         }
 
