@@ -75,6 +75,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="File\LogWatcher.cs" />
     <Compile Include="File\Utilities.cs" />
     <Compile Include="Generic\EventArgsGeneric.cs" />
     <Compile Include="Generic\Progressable\IProgressable.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Generic\Serialization.cs" />
     <Compile Include="Utilities\DelayedInvokeState.cs" />
     <Compile Include="Utilities\ColorUtilities.cs" />
+    <Compile Include="Utilities\DisposableBase.cs" />
     <Compile Include="Utilities\MathUtilities.cs" />
     <Compile Include="Utilities\PluginLoader.cs" />
     <Compile Include="Utilities\TypeUtilities.cs" />
