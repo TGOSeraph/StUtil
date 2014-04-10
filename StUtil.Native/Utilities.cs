@@ -49,7 +49,7 @@ namespace StUtil.Native
        /// </returns>
        public static bool Is64BitOperatingSystem()
        {
-           if (IntPtr.Size == 8)  // 64-bit programs run only on Win64
+           if (Is64BitApplication())  // 64-bit programs run only on Win64
            {
                return true;
            }
@@ -61,6 +61,11 @@ namespace StUtil.Native
                return ((DoesWin32MethodExist("kernel32.dll", "IsWow64Process") &&
                    NativeMethods.IsWow64Process(NativeMethods.GetCurrentProcess(), out flag)) && flag);
            }
+       }
+
+       public static bool Is64BitApplication()
+       {
+           return IntPtr.Size == 8;
        }
 
        /// <summary>
@@ -97,34 +102,5 @@ namespace StUtil.Native
            int s32_Error = Marshal.GetLastWin32Error();
            throw new Win32Exception(s32_Error);
        }
-
-       //public static bool EnableSeDebugPrivilege()
-       //{
-       //    IntPtr hToken;
-       //    NativeStructs.LUID luidSEDebugNameValue;
-       //    NativeStructs.TOKEN_PRIVILEGES tkpPrivileges;
-
-       //    if (!NativeMethods.OpenProcessToken(NativeMethods.GetCurrentProcess(), NativeConsts.TOKEN_ADJUST_PRIVILEGES | NativeConsts.TOKEN_QUERY, out hToken))
-       //    {
-       //        return false;
-       //    }
-
-       //    if (!NativeMethods.LookupPrivilegeValue(null, NativeConsts.SE_DEBUG_NAME, out luidSEDebugNameValue))
-       //    {
-       //        NativeMethods.CloseHandle(hToken);
-       //        return false;
-       //    }
-
-       //    tkpPrivileges.PrivilegeCount = 1;
-       //    tkpPrivileges.Luid = luidSEDebugNameValue;
-       //    tkpPrivileges.Attributes = NativeConsts.SE_PRIVILEGE_ENABLED;
-
-       //    if (!NativeMethods.AdjustTokenPrivileges(hToken, false, ref tkpPrivileges, 0, IntPtr.Zero, IntPtr.Zero))
-       //    {
-       //        return false;
-       //    }
-       //    NativeMethods.CloseHandle(hToken);
-       //    return true;
-       //}
     }
 }

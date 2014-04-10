@@ -8,7 +8,8 @@ namespace StUtil.Internal.Native
 {
     public static class NativeUtils
     {
-        public delegate IntPtr LowLevelKeyboardProc(int nCode, UIntPtr wParam, IntPtr lParam);
+        public delegate int HookProc(int nCode, int wParam, IntPtr lParam);
+
         public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         public static string GetClassName(IntPtr hWnd)
@@ -25,7 +26,7 @@ namespace StUtil.Internal.Native
             return sb.ToString();
         }
 
-        public static IntPtr SetHook(LowLevelKeyboardProc proc)
+        public static IntPtr SetHook(HookProc proc)
         {
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)

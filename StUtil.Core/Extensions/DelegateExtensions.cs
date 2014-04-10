@@ -18,7 +18,7 @@ namespace StUtil.Extensions
         /// Invoke a delegate safely on a speficied control
         /// </summary>
         /// <param name="Action">The delegate to execute</param>
-        /// <param name="owner">The control to execute on</param>
+        /// <param name="owner">The control to execute on</param>fasdas
         /// <param name="args">The arguments to pass to the delegate</param>
         public static void SafeInvoke(this Delegate Action, System.Windows.Forms.Control owner, params object[] args)
         {

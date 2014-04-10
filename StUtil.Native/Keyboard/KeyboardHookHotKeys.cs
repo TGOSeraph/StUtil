@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using StUtil.Native.Keyboard;
+using StUtil.Native.Hooks;
 
 namespace StUtil.Native.Keyboard
 {
@@ -15,29 +16,34 @@ namespace StUtil.Native.Keyboard
         {
             this.Handlers = new List<HotKeyHandler>();
             this.Listener = listener;
-            this.Listener.Asynchronous = false;
-            this.Listener.KeyDown += new EventHandler<RawKeyEventArgs>(Listener_KeyDown);
-            this.Listener.KeyUp += new EventHandler<RawKeyEventArgs>(Listener_KeyUp);
+            this.Listener.KeyDown += new KeyEventHandler(Listener_KeyDown);
+            this.Listener.KeyUp += new KeyEventHandler(Listener_KeyUp);
         }
 
         private HotKeyHandler FindHandler(Keys key)
         {
+            Keys kz = key;
+            foreach (Keys keysDown in Listener.KeysDown)
+            {
+                kz |= keysDown;
+            }
+
             var keys = Listener.KeysDown.Contains(key) ? Listener.KeysDown : Listener.KeysDown.Concat(new Keys[] { key });
-            return this.Handlers.FirstOrDefault(h => h.Keys.Count == keys.Count() && h.Keys.All(k => keys.Contains(k)));
+            return this.Handlers.FirstOrDefault(h => h.Key == kz || (h.Keys.Count == keys.Count() && h.Keys.All(k => keys.Contains(k))));
         }
 
-        private void Listener_KeyUp(object sender, RawKeyEventArgs args)
+        private void Listener_KeyUp(object sender, KeyEventArgs args)
         {
-            HotKeyHandler handler = FindHandler(args.Key);
+            HotKeyHandler handler = FindHandler(args.KeyCode);
             if (handler != null)
             {
                 args.Handled = handler.Handle(HotKeyHandler.KeyState.Up);
             }
         }
 
-        private void Listener_KeyDown(object sender, RawKeyEventArgs args)
+        private void Listener_KeyDown(object sender, KeyEventArgs args)
         {
-            HotKeyHandler handler = FindHandler(args.Key);
+            HotKeyHandler handler = FindHandler(args.KeyCode);
             if (handler != null)
             {
                 args.Handled = handler.Handle(HotKeyHandler.KeyState.Down);

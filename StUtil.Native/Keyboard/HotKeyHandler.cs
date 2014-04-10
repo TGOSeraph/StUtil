@@ -13,7 +13,25 @@ namespace StUtil.Native.Keyboard
             Down
         }
 
-        public List<Keys> Keys { get; set; }
+        public Keys Key { get; private set; }
+
+        private List<Keys> keys;
+        public List<Keys> Keys
+        {
+            get
+            {
+                return keys;
+            }
+            set
+            {
+                keys = value;
+                Key = System.Windows.Forms.Keys.None;
+                foreach (System.Windows.Forms.Keys k in value)
+                {
+                    Key |= k;
+                }
+            }
+        }
         public Func<HotKeyHandler, KeyState, bool> Handler { get; set; }
         public Object Tag { get; set; }
 

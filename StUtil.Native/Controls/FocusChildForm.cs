@@ -13,7 +13,7 @@ namespace StUtil.Native.Controls
 {
     public partial class FocusChildForm : Form
     {
-        public bool ForceActiveBar { get; set; }
+        internal bool ForceActiveBar { get; set; }
 
         public FocusChildForm()
         {
