@@ -73,17 +73,6 @@ namespace StUtil.Net
                 {
                     throw;
                 }
-                //if (e.Status == WebExceptionStatus.ProtocolError)
-                //{
-                //    HttpWebResponse httpWebResponse = (HttpWebResponse)e.Response;
-                //    if ((int)httpWebResponse.StatusCode == 500)
-                //    {
-                //        using (StreamReader sr = new StreamReader(httpWebResponse.GetResponseStream()))
-                //        {
-                //            var result = sr.ReadToEnd();
-                //        }
-                //    }
-                //}
             }
 		}
 		protected virtual void SetHeaders(ref HttpWebRequest request)

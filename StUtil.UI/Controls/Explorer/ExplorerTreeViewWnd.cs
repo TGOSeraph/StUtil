@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace StUtil.UI.Controls.Explorer
 {
-    public abstract class ExplorerTreeViewWnd : TreeView
+    public abstract class ExplorerTreeViewWnd : TriStateTreeView
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessage(IntPtr hWnd, Int32 msg, IntPtr wParam, IntPtr lParam);
@@ -105,30 +105,38 @@ namespace StUtil.UI.Controls.Explorer
                 base.WndProc(ref m);
             }
         }
-     
+
         protected override void OnBeforeExpand(TreeViewCancelEventArgs e)
         {
+            if (e.Node.Nodes.Count == 1 && e.Node.Nodes[0].Text == "PH")
+            {
+            }
+            else
+            {
+                return;
+            }
             // Remove the placeholder node.
             e.Node.Nodes.Clear();
-
             // We stored the ShellItem object in the node's Tag property - hah!
             ShellItem shNode = (ShellItem)e.Node.Tag;
+
             ArrayList arrSub = shNode.GetSubFolders();
             foreach (ShellItem shChild in arrSub)
             {
-                TreeNode tvwChild = new TreeNode();
+                TriStateTreeNode tvwChild = new TriStateTreeNode();
                 tvwChild.Text = shChild.DisplayName;
                 tvwChild.ImageIndex = shChild.IconIndex;
                 tvwChild.SelectedImageIndex = shChild.IconIndex;
                 tvwChild.Tag = shChild;
-
                 // If this is a folder item and has children then add a place holder node.
                 if (shChild.IsFolder && shChild.HasSubFolder)
+                {
                     tvwChild.Nodes.Add("PH");
-                e.Node.Nodes.Add(tvwChild);
-            }
+                }
 
-            base.OnBeforeExpand(e);
+                e.Node.Nodes.Add(tvwChild);
+                base.OnBeforeExpand(e);
+            }
         }
     }
 }

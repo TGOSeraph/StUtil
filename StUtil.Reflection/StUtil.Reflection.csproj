@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dynamic\CustomProperty.cs" />
+    <Compile Include="Dynamic\DynamicObj.cs" />
+    <Compile Include="Dynamic\DynamicObjPropertyDescriptor.cs" />
     <Compile Include="IReflectedMember.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +59,12 @@
     <Compile Include="ReflectedMethod.cs" />
     <Compile Include="ReflectedProperty.cs" />
     <Compile Include="ReflectionHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

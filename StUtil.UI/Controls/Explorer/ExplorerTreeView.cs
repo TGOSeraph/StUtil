@@ -22,6 +22,8 @@ namespace StUtil.UI.Controls.Explorer
                 SystemImageList.SetTVImageList(base.Handle);
                 LoadRootNodes();
             }
+
+            this.DrawMode = TreeViewDrawMode.OwnerDrawAll;
         }
 
         /// <summary>
@@ -33,7 +35,7 @@ namespace StUtil.UI.Controls.Explorer
             ShellItem m_shDesktop = new ShellItem();
 
             // Create the root node.
-            TreeNode tvwRoot = new TreeNode();
+            TriStateTreeNode tvwRoot = new TriStateTreeNode();
             tvwRoot.Text = m_shDesktop.DisplayName;
             tvwRoot.ImageIndex = m_shDesktop.IconIndex;
             tvwRoot.SelectedImageIndex = m_shDesktop.IconIndex;
@@ -43,7 +45,7 @@ namespace StUtil.UI.Controls.Explorer
             ArrayList arrChildren = m_shDesktop.GetSubFolders();
             foreach (ShellItem shChild in arrChildren)
             {
-                TreeNode tvwChild = new TreeNode();
+                TriStateTreeNode tvwChild = new TriStateTreeNode();
                 tvwChild.Text = shChild.DisplayName;
                 tvwChild.ImageIndex = shChild.IconIndex;
                 tvwChild.SelectedImageIndex = shChild.IconIndex;

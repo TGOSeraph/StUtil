@@ -138,6 +138,10 @@
     <Compile Include="Controls\TopDockPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\TriStateTreeNode.cs" />
+    <Compile Include="Controls\TriStateTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extensions\SplitterPanelExtensions.cs" />
     <Compile Include="Controls\FastRichTextBox.cs">
       <SubType>Component</SubType>
@@ -190,10 +194,6 @@
     <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
       <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
       <Name>StUtil.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
-      <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
-      <Name>StUtil.Native</Name>
     </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
