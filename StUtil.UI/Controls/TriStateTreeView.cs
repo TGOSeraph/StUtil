@@ -125,7 +125,6 @@ namespace StUtil.UI.Controls
             internal int bottom;
         }
 
-#pragma warning disable 649
         private struct NMHDR
         {
             internal IntPtr hwndFrom;
@@ -133,7 +132,6 @@ namespace StUtil.UI.Controls
             internal int code;
         }
 
-#pragma warning disable 649
         private struct NMCUSTOMDRAW
         {
             internal NMHDR hdr;
@@ -145,7 +143,6 @@ namespace StUtil.UI.Controls
             internal IntPtr lItemlParam;
         }
 
-#pragma warning disable 649
         private struct NMTVCUSTOMDRAW
         {
             internal NMCUSTOMDRAW nmcd;
@@ -153,6 +150,7 @@ namespace StUtil.UI.Controls
             internal int clrTextBk;
             internal int iLevel;
         }
+#pragma warning restore 649
 
         private int HandleNotify(Message msg)
         {
