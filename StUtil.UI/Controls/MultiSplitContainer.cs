@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Windows.Forms;
-using StUtil.UI.Extensions;
+using StUtil.Extensions;
 
 namespace StUtil.UI.Controls
 {

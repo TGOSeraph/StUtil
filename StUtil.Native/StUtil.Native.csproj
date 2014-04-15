@@ -73,9 +73,11 @@
     <Compile Include="Controls\SysTreeView32.cs" />
     <Compile Include="Controls\Utilities.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
-    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\ControlNativeExtensions.cs" />
     <Compile Include="Extensions\CursorExtensions.cs" />
+    <Compile Include="Extensions\ListViewNativeExtensions.cs" />
     <Compile Include="Extensions\StructExtensions.cs" />
+    <Compile Include="Extensions\TreeViewNativeExtensions.cs" />
     <Compile Include="ExtractIcon.cs" />
     <Compile Include="Hooks\GlobalHook.cs" />
     <Compile Include="Hooks\HookMethod.cs" />
@@ -83,6 +85,9 @@
     <Compile Include="Hooks\LocalHook.cs" />
     <Compile Include="Hooks\MouseHook.cs" />
     <Compile Include="Hooks\WindowsHook.cs" />
+    <Compile Include="Internal\Native\NativeInterfaces.cs" />
+    <Compile Include="Internal\Shell\ShellItem.cs" />
+    <Compile Include="Internal\Shell\SystemImageList.cs" />
     <Compile Include="Keyboard\HotKeyHandler.cs" />
     <Compile Include="Keyboard\KeyboardHookHotKeys.cs" />
     <Compile Include="Memory\ExternalMemory.cs" />

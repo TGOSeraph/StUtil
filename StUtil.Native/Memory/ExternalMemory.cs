@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using StUtil.Extensions;
-using StUtil.Native.Extensions;
 
 namespace StUtil.Native.Memory
 {

@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Windows.Forms;
 
-namespace StUtil.UI.Extensions
+namespace StUtil.Extensions
 {
     public static class SplitterPanelExtensions
     {

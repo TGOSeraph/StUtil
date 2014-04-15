@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using StUtil.Extensions;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using StUtil.Internal.Shell;
+using System.Collections.Generic;
 
 namespace StUtil.UI.Controls.Explorer
 {
@@ -13,15 +15,11 @@ namespace StUtil.UI.Controls.Explorer
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessage(IntPtr hWnd, Int32 msg, IntPtr wParam, IntPtr lParam);
 
-        [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
-        private static extern Int32 SetWindowTheme(IntPtr hWnd, String pszSubAppName, String pszSubIdList);
-
         public ExplorerTreeViewWnd()
         {
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.UserPaint, true);
-
             UpdateStyles();
         }
 
@@ -64,12 +62,11 @@ namespace StUtil.UI.Controls.Explorer
                 IntPtr.Zero, IntPtr.Zero);
 
             dw |= TVS_EX_AUTOHSCROLL;
-            dw |= TVS_EX_FADEINOUTEXPANDOS;
 
             SendMessage(Handle, TVM_SETEXTENDEDSTYLE, IntPtr.Zero, new IntPtr(dw));
 
-            Int32 hresult = SetWindowTheme(Handle, "explorer", null);
-            Tag = hresult;
+            this.SetExplorerTheme();
+            
         }
 
         /// <summary>
@@ -120,7 +117,7 @@ namespace StUtil.UI.Controls.Explorer
             // We stored the ShellItem object in the node's Tag property - hah!
             ShellItem shNode = (ShellItem)e.Node.Tag;
 
-            ArrayList arrSub = shNode.GetSubFolders();
+            List<ShellItem> arrSub = shNode.GetDirectories();
             foreach (ShellItem shChild in arrSub)
             {
                 TriStateTreeNode tvwChild = new TriStateTreeNode();

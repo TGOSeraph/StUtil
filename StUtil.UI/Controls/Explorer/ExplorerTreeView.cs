@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using StUtil.Extensions;
+using StUtil.Internal.Shell;
 
 namespace StUtil.UI.Controls.Explorer
 {
@@ -19,7 +20,7 @@ namespace StUtil.UI.Controls.Explorer
             // Set the TreeView image list to the system image list.
             if (!this.InDesignMode())
             {
-                SystemImageList.SetTVImageList(base.Handle);
+                SystemImageListHelper.SetImageList(this, new SystemImageList(), true);
                 LoadRootNodes();
             }
 
@@ -32,7 +33,7 @@ namespace StUtil.UI.Controls.Explorer
         private void LoadRootNodes()
         {
             // Create the root shell item.
-            ShellItem m_shDesktop = new ShellItem();
+            ShellItem m_shDesktop = ShellItem.GetRoot();
 
             // Create the root node.
             TriStateTreeNode tvwRoot = new TriStateTreeNode();
@@ -42,7 +43,7 @@ namespace StUtil.UI.Controls.Explorer
             tvwRoot.Tag = m_shDesktop;
 
             // Now we need to add any children to the root node.
-            ArrayList arrChildren = m_shDesktop.GetSubFolders();
+            List<ShellItem> arrChildren = m_shDesktop.GetDirectories();
             foreach (ShellItem shChild in arrChildren)
             {
                 TriStateTreeNode tvwChild = new TriStateTreeNode();

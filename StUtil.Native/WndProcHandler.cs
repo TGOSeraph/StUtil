@@ -30,7 +30,7 @@ namespace StUtil.Native
         public Dictionary<int, List<MessageHandlerProc>> MessageHandlers { get; private set; }
 
         /// <summary>
-        /// Delegate function for handling a message
+        /// Delegate function for handling a message, return true to prevent propagating the message
         /// </summary>
         /// <param name="handler">The handler</param>
         /// <param name="message">The message</param>
@@ -300,6 +300,17 @@ namespace StUtil.Native
                 return false;
             });
             return mhandler;
+        }
+
+        public static MessageHandler CreateFlickerFreeHandler(Control control)
+        {
+            return new MessageHandler
+          (
+              NativeConsts.WM_ERASEBKGND,
+              new MessageHandlerProc(delegate(WndProcHandler w, ref Message m)
+              {
+                  return true;
+              }));
         }
 
 

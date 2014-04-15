@@ -35,6 +35,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StUtil.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\StUtil.Core\bin\Debug\StUtil.Core.dll</HintPath>
+    </Reference>
     <Reference Include="StUtil.Reflection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\StUtil.Reflection\bin\Debug\StUtil.Reflection.dll</HintPath>
@@ -75,9 +79,6 @@
     <Compile Include="Controls\Explorer\ExplorerTreeViewWnd.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Explorer\ShellAPI.cs" />
-    <Compile Include="Controls\Explorer\ShellItem.cs" />
-    <Compile Include="Controls\Explorer\SystemImageList.cs" />
     <Compile Include="Controls\FileSystemSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,9 +98,6 @@
       <DependentUpon>LoadingOverlay.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MultiSplitContainer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\NonFlickerListView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\PlaceholderTextbox.cs">
@@ -148,10 +146,12 @@
     <Compile Include="Controls\TriStateTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extensions\ListViewExtensions.cs" />
     <Compile Include="Extensions\SplitterPanelExtensions.cs" />
     <Compile Include="Controls\FastRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extensions\TreeViewExtensions.cs" />
     <Compile Include="Forms\AlphaTransparencyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,10 +203,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
-      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
-      <Name>StUtil.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
       <Name>StUtil.Native</Name>

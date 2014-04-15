@@ -1,6 +1,7 @@
 ﻿using StUtil.Generic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -15,6 +16,14 @@ namespace StUtil.Extensions
     /// </remarks>
     public static class EventHandlerExtensions
     {
+        public static void RaiseEvent(this PropertyChangedEventHandler handler, object sender, string property)
+        {
+            if (handler != null)
+            {
+                handler(sender, new PropertyChangedEventArgs(property));
+            }
+        }
+
         /// <summary>
         /// Raise an event handler if it is not null
         /// </summary>

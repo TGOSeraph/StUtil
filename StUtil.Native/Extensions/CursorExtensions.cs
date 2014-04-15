@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StUtil.Native.Extensions
+namespace StUtil.Extensions
 {
     public static class CursorExtensions
     {

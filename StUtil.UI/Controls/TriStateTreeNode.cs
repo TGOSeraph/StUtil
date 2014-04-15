@@ -38,7 +38,6 @@ namespace StUtil.UI.Controls
         public TriStateTreeNode(string text, int imageIndex, int selectedImageIndex, TriStateTreeNode[] children) : base(text, imageIndex, selectedImageIndex, children) { }
         public TriStateTreeNode(string text, TriStateTreeNode[] children) : base(text, children) { }
 
-
         /// <summary>
         /// Get / set if the node is checked or not.
         /// </summary>
@@ -100,7 +99,7 @@ namespace StUtil.UI.Controls
         /// Used internally by the treeview to set a node to s specific state.
         /// </summary>
         /// <param name="value"></param>
-        internal void SetCheckedState(CheckState value)
+        public void SetCheckedState(CheckState value)
         {
             CheckStateChanged(_nodeCheckState, value);
         }

@@ -7,7 +7,7 @@ using System.Text;
 
 using System.Windows.Forms;
 
-namespace StUtil.Native.Extensions
+namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for Controls
@@ -15,7 +15,7 @@ namespace StUtil.Native.Extensions
     /// <remarks>
     /// 2013-06-27  - Initial version
     /// </remarks>
-    public static class ControlExtensions
+    public static class ControlNativeExtensions
     {
         /// <summary>
         /// Suspend drawing on the control
