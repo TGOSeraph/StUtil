@@ -193,6 +193,34 @@ namespace StUtil.Internal.Shell
             return strBuffer.ToString();
         }
 
+        public bool HasDirectories()
+        {
+            return HasItems(NativeEnums.SHCONTF.SHCONTF_FOLDERS);
+        }
+
+        private bool HasItems(NativeEnums.SHCONTF type)
+        {
+            // Make sure we have a folder.
+            if (IsFolder == false)
+                throw new Exception("Unable to retrieve items for a non-folder.");
+
+            NativeInterfaces.IEnumIDList pEnum = null;
+            uint hRes = ShellFolder.EnumObjects(IntPtr.Zero, type, out pEnum);
+            if (hRes != 0)
+                Marshal.ThrowExceptionForHR((int)hRes);
+            if (pEnum == null)
+            {
+                return false;
+            }
+            IntPtr pIDL = IntPtr.Zero;
+            Int32 iGot = 0;
+
+            // Grab the first enumeration.
+            pEnum.Next(1, out pIDL, out iGot);
+
+            return !pIDL.Equals(IntPtr.Zero) && iGot == 1;
+        }
+
         private List<ShellItem> GetItems(NativeEnums.SHCONTF type)
         {
             // Make sure we have a folder.

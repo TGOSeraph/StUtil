@@ -253,6 +253,10 @@ namespace StUtil.Tests
         [STAThread]
         static void Main()
         {
+
+            StUtil.Native.PE.WindowsPE pe = new Native.PE.WindowsPE(@"C:\Projects\~Other\APIs\StUtil.Git\StUtil.Core\bin\Debug\StUtil.Core.dll");
+
+
             Dictionary<string, string> ScriptArguments = GetScriptArguments();
             Dictionary<string, Func<string>> Replacements = GetReplacements();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StUtil.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace StUtil.UI.Controls
     /// </summary>
     public class TriStateTreeNode : TreeNode
     {
+      public event PropertyChangedEventHandler PropertyChanged;
         // stores node state ( either checked, unchecked or indeterminate )
         private CheckState _nodeCheckState = CheckState.Unchecked;
 
@@ -30,13 +32,21 @@ namespace StUtil.UI.Controls
         // Only a folder can have an third (indeterminate) state
         private bool _isContainer = true;
         private bool _checkboxVisible = true;
+        private bool isUpdatingCheckState = false;
 
         // public constructor
-        public TriStateTreeNode() : base() { }
-        public TriStateTreeNode(string text) : base(text) { }
-        public TriStateTreeNode(string text, int imageIndex, int selectedImageIndex) : base(text, imageIndex, selectedImageIndex) { }
-        public TriStateTreeNode(string text, int imageIndex, int selectedImageIndex, TriStateTreeNode[] children) : base(text, imageIndex, selectedImageIndex, children) { }
-        public TriStateTreeNode(string text, TriStateTreeNode[] children) : base(text, children) { }
+        public TriStateTreeNode() : base() { Init(); }
+        public TriStateTreeNode(string text) : base(text) { Init(); }
+        public TriStateTreeNode(string text, int imageIndex, int selectedImageIndex) : base(text, imageIndex, selectedImageIndex) { Init(); }
+        public TriStateTreeNode(string text, int imageIndex, int selectedImageIndex, TriStateTreeNode[] children) : base(text, imageIndex, selectedImageIndex, children) { Init(); }
+        public TriStateTreeNode(string text, TriStateTreeNode[] children) : base(text, children) { Init(); }
+
+        public BindingList<NodeData> Data { get; set; }
+
+        private void Init()
+        {
+            Data = new BindingList<NodeData>();
+        }
 
         /// <summary>
         /// Get / set if the node is checked or not.
@@ -45,7 +55,14 @@ namespace StUtil.UI.Controls
         new public bool Checked
         {
             get { return (this._nodeCheckState != CheckState.Unchecked); }
-            set { SetCheckedState(value ? CheckState.Checked : CheckState.Unchecked); }
+        }
+
+        new public TriStateTreeNode Parent
+        {
+            get
+            {
+                return base.Parent as TriStateTreeNode;
+            }
         }
 
         /// <summary>
@@ -54,7 +71,18 @@ namespace StUtil.UI.Controls
         /// </summary>
         public CheckState CheckState
         {
-            get { return this._nodeCheckState; }
+            get
+            {
+                return _nodeCheckState;
+            }
+            set
+            {
+                if (this._nodeCheckState != value && !isUpdatingCheckState)
+                {
+                    this._nodeCheckState = value;
+                    UpdateTreeCheckState();
+                }
+            }
         }
 
         /// <summary>
@@ -95,201 +123,70 @@ namespace StUtil.UI.Controls
             }
         }
 
-        /// <summary>
-        /// Used internally by the treeview to set a node to s specific state.
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetCheckedState(CheckState value)
+        private void UpdateTreeCheckState()
         {
-            CheckStateChanged(_nodeCheckState, value);
-        }
-
-        /// <summary>
-        /// Private method that is called by one of the childnodes in order to report a
-        /// change in state.
-        /// </summary>
-        /// <param name="childNewState">New state of the childnode in question</param>
-        private void ChildCheckStateChanged(CheckState childNewState)
-        {
-            bool notifyParent = false;
-            CheckState currentState = this._nodeCheckState;
-            CheckState newState = this._nodeCheckState;
-
-            // take action based on the child's new state
-            switch (childNewState)
+            isUpdatingCheckState = true;
+            PropertyChanged.RaiseEvent(this, "CheckState");
+            //If the node is checked/unchecked then do the same to its children
+            if (this._nodeCheckState != System.Windows.Forms.CheckState.Indeterminate)
             {
-                case CheckState.Indeterminate: // child state changed to indeterminate
-                    // if one of the children's state changes to indeterminate, 
-                    // it's parent should do the same, if it is a container too!.
-                    if (IsContainer)
-                    {
-                        newState = CheckState.Indeterminate;
+                foreach (TriStateTreeNode child in Nodes)
+                {
+                    child.CheckState = this._nodeCheckState;
+                }
+                foreach (NodeData child in Data)
+                {
+                    child.IsChecked = false;
+                }
 
-                        // the same is valid for this node's parent.
-                        // check if this node's state has changed and inform the parent
-                        // if this is the case
-                        notifyParent = (newState != currentState);
-                    }
-                    break;
-                case CheckState.Checked:
-                    // One of the child nodes was checked so we must check:
-                    // 1) if the child node is the only child node, our state becomes checked too.
-                    // 2) if there are children with a state other then checked, our state
-                    //    must become indeterminate if this is a container.
-                    if (this.Nodes.Count == 1) // if there is only one child, our state changes too!
-                    {
-                        // set our state to checked too and set the flag for
-                        // parent notification. 
-                        newState = CheckState.Checked;
-                        notifyParent = true;
-                        break;
-                    }
-
-                    // set to checked by default
-                    // if this is not a container, there is no need to check further
-                    newState = CheckState.Checked;
-                    if (!IsContainer)
-                    {
-                        notifyParent = (newState != currentState);
-                        break;
-                    }
-
-                    // traverse all child nodes to see if there are any with a state other then
-                    // checked. if so, change state to indeterminate.
-                    foreach (TreeNode node in this.Nodes)
-                    {
-                        TriStateTreeNode checkedNode = node as TriStateTreeNode;
-                        if (checkedNode != null && checkedNode.CheckState != CheckState.Checked)
-                        {
-                            newState = CheckState.Indeterminate;
-                            break;
-                        }
-                    }
-
-                    // set notification flag if our state has to be changed too
-                    notifyParent = (newState != currentState);
-                    break;
-                case CheckState.Unchecked:
-                    // For nodes that are no containers, a child being unchecked is not relevant.
-                    // so we can exit at this point.
-                    if (!IsContainer)
-                        break;
-
-                    // A child's state has changed to unchecked so check:
-                    // 1) if this is the only child. if so, uncheck this node too, if it is a container, and set
-                    //    notification flag for the parent.
-                    // 2) Check if there are child nodes with a state other then unchecked.
-                    //    if so, change our state to indeterminate.
-                    if (this.Nodes.Count == 1)
-                    {
-                        // synchronize state with only child.
-                        // set notification flag
-                        newState = CheckState.Unchecked;
-                        notifyParent = true;
-                        break;
-                    }
-
-                    // set to unchecked by default
-                    newState = CheckState.Unchecked;
-
-                    // if there is a child with a state other then unchecked,
-                    // our state must become indeterminate.
-                    foreach (TreeNode node in this.Nodes)
-                    {
-                        TriStateTreeNode checkedNode = node as TriStateTreeNode;
-                        if (checkedNode != null && checkedNode.CheckState != CheckState.Unchecked)
-                        {
-                            newState = CheckState.Indeterminate;
-                            break;
-                        }
-                    }
-
-                    // notify the parent only if our state is about to be changed too.
-                    notifyParent = (newState != currentState);
-                    break;
-            }
-
-            // should we notify the parent? ( has our state changed? )
-            if (notifyParent)
-            {
-                // change state
-                this._nodeCheckState = newState;
-
-                // notify parent
+                //Now process the parent
                 if (this.Parent != null)
                 {
-                    TriStateTreeNode parentNode = this.Parent as TriStateTreeNode;
-                    if (parentNode != null)
+                    if (this.Parent.Data.All(d => d.IsChecked == (this._nodeCheckState == System.Windows.Forms.CheckState.Checked))
+                        && this.Parent.Nodes.OfType<TriStateTreeNode>().All(n => n.CheckState == this._nodeCheckState))
                     {
-                        // call the same method on the parent.
-                        parentNode.ChildCheckStateChanged(this._nodeCheckState);
+                        this.Parent.CheckState = this._nodeCheckState;
+                    }
+                    else
+                    {
+                        this.Parent.CheckState = System.Windows.Forms.CheckState.Indeterminate;
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// This method is only called when a node's state has been changed through the 
-        /// Checked property
-        /// </summary>
-        /// <param name="oldState">Previous state</param>
-        /// <param name="newState">New state</param>
-        private void CheckStateChanged(CheckState oldState, CheckState newState)
-        {
-            // States are equal?
-            if (newState != oldState)
+            else
             {
-                // not equal.
-                // modify state
-                this._nodeCheckState = newState;
-
-                // change state of the children
-                if (this.Nodes != null && this.Nodes.Count > 0)
-                {
-                    foreach (TreeNode node in this.Nodes)
-                    {
-                        TriStateTreeNode tsNode = node as TriStateTreeNode;
-                        if (tsNode != null)
-                        {
-                            tsNode.ChangeChildState(newState);
-                        }
-                    }
-                }
-
-                // notify the parent of the changed state.
                 if (this.Parent != null)
                 {
-                    TriStateTreeNode parentNode = this.Parent as TriStateTreeNode;
-                    if (parentNode != null)
-                    {
-                        parentNode.ChildCheckStateChanged(this._nodeCheckState);
-                    }
+                    this.Parent.CheckState = System.Windows.Forms.CheckState.Indeterminate;
                 }
             }
-        }
 
-        /// <summary>
-        /// This method is only called by other nodes so it can be private.
-        /// Changes state of the node to the state provided.
-        /// </summary>
-        /// <param name="newState"></param>
-        private void ChangeChildState(CheckState newState)
-        {
-            // change state
-            this._nodeCheckState = newState;
-
-            // change state on the children
-            if (this.Nodes != null && this.Nodes.Count > 0)
-            {
-                foreach (TreeNode node in this.Nodes)
-                {
-                    TriStateTreeNode tsNode = node as TriStateTreeNode;
-                    if (tsNode != null)
-                    {
-                        tsNode.ChangeChildState(newState);
-                    }
-                }
-            }
+            isUpdatingCheckState = false;
         }
     }
+    public class NodeData : INotifyPropertyChanged
+    {
+        public TriStateTreeNode Parent { get; set; }
+        public string Data { get; set; }
+
+        private bool isChecked;
+        public bool IsChecked
+        {
+            get
+            {
+                return isChecked;
+            }
+            set
+            {
+                if (this.isChecked != value)
+                {
+                    this.isChecked = value;
+                    PropertyChanged.RaiseEvent(this, "IsChecked");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }
+

@@ -48,6 +48,10 @@ namespace StUtil.Utilities
 
         public DelayedInvokeState(Delegate action, int timeout, bool blocking, object[] args = null)
         {
+            if (timeout == 0)
+            {
+                action.DynamicInvoke(args);
+            }
             if (blocking)
             {
                 do
