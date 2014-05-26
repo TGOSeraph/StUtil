@@ -51,7 +51,7 @@ namespace StUtil.Net.Utilities
 
         private sealed class DynamicJsonObject : DynamicObject
         {
-            private readonly IDictionary<string, object> _dictionary;
+            public readonly IDictionary<string, object> _dictionary;
 
             public DynamicJsonObject(IDictionary<string, object> dictionary)
             {
