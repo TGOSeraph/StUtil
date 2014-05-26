@@ -70,6 +70,12 @@
     <Compile Include="Controls\DualImageToolStripRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\EditableLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EditableLabel.designer.cs">
+      <DependentUpon>EditableLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Explorer\ExplorerTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -181,6 +187,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Controls\DrawingCanvas.resx">
       <DependentUpon>DrawingCanvas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EditableLabel.resx">
+      <DependentUpon>EditableLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Explorer\ExplorerTreeView.resx">
       <DependentUpon>ExplorerTreeView.cs</DependentUpon>

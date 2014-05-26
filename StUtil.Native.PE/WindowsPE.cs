@@ -146,6 +146,40 @@ namespace StUtil.Native.PE
             }
         }
 
+        private ushort clrMajorRuntimeVersion = ushort.MaxValue;
+        /// <summary>
+        /// The major version of the CLR the assembly is built against
+        /// </summary>
+        public ushort ClrMajorRuntimeVersion
+        {
+            get
+            {
+                //If we havn't got a target yet then compute it
+                if (clrMajorRuntimeVersion == ushort.MaxValue)
+                {
+                    ComputePETargets();
+                }
+                return clrMajorRuntimeVersion;
+            }
+        }
+
+        private ushort clrMinorRuntimeVersion = ushort.MaxValue;
+        /// <summary>
+        /// The minor version of the CLR the assembly is built against
+        /// </summary>
+        public ushort ClrMinorRuntimeVersion
+        {
+            get
+            {
+                //If we havn't got a target yet then compute it
+                if (clrMinorRuntimeVersion == ushort.MaxValue)
+                {
+                    ComputePETargets();
+                }
+                return clrMinorRuntimeVersion;
+            }
+        }
+
         private uint? ntHeaderOffset = null;
         /// <summary>
         /// The pointer to the NT header
@@ -359,6 +393,9 @@ namespace StUtil.Native.PE
                             targetArchitecture = TargetPlatformArchitecture.x86;
                         }
                     }
+
+                    clrMajorRuntimeVersion = GetValue<ushort>(CLRDirectoryPointer + 0x4);
+                    clrMinorRuntimeVersion = GetValue<ushort>(CLRDirectoryPointer + 0x6);
                 }
                 else
                 {

@@ -347,7 +347,7 @@ namespace StUtil.UI.Controls
             BeginUpdate();
 
             // update the node state, and dependend nodes
-            node.SetCheckedState(nextState);
+            node.CheckState = (nextState);
 
             // force a redraw
             EndUpdate();
