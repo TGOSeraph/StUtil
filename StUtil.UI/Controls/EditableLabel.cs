@@ -13,7 +13,7 @@ namespace StUtil.UI.Controls
 {
     public partial class EditableLabel : UserControl
     {
-        public event EventHandler TextChanged;
+        public new event EventHandler TextChanged;
 
         private bool isEditable;
 
