@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -118,6 +118,9 @@
     <Compile Include="Controls\ProgressBar\DarkBlueProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\RichTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\RoundedCornersTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -128,6 +131,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ShadowLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Style\BasicStylePart.cs" />
+    <Compile Include="Controls\Style\Style.cs" />
+    <Compile Include="Controls\Style\StylePart.cs" />
+    <Compile Include="Controls\Style\StyleRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\SystemPopup\FooterPanel.cs">
