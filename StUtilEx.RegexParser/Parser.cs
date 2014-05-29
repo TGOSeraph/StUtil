@@ -361,7 +361,7 @@ namespace StUtilEx.RegexParser
             {
                 CurrentToken.Type = PartType.Greedy;
             }
-            else if (MatchPattern(string.Format(format, "<[[^\\d][^>]*>"), ref value))
+            else if (MatchPattern(string.Format(format, "<[^\\d][^>]*>"), ref value))
             {
                 CurrentToken.Type = PartType.NamedCapture;
             }
