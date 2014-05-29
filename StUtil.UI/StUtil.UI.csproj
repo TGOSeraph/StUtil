@@ -35,12 +35,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StUtil.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StUtil.Core\bin\Debug\StUtil.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="StUtil.Reflection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="StUtil.Reflection">
       <HintPath>..\StUtil.Reflection\bin\Debug\StUtil.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -151,6 +146,38 @@
     <Compile Include="Controls\SystemPopup\HeaderPanel.designer.cs">
       <DependentUpon>HeaderPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Theme\IThemeControl.cs" />
+    <Compile Include="Controls\Theme\Menu\MenuContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\Menu\MenuContainer.Designer.cs">
+      <DependentUpon>MenuContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Theme\Menu\MenuHeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\Menu\MenuHeaderControl.Designer.cs">
+      <DependentUpon>MenuHeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Theme\Menu\MenuItem.cs" />
+    <Compile Include="Controls\Theme\Menu\MenuItemControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\Menu\MenuItemControl.Designer.cs">
+      <DependentUpon>MenuItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Theme\Menu\MenuTask.cs" />
+    <Compile Include="Controls\Theme\ThemeControlHelper.cs" />
+    <Compile Include="Controls\Theme\ThemeEditableLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\ThemeLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\ThemeManager.cs" />
+    <Compile Include="Controls\Theme\ThemePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ToolStripRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -159,6 +186,9 @@
     </Compile>
     <Compile Include="Controls\TriStateTreeNode.cs" />
     <Compile Include="Controls\TriStateTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UISymbolLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Extensions\ListViewExtensions.cs" />
@@ -174,6 +204,12 @@
       <DependentUpon>AlphaTransparencyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InputBox.cs" />
+    <Compile Include="Forms\ThemedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ThemedForm.Designer.cs">
+      <DependentUpon>ThemedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UIHostForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +228,7 @@
     <Compile Include="Utilities\ControlLongAnimator.cs" />
     <Compile Include="Utilities\ControlPropertyAnimator.cs" />
     <Compile Include="Utilities\PropertyAnimator.cs" />
+    <Compile Include="Utilities\UISymbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\DrawingCanvas.resx">
@@ -215,12 +252,28 @@
     <EmbeddedResource Include="Controls\SystemPopup\HeaderPanel.resx">
       <DependentUpon>HeaderPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Theme\Menu\MenuContainer.resx">
+      <DependentUpon>MenuContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Theme\Menu\MenuHeaderControl.resx">
+      <DependentUpon>MenuHeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Theme\Menu\MenuItemControl.resx">
+      <DependentUpon>MenuItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ThemedForm.resx">
+      <DependentUpon>ThemedForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{ff84f30f-a046-4325-8e3b-8362193250a8}</Project>
       <Name>StUtil.Native</Name>
