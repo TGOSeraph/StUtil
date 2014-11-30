@@ -4,15 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-
 namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for Func's
     /// </summary>
-    /// <remarks>
-    /// 2013-06-26  - Initial version
-    /// </remarks>
     public static class FuncExtensions
     {
         /// <summary>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,10 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StUtil</RootNamespace>
     <AssemblyName>StUtil.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,61 +33,57 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataStructures\FixedCapacityQueue.cs" />
-    <Compile Include="DataStructures\Range.cs" />
-    <Compile Include="DataStructures\RangeEnumerator.cs" />
-    <Compile Include="Extensions\BitmapExtensions.cs" />
+    <Compile Include="Core\DelayedInvoke.cs" />
+    <Compile Include="Core\PropertyAccessor.cs" />
     <Compile Include="Extensions\CharExtensions.cs" />
-    <Compile Include="Extensions\ComponentExtensions.cs" />
-    <Compile Include="Extensions\ControlCollectionExtensions.cs" />
-    <Compile Include="Extensions\DoubleExtensions.cs" />
-    <Compile Include="Extensions\EventHandlerExtensions.cs" />
-    <Compile Include="Extensions\FuncExtensions.cs" />
-    <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\ComparableExtensions.cs" />
+    <Compile Include="Extensions\ComponentExtensions.cs" />
+    <Compile Include="Extensions\ControlCollectionExtensions.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\DelegateExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
-    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />
-    <Compile Include="Extensions\FloatExtensions.cs" />
+    <Compile Include="Extensions\EventHandlerExtensions.cs" />
+    <Compile Include="Extensions\FuncExtensions.cs" />
     <Compile Include="Extensions\GraphicsExtensions.cs" />
-    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Extensions\ICollectionExtensions.cs" />
+    <Compile Include="Extensions\IListExtensions.cs" />
+    <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\IntPtrExtensions.cs" />
-    <Compile Include="Extensions\ListExtensions.cs" />
-    <Compile Include="Extensions\LongExtensions.cs" />
     <Compile Include="Extensions\PictureBoxExtensions.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\TimeSpanExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="File\LogWatcher.cs" />
-    <Compile Include="File\Utilities.cs" />
-    <Compile Include="Generic\EventArgsGeneric.cs" />
-    <Compile Include="Generic\Progressable\IProgressable.cs" />
-    <Compile Include="Generic\Progressable\ProgressableProcess.cs" />
-    <Compile Include="Generic\Serialization.cs" />
-    <Compile Include="Utilities\DelayedInvokeState.cs" />
-    <Compile Include="Utilities\ColorUtilities.cs" />
-    <Compile Include="Utilities\DisposableBase.cs" />
-    <Compile Include="Utilities\MathUtilities.cs" />
-    <Compile Include="Utilities\PluginLoader.cs" />
-    <Compile Include="Utilities\TypeUtilities.cs" />
+    <Compile Include="Formatting\FileSizeFormatter.cs" />
+    <Compile Include="Formatting\TimeSpanFormatter.cs" />
+    <Compile Include="Generic\EventArgs.cs" />
+    <Compile Include="Imaging\Utilities.cs" />
+    <Compile Include="IO\TempFile.cs" />
+    <Compile Include="IO\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strings\RandomStringGenerator.cs" />
+    <Compile Include="Utilities\ColorGenerator.cs" />
+    <Compile Include="Utilities\Math.cs" />
+    <Compile Include="Utilities\PluginLoader.cs" />
+    <Compile Include="Utilities\Serialization.cs" />
+    <Compile Include="Utilities\StringGenerator.cs" />
+    <Compile Include="Utilities\TypeUtilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StUtil.Data\StUtil.Data.csproj">
+      <Project>{16005c28-367b-4d6c-ae61-40d591aeb66b}</Project>
+      <Name>StUtil.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

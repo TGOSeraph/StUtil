@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.Extensions
@@ -9,9 +10,6 @@ namespace StUtil.Extensions
     /// <summary>
     /// Extensions for ControlCollections
     /// </summary>
-    /// <remarks>
-    /// 2013-10-18  - Initial version
-    /// </remarks>
     public static class ControlCollectionExtensions
     {
         /// <summary>
@@ -25,6 +23,7 @@ namespace StUtil.Extensions
             list.Add(item);
             return item;
         }
+
         /// <summary>
         /// Add an item to the collection and return the collection
         /// </summary>

@@ -10,9 +10,6 @@ namespace StUtil.Net.Mail
     /// <summary>
     /// Class for sending emails using Gmail
     /// </summary>
-    /// <remarks>
-    /// 2013-08-05  - Initial version
-    /// </remarks>
     public class Gmail
     {
         /// <summary>

@@ -1,35 +1,41 @@
-﻿using StUtil.Generic;
-using StUtil.Utilities;
+﻿using StUtil.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for Delegates
     /// </summary>
-    /// <remarks>
-    /// 2013-06-26  - Initial version
-    /// </remarks>
     public static class DelegateExtensions
     {
         /// <summary>
-        /// Invoke a delegate safely on a speficied control
+        /// Invoke a delegate after a set period of time
         /// </summary>
-        /// <param name="Action">The delegate to execute</param>
-        /// <param name="owner">The control to execute on</param>fasdas
-        /// <param name="args">The arguments to pass to the delegate</param>
-        public static void SafeInvoke(this Delegate Action, System.Windows.Forms.Control owner, params object[] args)
+        /// <param name="action">The delegate to invoke</param>
+        /// <param name="timeout">The period of time to wait until invoking the method</param>
+        /// <param name="args">The arguments to pass to the method</param>
+        /// <returns>A state object allowing you access to the state of the delayed invoke</returns>
+        public static DelayedInvoke DelayedInvoke(this Delegate action, int timeout, object[] args = null)
         {
-            if (owner.InvokeRequired)
-            {
-                owner.Invoke(Action, args);
-            }
-            else
-            {
-                Action.DynamicInvoke(args);
-            }
+            return DelayedInvoke(action, timeout, false, args);
+        }
+
+        /// <summary>
+        /// Invoke a delegate after a set period of time
+        /// </summary>
+        /// <param name="action">The delegate to invoke</param>
+        /// <param name="timeout">The period of time to wait until invoking the method</param>
+        /// <param name="blocking">If the method should be invoked on the thread it was called from</param>
+        /// <param name="args">The arguments to pass to the method</param>
+        /// <returns>A state object allowing you access to the state of the delayed invoke</returns>
+        public static DelayedInvoke DelayedInvoke(this Delegate action, int timeout, bool blocking, object[] args = null)
+        {
+            return new DelayedInvoke(action, timeout, blocking, args);
         }
 
         /// <summary>
@@ -98,36 +104,6 @@ namespace StUtil.Extensions
         }
 
         /// <summary>
-        /// Runs a delegate on a new thread
-        /// </summary>
-        /// <param name="action">The method to run</param>
-        /// <param name="arg">The paramater to pass to the delegate</param>
-        /// <returns>The newly created thread</returns>
-        public static Thread RunOnNewThread(this Delegate action, object arg, bool isBackground = true)
-        {
-            Thread t = new Thread((ParameterizedThreadStart)action);
-            t.Start(arg);
-            t.IsBackground = isBackground;
-            return t;
-        }
-
-
-        /// <summary>
-        /// Run a delegate on a new thread
-        /// </summary>
-        /// <param name="action">The method to run</param>
-        /// <returns>The newly created thread</returns>
-        public static Thread RunOnNewThread(this Delegate action)
-        {
-            Thread t = new Thread(delegate()
-            {
-                action.DynamicInvoke();
-            });
-            t.Start();
-            return t;
-        }
-
-        /// <summary>
         /// Run a delegate for a set period of time
         /// </summary>
         /// <typeparam name="T">The type of the result object from the action</typeparam>
@@ -155,6 +131,35 @@ namespace StUtil.Extensions
         public static List<T> RunForXTime<T>(this Delegate action, TimeSpan timespan, ref bool cancel, object[] args = null, int sleep = -1)
         {
             return RunUntilXTime<T>(action, DateTime.Now.Add(timespan), ref cancel, args);
+        }
+
+        /// <summary>
+        /// Runs a delegate on a new thread
+        /// </summary>
+        /// <param name="action">The method to run</param>
+        /// <param name="arg">The paramater to pass to the delegate</param>
+        /// <returns>The newly created thread</returns>
+        public static Thread RunOnNewThread(this Delegate action, object arg, bool isBackground = true)
+        {
+            Thread t = new Thread((ParameterizedThreadStart)action);
+            t.Start(arg);
+            t.IsBackground = isBackground;
+            return t;
+        }
+
+        /// <summary>
+        /// Run a delegate on a new thread
+        /// </summary>
+        /// <param name="action">The method to run</param>
+        /// <returns>The newly created thread</returns>
+        public static Thread RunOnNewThread(this Delegate action)
+        {
+            Thread t = new Thread(delegate()
+            {
+                action.DynamicInvoke();
+            });
+            t.Start();
+            return t;
         }
 
         /// <summary>
@@ -207,28 +212,21 @@ namespace StUtil.Extensions
         }
 
         /// <summary>
-        /// Invoke a delegate after a set period of time
+        /// Invoke a delegate safely on a speficied control
         /// </summary>
-        /// <param name="action">The delegate to invoke</param>
-        /// <param name="timeout">The period of time to wait until invoking the method</param>
-        /// <param name="args">The arguments to pass to the method</param>
-        /// <returns>A state object allowing you access to the state of the delayed invoke</returns>
-        public static DelayedInvokeState DelayedInvoke(this Delegate action, int timeout, object[] args = null)
+        /// <param name="Action">The delegate to execute</param>
+        /// <param name="owner">The control to execute on</param>fasdas
+        /// <param name="args">The arguments to pass to the delegate</param>
+        public static void SafeInvoke(this Delegate Action, System.Windows.Forms.Control owner, params object[] args)
         {
-            return DelayedInvoke(action, timeout, false, args);
-        }
-
-        /// <summary>
-        /// Invoke a delegate after a set period of time
-        /// </summary>
-        /// <param name="action">The delegate to invoke</param>
-        /// <param name="timeout">The period of time to wait until invoking the method</param>
-        /// <param name="blocking">If the method should be invoked on the thread it was called from</param>
-        /// <param name="args">The arguments to pass to the method</param>
-        /// <returns>A state object allowing you access to the state of the delayed invoke</returns>
-        public static DelayedInvokeState DelayedInvoke(this Delegate action, int timeout, bool blocking, object[] args = null)
-        {
-            return new DelayedInvokeState(action, timeout, blocking, args);
+            if (owner.InvokeRequired)
+            {
+                owner.Invoke(Action, args);
+            }
+            else
+            {
+                Action.DynamicInvoke(args);
+            }
         }
     }
 }

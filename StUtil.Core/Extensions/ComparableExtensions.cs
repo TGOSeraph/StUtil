@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for objects implmenting IComparable
     /// </summary>
-    /// <remarks>
-    /// 2013-06-23  - Initial version
-    /// </remarks>
     public static class ComparableExtensions
     {
         /// <summary>

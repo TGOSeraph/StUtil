@@ -6,9 +6,6 @@ namespace StUtil.Extensions
     /// <summary>
     /// Extensions for Points
     /// </summary>
-    /// <remarks>
-    /// 2013-06-26  - Initial version
-    /// </remarks>
     public static class PointExtensions
     {
         /// <summary>

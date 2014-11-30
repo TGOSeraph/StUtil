@@ -5,9 +5,6 @@ namespace StUtil.Extensions
     /// <summary>
     /// Extensions for Rectangles
     /// </summary>
-    /// <remarks>
-    /// 2013-06-26  - Initial version
-    /// </remarks>
     public static class RectangleExtensions
     {
         /// <summary>
@@ -19,6 +16,7 @@ namespace StUtil.Extensions
         {
             return rect.Width * rect.Height;
         }
+
         /// <summary>
         /// Returns the midpoint of the rectangle
         /// </summary>
@@ -28,6 +26,7 @@ namespace StUtil.Extensions
         {
             return new Point(rect.X + (rect.Width / 2), rect.Y + (rect.Height / 2));
         }
+
         /// <summary>
         /// Returns the midpoint of the rectangle
         /// </summary>
@@ -38,21 +37,38 @@ namespace StUtil.Extensions
             return new PointF(rect.X + (rect.Width / 2), rect.Y + (rect.Height / 2));
         }
 
-        public static Rectangle ToRectangle(this RectangleF rect)
+        /// <summary>
+        /// Sets the bottom value.
+        /// </summary>
+        /// <param name="rect">The rect.</param>
+        /// <param name="val">The value.</param>
+        /// <returns></returns>
+        public static Rectangle SetBottom(this Rectangle rect, int val)
         {
-            return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
+            rect.Height = val - rect.Y;
+            return rect;
         }
 
+        /// <summary>
+        /// Sets the right value.
+        /// </summary>
+        /// <param name="rect">The rect.</param>
+        /// <param name="val">The value.</param>
+        /// <returns></returns>
         public static Rectangle SetRight(this Rectangle rect, int val)
         {
             rect.Width = val - rect.X;
             return rect;
         }
 
-        public static Rectangle SetBottom(this Rectangle rect, int val)
+        /// <summary>
+        /// Converts a RectangleF to a Rectangle.
+        /// </summary>
+        /// <param name="rect">The rect.</param>
+        /// <returns></returns>
+        public static Rectangle ToRectangle(this RectangleF rect)
         {
-            rect.Height = val - rect.Y;
-            return rect;
+            return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
         }
     }
 }

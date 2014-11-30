@@ -7,11 +7,18 @@ namespace StUtil.Extensions
     /// <summary>
     /// Extensions for PictureBoxes
     /// </summary>
-    /// <remarks>
-    /// 2013-06-26  - Initial version
-    /// </remarks>
     public static class PictureBoxExtensions
     {
+        /// <summary>
+        /// Get the point on the image that the cursor is currently over
+        /// </summary>
+        /// <param name="pb">The picturebox to get the point from</param>
+        /// <returns>The image-relative point from the control-relative point</returns>
+        public static Point GetCursorLocation(this PictureBox pb)
+        {
+            return GetZoomedPoint(pb, Cursor.Position);
+        }
+
         /// <summary>
         /// Gets a point in the displayed image from a point on the picture box taking into account Zooming
         /// </summary>
@@ -58,16 +65,6 @@ namespace StUtil.Extensions
             }
 
             return unscaled_p;
-        }
-
-        /// <summary>
-        /// Get the point on the image that the cursor is currently over
-        /// </summary>
-        /// <param name="pb">The picturebox to get the point from</param>
-        /// <returns>The image-relative point from the control-relative point</returns>
-        public static Point GetCursorLocation(this PictureBox pb)
-        {
-            return GetZoomedPoint(pb, Cursor.Position);
         }
     }
 }

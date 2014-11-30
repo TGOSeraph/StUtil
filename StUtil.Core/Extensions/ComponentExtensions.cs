@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for Component's
     /// </summary>
-    /// <remarks>
-    /// 2013-06-23  - Initial version
-    /// </remarks>
     public static class ComponentExtensions
     {
         /// <summary>

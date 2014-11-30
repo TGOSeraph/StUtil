@@ -4,11 +4,50 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace StUtil.Utilities
 {
     public static class TypeUtilities
     {
+        /// <summary>
+        /// Converts the object to the specified type.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <param name="t">The type.</param>
+        /// <returns></returns>
+        public static object ConvertType(object obj, Type t)
+        {
+            if (t.IsEnum)
+            {
+                int i = -1;
+                if (int.TryParse(obj.ToString(), out i))
+                {
+                    return Enum.ToObject(t, i);
+                }
+                else
+                {
+                    return Enum.Parse(t, obj.ToString());
+                }
+            }
+            else if (t == typeof(Color))
+            {
+                return Color.FromName(obj.ToString());
+            }
+            return Convert.ChangeType(obj, t);
+        }
+
+        /// <summary>
+        /// Converts the object to the specified type.
+        /// </summary>
+        /// <typeparam name="U">The type to convert to.</typeparam>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static U ConvertType<U>(object obj)
+        {
+            return (U)ConvertType(obj, typeof(U));
+        }
+
         /// <summary>
         /// Gets a type from a type name
         /// </summary>
@@ -42,63 +81,81 @@ namespace StUtil.Utilities
                 case "boolean":
                     parsedTypeName = "System.Boolean";
                     break;
+
                 case "byte":
                     parsedTypeName = "System.Byte";
                     break;
+
                 case "char":
                     parsedTypeName = "System.Char";
                     break;
+
                 case "datetime":
                     parsedTypeName = "System.DateTime";
                     break;
+
                 case "datetimeoffset":
                     parsedTypeName = "System.DateTimeOffset";
                     break;
+
                 case "decimal":
                     parsedTypeName = "System.Decimal";
                     break;
+
                 case "double":
                     parsedTypeName = "System.Double";
                     break;
+
                 case "float":
                     parsedTypeName = "System.Single";
                     break;
+
                 case "int16":
                 case "short":
                     parsedTypeName = "System.Int16";
                     break;
+
                 case "int32":
                 case "int":
                     parsedTypeName = "System.Int32";
                     break;
+
                 case "int64":
                 case "long":
                     parsedTypeName = "System.Int64";
                     break;
+
                 case "object":
                     parsedTypeName = "System.Object";
                     break;
+
                 case "sbyte":
                     parsedTypeName = "System.SByte";
                     break;
+
                 case "string":
                     parsedTypeName = "System.String";
                     break;
+
                 case "timespan":
                     parsedTypeName = "System.TimeSpan";
                     break;
+
                 case "uint16":
                 case "ushort":
                     parsedTypeName = "System.UInt16";
                     break;
+
                 case "uint32":
                 case "uint":
                     parsedTypeName = "System.UInt32";
                     break;
+
                 case "uint64":
                 case "ulong":
                     parsedTypeName = "System.UInt64";
                     break;
+
                 case "intptr":
                     parsedTypeName = "System.IntPtr";
                     break;
@@ -119,16 +176,34 @@ namespace StUtil.Utilities
             return Type.GetType(parsedTypeName);
         }
 
-           public static Type[] LoadType(string typeName)
+        /// <summary>
+        /// Gets a type from a type name
+        /// </summary>
+        /// <param name="typeName">Name of the type.</param>
+        /// <returns></returns>
+        public static Type[] LoadType(string typeName)
         {
             return LoadType(typeName, true);
         }
 
+        /// <summary>
+        /// Gets a type from a type name
+        /// </summary>
+        /// <param name="typeName">Name of the type.</param>
+        /// <param name="referenced">if set to <c>true</c> then check referenced assemblies.</param>
+        /// <returns></returns>
         public static Type[] LoadType(string typeName, bool referenced)
         {
             return LoadType(typeName, referenced, false);
         }
 
+        /// <summary>
+        /// Gets a type from a type name
+        /// </summary>
+        /// <param name="typeName">Name of the type.</param>
+        /// <param name="referenced">if set to <c>true</c> then check referenced assemblies.</param>
+        /// <param name="gac">if set to <c>true</c> then check the GAC.</param>
+        /// <returns></returns>
         public static Type[] LoadType(string typeName, bool referenced, bool gac)
         {
             //check for problematic work
@@ -188,7 +263,12 @@ namespace StUtil.Utilities
             return types.ToArray();
         }
 
-        public static string[] GetGlobalAssemblyCacheFiles(string path)
+        /// <summary>
+        /// Gets the global assembly cache files.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
+        private static string[] GetGlobalAssemblyCacheFiles(string path)
         {
             List<string> files = new List<string>();
 
@@ -206,32 +286,6 @@ namespace StUtil.Utilities
             }
 
             return files.ToArray();
-        }
-
-        public static object ConvertType(object obj, Type t)
-        {
-            if (t.IsEnum)
-            {
-                int i = -1;
-                if (int.TryParse(obj.ToString(), out i))
-                {
-                    return Enum.ToObject(t, i);
-                }
-                else
-                {
-                    return Enum.Parse(t, obj.ToString());
-                }
-            }
-            else if (t == typeof(Color))
-            {
-                return Color.FromName(obj.ToString());
-            }
-            return Convert.ChangeType(obj, t);
-        }
-
-        public static U ConvertType<U>(object obj)
-        {
-            return (U)ConvertType(obj, typeof(U));
         }
     }
 }

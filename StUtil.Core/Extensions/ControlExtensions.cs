@@ -1,17 +1,16 @@
-﻿using System.ComponentModel;
-using System.Windows.Forms;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StUtil.Extensions
 {
     /// <summary>
     /// Extensions for Controls
     /// </summary>
-    /// <remarks>
-    /// 2013-06-26  - Initial version
-    /// 2013-06-27  - Moved Suspend/Resume drawing and GetV/HScroll info methods to StUtil.Native.Extensions
-    /// </remarks>
     public static class ControlExtensions
     {
         /// <summary>
@@ -38,15 +37,17 @@ namespace StUtil.Extensions
             {
                 case CenterMode.Horizontal:
                     y = control.Location.Y;
-                    x = (control.Parent.Width - control.Width) / 2;
+                    x = (control.Parent.ClientSize.Width - control.Width) / 2;
                     break;
+
                 case CenterMode.Verical:
                     x = control.Location.X;
-                    y = (control.Parent.Height - control.Height) / 2;
+                    y = (control.Parent.ClientSize.Height - control.Height) / 2;
                     break;
+
                 default:
-                    x = (control.Parent.Width - control.Width) / 2;
-                    y = (control.Parent.Height - control.Height) / 2;
+                    x = (control.Parent.ClientSize.Width - control.Width) / 2;
+                    y = (control.Parent.ClientSize.Height - control.Height) / 2;
                     break;
             }
 
@@ -54,7 +55,28 @@ namespace StUtil.Extensions
         }
 
         /// <summary>
-        /// Uses reflection to enable the setting of a style, e.g. double buffering, on a control from outside its class
+        /// Resizes the width to the maximum width of the children of the control.
+        /// </summary>
+        /// <param name="control">The control.</param>
+        public static void ResizeWidthToMaxChild(this Control control)
+        {
+            int w = control.Controls.Count > 0 ? control.Controls.AsEnumerable<Control>().Max(c => c.PreferredSize.Width) : control.Width;
+
+            if (typeof(ScrollableControl).IsAssignableFrom(control.GetType()))
+            {
+                ScrollableControl ctrl = (ScrollableControl)control;
+                if (ctrl.VerticalScroll.Visible)
+                {
+                    w += SystemInformation.VerticalScrollBarWidth;
+                }
+            }
+
+            control.Width = w;
+        }
+
+        /// <summary>
+        /// Uses reflection to enable the setting of a style, e.g. double buffering, on a control
+        /// from outside its class
         /// </summary>
         /// <param name="ctrl">The control to set the stype on</param>
         /// <param name="style">The styles to set</param>
@@ -71,7 +93,6 @@ namespace StUtil.Extensions
                 method.Invoke(ctrl, param);
             }
         }
-
 
     }
 }
