@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.UI.Forms
@@ -13,6 +9,7 @@ namespace StUtil.UI.Forms
         private Panel placeholder;
 
         private Control hostedControlParent;
+
         public Control HostedControl { get; private set; }
 
         private void Replace()
@@ -41,7 +38,6 @@ namespace StUtil.UI.Forms
             this.HostedControl.VisibleChanged += HostedControl_Mirror;
 
             this.Owner.Focus();
-
         }
 
         private void MirrorTarget()
@@ -81,7 +77,7 @@ namespace StUtil.UI.Forms
             this.FormClosing += ControlHostForm_FormClosing;
         }
 
-        void ControlHostForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void ControlHostForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Restore();
         }
@@ -91,6 +87,5 @@ namespace StUtil.UI.Forms
             Replace();
             base.OnShown(e);
         }
-
     }
 }

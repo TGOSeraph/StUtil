@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
 
 namespace StUtil.Tasks
@@ -60,6 +58,7 @@ namespace StUtil.Tasks
             Skipped,
             Failed
         }
+
         /// <summary>
         /// If the task should be run on a separate thread
         /// </summary>
@@ -146,6 +145,7 @@ namespace StUtil.Tasks
                 }
             }
         }
+
         /// <summary>
         /// If the task finished successfully
         /// </summary>
@@ -156,6 +156,7 @@ namespace StUtil.Tasks
                 return State == WorkerState.Completed;
             }
         }
+
         /// <summary>
         /// Abort the task if stop does not work. Will only abort async tasks.
         /// </summary>
@@ -326,6 +327,7 @@ namespace StUtil.Tasks
             OnPropertyChanged(propertyName);
             return true;
         }
+
         /// <summary>
         /// Internal task running method
         /// </summary>

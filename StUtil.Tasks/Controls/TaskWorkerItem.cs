@@ -1,14 +1,10 @@
 ﻿using StUtil.Extensions;
+using StUtil.Tasks;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using StUtil.Tasks;
 
 namespace StUtil.Dev.WinForm.Controls
 {
@@ -27,6 +23,7 @@ namespace StUtil.Dev.WinForm.Controls
         }
 
         private TaskWorker worker;
+
         /// <summary>
         /// Gets or sets the task that this control represents.
         /// </summary>

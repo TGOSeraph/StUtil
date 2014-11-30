@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Internal
 {
@@ -159,7 +155,6 @@ namespace StUtil.Native.Internal
         /// If the function succeeds, the return value is nonzero.
         /// </returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-
         public extern static bool PostMessage(IntPtr hWnd, NativeEnums.WM wMsg, IntPtr wParam, IntPtr lParam);
 
         /// <summary>
@@ -215,7 +210,7 @@ namespace StUtil.Native.Internal
         /// <remarks>
         /// <para>Use the CallWindowProc function for window subclassing. Usually, all windows with the same class share one window procedure. A subclass is a window or set of windows with the same class whose messages are intercepted and processed by another window procedure (or procedures) before being passed to the window procedure of the class.</para>
         /// <para>The SetWindowLong function creates the subclass by changing the window procedure associated with a particular window, causing the system to call the new window procedure instead of the previous one. An application must pass any messages not processed by the new window procedure to the previous window procedure by calling CallWindowProc. This allows the application to create a chain of window procedures.</para>
-         /// <para>For further information about functions declared with empty argument lists, refer to 
+        /// <para>For further information about functions declared with empty argument lists, refer to
         /// The C++ Programming Language, Second Edition, by Bjarne Stroustrup.</para>
         /// <para>The CallWindowProc function handles Unicode-to-ANSI conversion. You cannot take advantage of this conversion if you call the window procedure directly.</para>
         /// </remarks>

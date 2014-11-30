@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StUtil.Data.Generic
+﻿namespace StUtil.Data.Generic
 {
     /// <summary>
     /// A pairing of two objects
@@ -17,6 +11,7 @@ namespace StUtil.Data.Generic
         /// The first object
         /// </summary>
         public TFirst First { get; set; }
+
         /// <summary>
         /// The second object
         /// </summary>

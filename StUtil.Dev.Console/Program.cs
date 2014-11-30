@@ -1,10 +1,4 @@
-﻿using StUtil.Native.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace StUtil.Dev.ConsoleTest
@@ -13,15 +7,12 @@ namespace StUtil.Dev.ConsoleTest
     {
         private static void Main(string[] args)
         {
-         
-
             Console.Read();
         }
 
-        static void Mouse_MouseClick(object sender, MouseEventArgs e)
+        private static void Mouse_MouseClick(object sender, MouseEventArgs e)
         {
             Console.WriteLine("Clicked " + e.Location.ToString() + " " + e.Button.ToString());
         }
-
     }
 }

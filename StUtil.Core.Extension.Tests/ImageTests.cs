@@ -1,9 +1,8 @@
-﻿using StUtil.Extensions;
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StUtil.Extensions;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace StUtil.Core.Extension.Tests
 {
@@ -61,7 +60,7 @@ namespace StUtil.Core.Extension.Tests
         [TestMethod]
         public void CreateDisabled()
         {
-            using (Bitmap b = new Bitmap(100,100))
+            using (Bitmap b = new Bitmap(100, 100))
             {
                 using (Graphics g = b.GetGraphics())
                 {

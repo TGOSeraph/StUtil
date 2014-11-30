@@ -36,6 +36,7 @@ namespace StUtil.Net.JSON
             : base(url)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PostRequest{T}"/> class.
         /// </summary>
@@ -45,6 +46,7 @@ namespace StUtil.Net.JSON
             : base(url, cookies)
         {
         }
+
         /// <summary>
         /// Sets the data to post.
         /// </summary>
@@ -85,6 +87,7 @@ namespace StUtil.Net.JSON
             : base(url)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PostRequest"/> class.
         /// </summary>

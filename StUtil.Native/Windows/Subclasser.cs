@@ -1,9 +1,5 @@
 ﻿using StUtil.Native.Internal;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Windows
 {
@@ -14,6 +10,7 @@ namespace StUtil.Native.Windows
         private const int GWL_WNDPROC = -4;
 
         public IntPtr Handle { get; private set; }
+
         private IntPtr oldWndProc;
         private WndProc proc;
 

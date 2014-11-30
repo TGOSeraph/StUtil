@@ -1,13 +1,9 @@
 ﻿using StUtil.Native.Injection;
 using StUtil.Native.Windows;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.Native.Hook

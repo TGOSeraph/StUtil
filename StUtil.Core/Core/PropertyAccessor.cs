@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Core
 {
@@ -39,6 +35,7 @@ namespace StUtil.Core
         /// The object.
         /// </value>
         public object Object { get; private set; }
+
         /// <summary>
         /// Gets the property.
         /// </summary>
@@ -92,4 +89,3 @@ namespace StUtil.Core
         }
     }
 }
-

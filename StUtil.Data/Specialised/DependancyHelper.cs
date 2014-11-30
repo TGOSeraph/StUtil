@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Data.Specialised
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <typeparam name="T">The type of the dependancy</typeparam>
     public class DependancyHelper<T>
@@ -30,7 +28,7 @@ namespace StUtil.Data.Specialised
             }
             dependancies[item].DependsOn.Add(dependsOn);
         }
-            
+
         /// <summary>
         /// Gets the dependancies for this helper
         /// </summary>
@@ -97,5 +95,4 @@ namespace StUtil.Data.Specialised
             return done;
         }
     }
-
 }

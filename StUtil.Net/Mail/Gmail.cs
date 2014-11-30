@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Text;
 
 namespace StUtil.Net.Mail
 {
@@ -16,10 +12,12 @@ namespace StUtil.Net.Mail
         /// The email address to send from
         /// </summary>
         public string FromAddress { get; private set; }
+
         /// <summary>
         /// The email address to send to
         /// </summary>
         public string ToAddress { get; private set; }
+
         /// <summary>
         /// The from accounts password
         /// </summary>

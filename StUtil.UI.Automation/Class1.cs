@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StUtil.UI.Automation
+﻿namespace StUtil.UI.Automation
 {
     public class Class1
     {

@@ -68,6 +68,8 @@
     <Compile Include="Formatting\FileSizeFormatter.cs" />
     <Compile Include="Formatting\TimeSpanFormatter.cs" />
     <Compile Include="Generic\EventArgs.cs" />
+    <Compile Include="Generic\Proxy.cs" />
+    <Compile Include="Generic\ProxyInvoker.cs" />
     <Compile Include="Imaging\Utilities.cs" />
     <Compile Include="IO\TempFile.cs" />
     <Compile Include="IO\Utilities.cs" />
@@ -85,6 +87,7 @@
       <Name>StUtil.Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

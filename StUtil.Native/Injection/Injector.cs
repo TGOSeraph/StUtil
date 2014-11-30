@@ -1,13 +1,9 @@
 ﻿using StUtil.Extensions;
 using StUtil.Native.Internal;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Injection
 {
@@ -18,7 +14,7 @@ namespace StUtil.Native.Injection
 
         [DllImport(@"StUtil.Native.Injection.dll", SetLastError = true)]
         private static extern bool InjectDotNetAssembly(
-            int pid, 
+            int pid,
             IntPtr hProcess,
             [MarshalAs(UnmanagedType.LPWStr)]string dll,
             [MarshalAs(UnmanagedType.LPWStr)]string typeName,
@@ -149,7 +145,6 @@ namespace StUtil.Native.Injection
                     NativeMethods.CloseHandle(hProcess);
                 }
             }
-
         }
     }
 }

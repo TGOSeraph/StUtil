@@ -2,10 +2,7 @@
 using StUtil.Native.Internal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.Native.Input.Hook
@@ -18,10 +15,12 @@ namespace StUtil.Native.Input.Hook
         /// Occurs when the user presses a key down
         /// </summary>
         public event KeyEventHandler KeyDown;
+
         /// <summary>
         /// Occurs when the user presses and releases
         /// </summary>
         public event KeyPressEventHandler KeyPress;
+
         /// <summary>
         /// Occurs when the user releases a key
         /// </summary>

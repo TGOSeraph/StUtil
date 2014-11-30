@@ -3,8 +3,6 @@ using StUtil.Native.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Windows
 {
@@ -40,7 +38,6 @@ namespace StUtil.Native.Windows
             }
         }
 
-
         public IEnumerable<NativeComponent> Children
         {
             get
@@ -51,8 +48,10 @@ namespace StUtil.Native.Windows
                     {
                         case "Button":
                             return new NativeButton(c.Handle);
+
                         case "Static":
                             return new NativeStatic(c.Handle);
+
                         default:
                             return c;
                     }

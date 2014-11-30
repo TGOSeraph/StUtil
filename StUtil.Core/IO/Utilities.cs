@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace StUtil.IO
 {
@@ -51,41 +46,6 @@ namespace StUtil.IO
             string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidReStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
             return dir + "\\" + System.Text.RegularExpressions.Regex.Replace(name, invalidReStr, replace) + ext;
-        }
-
-        /// <summary>
-        /// Backup a file by either moving or copying it with a new extension
-        /// </summary>
-        /// <param name="filePath">The path to the file to backup</param>
-        /// <param name="backupExt">The file extension to append to the file</param>
-        /// <param name="copy">If the file should be copied, else it will be moved</param>
-        /// <param name="overwriteExisting">If an existing backup should be overwritten or an exception should be thrown</param>
-        /// <returns>If the file was overwritten or not</returns>
-        public static bool BackupFile(string filePath, string backupExt = ".bkp", bool copy = false, bool overwriteExisting = true)
-        {
-            string bkpFile = filePath + backupExt;
-            bool ex = false;
-            if (System.IO.File.Exists(bkpFile))
-            {
-                ex = true;
-                if (overwriteExisting)
-                {
-                    System.IO.File.Delete(bkpFile);
-                }
-                else
-                {
-                    throw new IOException("File already exists");
-                }
-            }
-            if (copy)
-            {
-                System.IO.File.Copy(filePath, bkpFile);
-            }
-            else
-            {
-                System.IO.File.Move(filePath, bkpFile);
-            }
-            return ex;
         }
     }
 }

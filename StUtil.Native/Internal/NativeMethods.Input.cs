@@ -1,25 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.Native.Internal
 {
     public static partial class NativeMethods
     {
-        /// <summary>
-        /// Translates a character to the corresponding virtual-key code and shift state for the current keyboard.
-        /// </summary>
-        /// <param name="ch">The character to be translated into a virtual-key code. </param>
-        /// <returns>If the function succeeds, the low-order byte of the return value contains the virtual-key code and the high-order byte contains the shift state.
-        /// If the function finds no key that translates to the passed character code, both the low-order and high-order bytes contain –1. 
-        /// </returns>
-        [DllImport("user32.dll")]
-        public static extern short VkKeyScan(char ch);
-
         /// <summary>
         /// Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to GetAsyncKeyState.
         /// </summary>
@@ -43,7 +29,7 @@ namespace StUtil.Native.Internal
         /// <summary>
         /// <para>Retrieves the status of the specified virtual key. The status specifies whether the key is up, down, or toggled (on, offâ€”alternating each time the key is pressed).</para>
         /// </summary>
-        /// <param name="nVirtKey">A virtual key. If the desired virtual key is a letter or digit (A through Z, a through z, or 0 through 9), 
+        /// <param name="nVirtKey">A virtual key. If the desired virtual key is a letter or digit (A through Z, a through z, or 0 through 9),
         /// nVirtKey must be set to the ASCII value of that character. For other keys, it must be a virtual-key code. </param>
         /// <returns>
         /// <para>Type: SHORT</para>
@@ -55,8 +41,8 @@ namespace StUtil.Native.Internal
         /// <para>The key status returned from this function changes as a thread reads key messages from its message queue. The status does not reflect the interrupt-level state associated with the hardware. Use the GetAsyncKeyState function to retrieve that information.</para>
         /// <para>An application calls GetKeyState in response to a keyboard-input message. This function retrieves the state of the key when the input message was generated.</para>
         /// <para>To retrieve state information for all the virtual keys, use the GetKeyboardState function.</para>
-        /// <para>An application can use the virtual key code constants VK_SHIFT, VK_CONTROL, and VK_MENU as values for the 
-        /// nVirtKey parameter. This gives the status of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. An application can also use the following virtual-key code constants as values for 
+        /// <para>An application can use the virtual key code constants VK_SHIFT, VK_CONTROL, and VK_MENU as values for the
+        /// nVirtKey parameter. This gives the status of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. An application can also use the following virtual-key code constants as values for
         /// nVirtKey to distinguish between the left and right instances of those keys:</para>
         /// <list>
         /// <listheader>VK_LSHIFT</listheader>
@@ -74,7 +60,7 @@ namespace StUtil.Native.Internal
         /// <summary>
         /// <para>Retrieves the status of the specified virtual key. The status specifies whether the key is up, down, or toggled (on, offâ€”alternating each time the key is pressed).</para>
         /// </summary>
-        /// <param name="nVirtKey">A virtual key. If the desired virtual key is a letter or digit (A through Z, a through z, or 0 through 9), 
+        /// <param name="nVirtKey">A virtual key. If the desired virtual key is a letter or digit (A through Z, a through z, or 0 through 9),
         /// nVirtKey must be set to the ASCII value of that character. For other keys, it must be a virtual-key code. </param>
         /// <returns>
         /// <para>Type: SHORT</para>
@@ -86,8 +72,8 @@ namespace StUtil.Native.Internal
         /// <para>The key status returned from this function changes as a thread reads key messages from its message queue. The status does not reflect the interrupt-level state associated with the hardware. Use the GetAsyncKeyState function to retrieve that information.</para>
         /// <para>An application calls GetKeyState in response to a keyboard-input message. This function retrieves the state of the key when the input message was generated.</para>
         /// <para>To retrieve state information for all the virtual keys, use the GetKeyboardState function.</para>
-        /// <para>An application can use the virtual key code constants VK_SHIFT, VK_CONTROL, and VK_MENU as values for the 
-        /// nVirtKey parameter. This gives the status of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. An application can also use the following virtual-key code constants as values for 
+        /// <para>An application can use the virtual key code constants VK_SHIFT, VK_CONTROL, and VK_MENU as values for the
+        /// nVirtKey parameter. This gives the status of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. An application can also use the following virtual-key code constants as values for
         /// nVirtKey to distinguish between the left and right instances of those keys:</para>
         /// <list>
         /// <listheader>VK_LSHIFT</listheader>
@@ -114,17 +100,17 @@ namespace StUtil.Native.Internal
         /// <para>Type: int</para>
         /// <para>If the specified key is a dead key, the return value is negative. Otherwise, it is one of the following values.</para>
         /// eturn valueDescription
-        /// 
+        ///
         /// he specified virtual key has no translation for the current state of the keyboard.1
         /// ne character was copied to the buffer.2
         /// wo characters were copied to the buffer. This usually happens when a dead-key character (accent or diacritic) stored in the keyboard layout cannot be composed with the specified virtual key to form a single character./// </returns>
         /// <remarks>
         /// <para>The parameters supplied to the ToAscii function might not be sufficient to translate the virtual-key code, because a previous dead key is stored in the keyboard layout.</para>
-        /// <para>Typically, ToAscii performs the translation based on the virtual-key code. In some cases, however, bit 15 of the 
+        /// <para>Typically, ToAscii performs the translation based on the virtual-key code. In some cases, however, bit 15 of the
         /// uScanCode parameter may be used to distinguish between a key press and a key release. The scan code is used for translating ALT+
         /// number key combinations.</para>
-        /// <para>Although NUM LOCK is a toggle key that affects keyboard behavior, ToAscii ignores the toggle setting (the low bit) of 
-        /// lpKeyState (VK_NUMLOCK) because the 
+        /// <para>Although NUM LOCK is a toggle key that affects keyboard behavior, ToAscii ignores the toggle setting (the low bit) of
+        /// lpKeyState (VK_NUMLOCK) because the
         /// uVirtKey parameter alone is sufficient to distinguish the cursor movement keys (VK_HOME, VK_INSERT, and so on) from the numeric keys (VK_DECIMAL, VK_NUMPAD0 - VK_NUMPAD9).</para>
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
@@ -134,30 +120,30 @@ namespace StUtil.Native.Internal
         /// <para>The mouse_event function synthesizes mouse motion and button clicks.</para>
         /// </summary>
         /// <param name="dwFlags">Controls various aspects of mouse motion and button clicking. This parameter can be certain combinations of the following values.</param>
-        /// <param name="dx">The mouse's absolute position along the x-axis or its amount of motion since the last mouse event was generated, depending on the setting of MOUSEEVENTF_ABSOLUTE. Absolute data is specified as the mouse's actual x-coordinate; relative data is specified as the number of mickeys moved. A 
+        /// <param name="dx">The mouse's absolute position along the x-axis or its amount of motion since the last mouse event was generated, depending on the setting of MOUSEEVENTF_ABSOLUTE. Absolute data is specified as the mouse's actual x-coordinate; relative data is specified as the number of mickeys moved. A
         /// mickey is the amount that a mouse has to move for it to report that it has moved. </param>
         /// <param name="dy">The mouse's absolute position along the y-axis or its amount of motion since the last mouse event was generated, depending on the setting of MOUSEEVENTF_ABSOLUTE. Absolute data is specified as the mouse's actual y-coordinate; relative data is specified as the number of mickeys moved. </param>
-        /// <param name="dwData">If 
-        /// dwFlags contains MOUSEEVENTF_WHEEL, then 
+        /// <param name="dwData">If
+        /// dwFlags contains MOUSEEVENTF_WHEEL, then
         /// dwData specifies the amount of wheel movement. A positive value indicates that the wheel was rotated forward, away from the user; a negative value indicates that the wheel was rotated backward, toward the user. One wheel click is defined as WHEEL_DELTA, which is 120. </param>
         /// <param name="dwExtraInfo">An additional value associated with the mouse event. An application calls GetMessageExtraInfo to obtain this extra information. </param>
         /// <returns>
         /// <para>This function has no return value.</para>
         /// </returns>
         /// <remarks>
-        /// <para>If the mouse has moved, indicated by MOUSEEVENTF_MOVE being set, 
-        /// dx and 
+        /// <para>If the mouse has moved, indicated by MOUSEEVENTF_MOVE being set,
+        /// dx and
         /// dy hold information about that motion. The information is specified as absolute or relative integer values.</para>
-        /// <para>If MOUSEEVENTF_ABSOLUTE value is specified, 
-        /// dx and 
+        /// <para>If MOUSEEVENTF_ABSOLUTE value is specified,
+        /// dx and
         /// dy contain normalized absolute coordinates between 0 and 65,535. The event procedure maps these coordinates onto the display surface. Coordinate (0,0) maps onto the upper-left corner of the display surface, (65535,65535) maps onto the lower-right corner.</para>
-        /// <para>If the MOUSEEVENTF_ABSOLUTE value is not specified, 
-        /// dx and 
+        /// <para>If the MOUSEEVENTF_ABSOLUTE value is not specified,
+        /// dx and
         /// dy specify relative motions from when the last mouse event was generated (the last reported position). Positive values mean the mouse moved right (or down); negative values mean the mouse moved left (or up).</para>
         /// <para>Relative mouse motion is subject to the settings for mouse speed and acceleration level. An end user sets these values using the Mouse application in Control Panel. An application obtains and sets these values with the SystemParametersInfo function.</para>
         /// <para>The system applies two tests to the specified relative mouse motion when applying acceleration. If the specified distance along either the x or y axis is greater than the first mouse threshold value, and the mouse acceleration level is not zero, the operating system doubles the distance. If the specified distance along either the x- or y-axis is greater than the second mouse threshold value, and the mouse acceleration level is equal to two, the operating system doubles the distance that resulted from applying the first threshold test. It is thus possible for the operating system to multiply relatively-specified mouse motion along the x- or y-axis by up to four times.</para>
         /// <para>Once acceleration has been applied, the system scales the resultant value by the desired mouse speed. Mouse speed can range from 1 (slowest) to 20 (fastest) and represents how much the pointer moves based on the distance the mouse moves. The default value is 10, which results in no additional modification to the mouse motion.</para>
-        /// <para>The mouse_event function is used to synthesize mouse events by applications that need to do so. It is also used by applications that need to obtain more information from the mouse than its position and button state. For example, if a tablet manufacturer wants to pass pen-based information to its own applications, it can write a DLL that communicates directly to the tablet hardware, obtains the extra information, and saves it in a queue. The DLL then calls mouse_event with the standard button and x/y position data, along with, in the dwExtraInfo parameter, some pointer or index to the queued extra information. When the application needs the extra information, it calls the DLL with the pointer or index stored in 
+        /// <para>The mouse_event function is used to synthesize mouse events by applications that need to do so. It is also used by applications that need to obtain more information from the mouse than its position and button state. For example, if a tablet manufacturer wants to pass pen-based information to its own applications, it can write a DLL that communicates directly to the tablet hardware, obtains the extra information, and saves it in a queue. The DLL then calls mouse_event with the standard button and x/y position data, along with, in the dwExtraInfo parameter, some pointer or index to the queued extra information. When the application needs the extra information, it calls the DLL with the pointer or index stored in
         /// dwExtraInfo, and the DLL returns the extra information.</para>
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
@@ -174,7 +160,7 @@ namespace StUtil.Native.Internal
         /// <para>This function does not return a value.</para>
         /// </returns>
         /// <remarks>
-        /// <para>An application can simulate a press of the PRINTSCRN key in order to obtain a screen snapshot and save it to the clipboard. To do this, call keybd_event with the 
+        /// <para>An application can simulate a press of the PRINTSCRN key in order to obtain a screen snapshot and save it to the clipboard. To do this, call keybd_event with the
         /// bVk parameter set to VK_SNAPSHOT.</para>
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
@@ -202,8 +188,5 @@ namespace StUtil.Native.Internal
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
         public static extern uint MapVirtualKey(uint uCode, uint uMapType);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern uint SendInput(uint nInputs, ref NativeStructs.INPUT pInputs, int cbSize);
     }
 }

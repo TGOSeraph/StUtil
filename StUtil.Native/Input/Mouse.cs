@@ -12,6 +12,15 @@ namespace StUtil.Native.Input
 {
     public static class Mouse
     {
+        //public enum Button : ushort
+        //{
+        //    Left = Keys.LButton,
+        //    Right = Keys.RButton,
+        //    Middle = Keys.MButton,
+        //    X1 = Keys.XButton1,
+        //    X2 = Keys.XButton2
+        //}
+
         /// <summary>
         /// Occurs on mouse click.
         /// </summary>
@@ -119,14 +128,19 @@ namespace StUtil.Native.Input
             {
                 case MouseButtons.Left:
                     return Keys.LButton;
+
                 case MouseButtons.Middle:
                     return Keys.MButton;
+
                 case MouseButtons.Right:
                     return Keys.RButton;
+
                 case MouseButtons.XButton1:
                     return Keys.XButton1;
+
                 case MouseButtons.XButton2:
                     return Keys.XButton2;
+
                 default:
                     throw new NotImplementedException();
             }
@@ -138,10 +152,13 @@ namespace StUtil.Native.Input
             {
                 case MouseButtons.Left:
                     return up ? NativeEnums.WM.LBUTTONUP : NativeEnums.WM.LBUTTONDOWN;
+
                 case MouseButtons.Middle:
                     return up ? NativeEnums.WM.MBUTTONUP : NativeEnums.WM.MBUTTONDOWN;
+
                 case MouseButtons.Right:
                     return up ? NativeEnums.WM.RBUTTONUP : NativeEnums.WM.RBUTTONDOWN;
+
                 default:
                     throw new NotImplementedException();
             }
@@ -152,11 +169,14 @@ namespace StUtil.Native.Input
             switch (button)
             {
                 case MouseButtons.Left:
-                    return up ? NativeEnums.MouseEventFlags.LEFTUP : NativeEnums.MouseEventFlags.LEFTDOWN;
+                    return up ? NativeEnums.MouseEventFlags.LeftUp : NativeEnums.MouseEventFlags.LeftDown;
+
                 case MouseButtons.Right:
-                    return up ? NativeEnums.MouseEventFlags.RIGHTUP : NativeEnums.MouseEventFlags.RIGHTDOWN;
+                    return up ? NativeEnums.MouseEventFlags.RightUp : NativeEnums.MouseEventFlags.RightDown;
+
                 case MouseButtons.Middle:
-                    return up ? NativeEnums.MouseEventFlags.MIDDLEUP : NativeEnums.MouseEventFlags.MIDDLEDOWN;
+                    return up ? NativeEnums.MouseEventFlags.MiddleUp : NativeEnums.MouseEventFlags.MiddleDown;
+
                 default:
                     throw new NotImplementedException();
             }
@@ -242,7 +262,7 @@ namespace StUtil.Native.Input
         /// <exception cref="System.NotImplementedException"></exception>
         public static void Down(MouseButtons button, Point location)
         {
-            NativeMethods.mouse_event((uint)(MouseButtonToMouseEventFlags(button, false) | NativeEnums.MouseEventFlags.ABSOLUTE), (uint)location.X, (uint)location.Y, 0, IntPtr.Zero);
+            NativeMethods.mouse_event((uint)(MouseButtonToMouseEventFlags(button, false) | NativeEnums.MouseEventFlags.Absolute), (uint)location.X, (uint)location.Y, 0, IntPtr.Zero);
         }
 
         /// <summary>
@@ -279,7 +299,7 @@ namespace StUtil.Native.Input
         /// <exception cref="System.NotImplementedException"></exception>
         public static void Up(MouseButtons button, Point location)
         {
-            NativeMethods.mouse_event((uint)(MouseButtonToMouseEventFlags(button, true) | NativeEnums.MouseEventFlags.ABSOLUTE), (uint)location.X, (uint)location.Y, 0, IntPtr.Zero);
+            NativeMethods.mouse_event((uint)(MouseButtonToMouseEventFlags(button, true) | NativeEnums.MouseEventFlags.Absolute), (uint)location.X, (uint)location.Y, 0, IntPtr.Zero);
         }
 
         /// <summary>
@@ -464,7 +484,7 @@ namespace StUtil.Native.Input
             Up(hWnd, MouseButtons.Left, Mouse.Location);
         }
 
-        #endregion Mouse Actions
+        #endregion Handle Specific Mouse Actions
 
         #region Mouse Events
 

@@ -15,6 +15,7 @@ namespace StUtil.Net
             : base(url)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRequest{T}"/> class.
         /// </summary>
@@ -45,6 +46,7 @@ namespace StUtil.Net
             : base(url)
         {
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GetRequest"/> class.
         /// </summary>

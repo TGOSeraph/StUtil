@@ -54,6 +54,7 @@ namespace StUtil.Data.Generic
         {
             return;
         }
+
         /// <summary>
         /// Move the the next number in the range
         /// </summary>

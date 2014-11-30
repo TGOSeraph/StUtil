@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Internal
 {
@@ -24,17 +21,6 @@ namespace StUtil.Native.Internal
         /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
-
-        /// <summary>
-        /// Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads. 
-        /// </summary>
-        /// <param name="hWnd">A handle to the window that should be activated and brought to the foreground. </param>
-        /// <returns>
-        /// If the window was brought to the foreground, the return value is nonzero.
-        /// If the window was not brought to the foreground, the return value is zero.
-        /// </returns>
-        [DllImport("user32.dll")]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         /// <summary>
         /// <para>Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application.</para>
@@ -108,7 +94,7 @@ namespace StUtil.Native.Internal
         /// <summary>
         /// <para>Enumerates the child windows that belong to the specified parent window by passing the handle to each child window, in turn, to an application-defined callback function. EnumChildWindows continues until the last child window is enumerated or the callback function returns FALSE.</para>
         /// </summary>
-        /// <param name="hWndParent">A handle to the parent window whose child windows are to be enumerated. If this parameter is NULL, this function is equivalent to EnumWindows.	
+        /// <param name="hWndParent">A handle to the parent window whose child windows are to be enumerated. If this parameter is NULL, this function is equivalent to EnumWindows.
         /// </param>
         /// <param name="lpEnumFunc">A pointer to an application-defined callback function. For more information, see EnumChildProc. </param>
         /// <param name="lParam">An application-defined value to be passed to the callback function. </param>
@@ -130,10 +116,10 @@ namespace StUtil.Native.Internal
         /// <param name="hObject">A valid handle to an open object.</param>
         /// <returns>
         /// <para>If the function succeeds, the return value is nonzero.</para>
-        /// <para>If the function fails, the return value is zero. To get extended error information, call 
+        /// <para>If the function fails, the return value is zero. To get extended error information, call
         /// etLastError.</para>
-        /// <para>If the application is running under a debugger, the function will throw an exception if it receives either a handle value that is not valid or a pseudo-handle value. This can happen if you close a handle twice, or if you call 
-        /// loseHandle on a handle returned by the 
+        /// <para>If the application is running under a debugger, the function will throw an exception if it receives either a handle value that is not valid or a pseudo-handle value. This can happen if you close a handle twice, or if you call
+        /// loseHandle on a handle returned by the
         /// indFirstFile function instead of calling the FindClose function.</para>
         /// </returns>
         /// <remarks>
@@ -166,13 +152,13 @@ namespace StUtil.Native.Internal
         /// x00000102L
         /// he time-out interval elapsed, and the object's state is nonsignaled.WAIT_FAILED
         /// DWORD)0xFFFFFFFF
-        /// he function has failed. To get extended error information, call 
+        /// he function has failed. To get extended error information, call
         /// etLastError./// </returns>
         /// <remarks>
-        /// <para>The 
+        /// <para>The
         /// aitForSingleObject function checks the current state of the specified object. If the object's state is nonsignaled, the calling thread enters the wait state until the object is signaled or the time-out interval elapses.</para>
         /// <para>The function modifies the state of some types of synchronization objects. Modification occurs only for the object whose signaled state caused the function to return. For example, the count of a semaphore object is decreased by one.</para>
-        /// <para>The 
+        /// <para>The
         /// aitForSingleObject function can wait for the following objects:</para>
         /// hange notification
         /// onsole input
@@ -183,9 +169,9 @@ namespace StUtil.Native.Internal
         /// emaphore
         /// hread
         /// aitable timer
-        /// <para>Use caution when calling the wait functions and code that directly or indirectly creates windows. If a thread creates any windows, it must process messages. Message broadcasts are sent to all windows in the system. A thread that uses a wait function with no time-out interval may cause the system to become deadlocked. Two examples of code that indirectly creates windows are DDE and the CoInitialize function. Therefore, if you have a thread that creates windows, use 
-        /// sgWaitForMultipleObjects or 
-        /// sgWaitForMultipleObjectsEx, rather than 
+        /// <para>Use caution when calling the wait functions and code that directly or indirectly creates windows. If a thread creates any windows, it must process messages. Message broadcasts are sent to all windows in the system. A thread that uses a wait function with no time-out interval may cause the system to become deadlocked. Two examples of code that indirectly creates windows are DDE and the CoInitialize function. Therefore, if you have a thread that creates windows, use
+        /// sgWaitForMultipleObjects or
+        /// sgWaitForMultipleObjectsEx, rather than
         /// aitForSingleObject.</para>
         /// </remarks>
         [DllImport("Kernel32.dll", SetLastError = true)]
@@ -194,18 +180,18 @@ namespace StUtil.Native.Internal
         /// <summary>
         /// <para>Retrieves the termination status of the specified thread.</para>
         /// </summary>
-        /// <param name="hThread">The handle must have the THREAD_QUERY_INFORMATION or THREAD_QUERY_LIMITED_INFORMATION access right. For more information, see 
+        /// <param name="hThread">The handle must have the THREAD_QUERY_INFORMATION or THREAD_QUERY_LIMITED_INFORMATION access right. For more information, see
         /// hread Security and Access Rights.</param>
         /// <param name="lpExitCode">A pointer to a variable to receive the thread termination status. For more information, see Remarks.</param>
         /// <returns>
         /// <para>If the function succeeds, the return value is nonzero.</para>
-        /// <para>If the function fails, the return value is zero. To get extended error information, call 
+        /// <para>If the function fails, the return value is zero. To get extended error information, call
         /// etLastError.</para>
         /// </returns>
         /// <remarks>
         /// <para>This function returns immediately. If the specified thread has not terminated and the function succeeds, the status returned is STILL_ACTIVE. If the thread has terminated and the function succeeds, the status returned is one of the following values:</para>
-        /// he exit value specified in the 
-        /// xitThread or 
+        /// he exit value specified in the
+        /// xitThread or
         /// erminateThread function.
         /// he return value from the thread function.
         /// he exit value of the thread's process.
@@ -213,15 +199,5 @@ namespace StUtil.Native.Internal
         /// </remarks>
         [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern bool GetExitCodeThread(IntPtr hThread, out IntPtr lpExitCode);
-
-        /// <summary>
-        /// Retrieves the specified system metric or system configuration setting.
-        /// Note that all dimensions retrieved by GetSystemMetrics are in pixels.
-        /// </summary>
-        /// <param name="smIndex">The system metric or configuration setting to be retrieved. This parameter can be one of the following values. Note that all SM_CX* values are widths and all SM_CY* values are heights. Also note that all settings designed to return Boolean data represent TRUE as any nonzero value, and FALSE as a zero value.</param>
-        /// <returns>f the function succeeds, the return value is the requested system metric or configuration setting.
-        /// If the function fails, the return value is 0. GetLastError does not provide extended error information. </returns>
-        [DllImport("user32.dll")]
-        public static extern int GetSystemMetrics(NativeEnums.SystemMetric smIndex);
     }
 }

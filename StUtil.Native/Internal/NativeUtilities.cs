@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Internal
 {
@@ -97,17 +95,5 @@ namespace StUtil.Native.Internal
 
             return hProcess;
         }
-
-
-        public static int CalculateAbsoluteCoordinateX(int x)
-        {
-            return (x * 65536) / NativeMethods.GetSystemMetrics(NativeEnums.SystemMetric.SM_CXSCREEN);
-        }
-
-        public static int CalculateAbsoluteCoordinateY(int y)
-        {
-            return (y * 65536) / NativeMethods.GetSystemMetrics(NativeEnums.SystemMetric.SM_CYSCREEN);
-        }
-
     }
 }

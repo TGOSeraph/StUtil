@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StUtil.Extensions;
 using System;
 
 namespace StUtil.Core.Tests

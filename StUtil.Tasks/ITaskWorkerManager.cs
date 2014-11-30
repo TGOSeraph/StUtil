@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Tasks
 {
@@ -12,10 +8,12 @@ namespace StUtil.Tasks
         /// Fires if running tasks is cancelled
         /// </summary>
         event EventHandler TasksCancelled;
+
         /// <summary>
         /// Fires once all tasks are completed
         /// </summary>
         event EventHandler TasksCompleted;
+
         /// <summary>
         /// Fires if running tasks fails
         /// </summary>

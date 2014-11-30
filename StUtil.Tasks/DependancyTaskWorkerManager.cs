@@ -1,11 +1,9 @@
-﻿using StUtil.Extensions;
-using StUtil.Data.Specialised;
+﻿using StUtil.Data.Specialised;
+using StUtil.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Tasks
 {

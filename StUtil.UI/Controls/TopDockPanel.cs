@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.UI.Controls
@@ -60,7 +57,7 @@ namespace StUtil.UI.Controls
                 throw new ArgumentException("Control not set as top docking", "control");
             }
             control.Disposed -= control_Disposed;
-            control.ControlAdded -= control_ControlAdded; 
+            control.ControlAdded -= control_ControlAdded;
             cache.Remove(control);
             return control;
         }
@@ -70,7 +67,7 @@ namespace StUtil.UI.Controls
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="ControlEventArgs"/> instance containing the event data.</param>
-        static void control_ControlAdded(object sender, ControlEventArgs e)
+        private static void control_ControlAdded(object sender, ControlEventArgs e)
         {
             e.Control.Dock = DockStyle.Top;
             e.Control.BringToFront();

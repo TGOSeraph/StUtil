@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace StUtil.Tasks
 {
@@ -15,6 +12,7 @@ namespace StUtil.Tasks
         /// Indicates that the progress of the task has changed
         /// </summary>
         public event ProgressChangedEventHandler ProgressChanged;
+
         /// <summary>
         /// Indicates that the maximum value of the progressable task has changed
         /// </summary>
@@ -24,6 +22,7 @@ namespace StUtil.Tasks
         /// The maximum value of the task
         /// </summary>
         protected double maximumValue = 0;
+
         /// <summary>
         /// The maximum value of the task
         /// </summary>
@@ -44,6 +43,7 @@ namespace StUtil.Tasks
         /// The current value of the task
         /// </summary>
         protected double currentValue = 0;
+
         /// <summary>
         /// The current value of the task
         /// </summary>

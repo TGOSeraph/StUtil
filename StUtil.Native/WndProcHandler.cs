@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace StUtil.Native
 {
@@ -47,7 +42,6 @@ namespace StUtil.Native
         ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
         /// </value>
         public bool IsActive { get; set; }
-
 
         /// <summary>
         /// Gets or sets the message id that this handler manages.

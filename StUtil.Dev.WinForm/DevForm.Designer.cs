@@ -32,6 +32,7 @@
             this.panel2 = new StUtil.UI.Controls.FlickerFree.Panel();
             this.panel1 = new StUtil.UI.Controls.FlickerFree.Panel();
             this.panel4 = new StUtil.UI.Controls.FlickerFree.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panel3
@@ -66,11 +67,22 @@
             this.panel4.Size = new System.Drawing.Size(10, 10);
             this.panel4.TabIndex = 3;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DevForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 281);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -87,6 +99,7 @@
         private UI.Controls.FlickerFree.Panel panel2;
         private UI.Controls.FlickerFree.Panel panel3;
         private UI.Controls.FlickerFree.Panel panel4;
+        private System.Windows.Forms.Button button1;
 
     }
 }

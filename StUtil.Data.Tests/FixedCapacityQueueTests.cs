@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StUtil.Data.Generic;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StUtil.Data.Tests

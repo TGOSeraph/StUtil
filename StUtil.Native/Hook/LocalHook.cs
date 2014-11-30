@@ -1,9 +1,5 @@
 ﻿using StUtil.Native.Internal;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Hook
 {
@@ -24,10 +20,13 @@ namespace StUtil.Native.Hook
             {
                 case WindowsHook.HookType.Keyboard:
                     return (int)NativeEnums.HookType.WH_KEYBOARD;
+
                 case WindowsHook.HookType.Mouse:
                     return (int)NativeEnums.HookType.WH_MOUSE;
+
                 case WindowsHook.HookType.Message:
                     return (int)NativeEnums.HookType.WH_CALLWNDPROC;
+
                 default:
                     throw new NotImplementedException();
             }

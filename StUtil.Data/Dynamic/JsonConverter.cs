@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace StUtil.Data.Dynamic
@@ -101,7 +100,6 @@ namespace StUtil.Data.Dynamic
                                 sb.AppendFormat("\"{0}\"", arrayValue);
                             else
                                 sb.AppendFormat("{0}", arrayValue);
-
                         }
                         sb.Append("]");
                     }
@@ -142,6 +140,6 @@ namespace StUtil.Data.Dynamic
             }
         }
 
-        #endregion
+        #endregion Nested type: DynamicJsonObject
     }
 }

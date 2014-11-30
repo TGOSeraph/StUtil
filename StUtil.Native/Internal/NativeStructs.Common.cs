@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace StUtil.Native.Internal
 {
-    public static partial class NativeStructs
+    public partial class NativeStructs
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct COLORREF
@@ -30,6 +25,7 @@ namespace StUtil.Native.Internal
                 ColorDWORD = (uint)color.R + (((uint)color.G) << 8) + (((uint)color.B) << 16);
             }
         }
+
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -71,7 +67,10 @@ namespace StUtil.Native.Internal
                 Bottom = bottom;
             }
 
-            public RECT(System.Drawing.Rectangle r) : this(r.Left, r.Top, r.Right, r.Bottom) { }
+            public RECT(System.Drawing.Rectangle r)
+                : this(r.Left, r.Top, r.Right, r.Bottom)
+            {
+            }
 
             public int X
             {

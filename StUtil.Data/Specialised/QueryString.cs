@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
+﻿using System.Collections.Specialized;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Data.Specialised
 {
@@ -15,7 +11,9 @@ namespace StUtil.Data.Specialised
     /// </summary>
     public class QueryString : NameValueCollection
     {
-        public QueryString() { }
+        public QueryString()
+        {
+        }
 
         public QueryString(string queryString)
         {
@@ -55,7 +53,6 @@ namespace StUtil.Data.Specialised
             }
             return this;
         }
-
 
         /// <summary>
         /// add a name value pair to the collection

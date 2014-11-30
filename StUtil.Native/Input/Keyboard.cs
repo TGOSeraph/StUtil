@@ -157,7 +157,6 @@ namespace StUtil.Native.Input
             Press(key, 0);
         }
 
-
         /// <summary>
         /// Presses the specified key.
         /// </summary>

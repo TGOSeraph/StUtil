@@ -1,10 +1,6 @@
 ﻿using StUtil.Native.Internal;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Extensions
 {
@@ -38,7 +34,6 @@ namespace StUtil.Extensions
                     NativeMethods.CloseHandle(hProcess);
                 }
             }
-          
         }
     }
 }

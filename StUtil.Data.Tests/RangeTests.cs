@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StUtil.Data.Generic;
+using System;
+using System.Linq;
 
 namespace StUtil.Data.Tests
 {
@@ -75,12 +75,11 @@ namespace StUtil.Data.Tests
             Assert.AreEqual(5, rx.Length);
             for (int i = 1; i < 10; i += 2)
             {
-                Assert.AreEqual(i, rx[(i-1) / 2]);
+                Assert.AreEqual(i, rx[(i - 1) / 2]);
             }
 
             range = new Range<int>(30, 0, -3);
             rx = range.ToArray();
-
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace StUtil.Tasks
 {
@@ -14,6 +11,7 @@ namespace StUtil.Tasks
         /// The task to run
         /// </summary>
         public Action<ActionProgressableTask> Task { get; private set; }
+
         /// <summary>
         /// The action to run when the task completes
         /// </summary>

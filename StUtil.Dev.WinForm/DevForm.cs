@@ -1,21 +1,6 @@
-﻿using StUtil.Data.Specialised;
-using StUtil.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using StUtil.Extensions;
-using System.Linq;
+﻿using System;
 using System.Threading;
-using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using StUtil.Native.Input;
-using StUtil.Native.Hook;
-using StUtil.Dev.WinForm.Controls;
-using StUtil.Native.Windows.Forms;
-using StUtil.Native;
-using StUtil.Native.Injection;
+using System.Windows.Forms;
 
 namespace StUtil.Dev.WinForm
 {
@@ -28,9 +13,8 @@ namespace StUtil.Dev.WinForm
             this.Shown += DevForm_Shown;
         }
 
-        void DevForm_Shown(object sender, EventArgs e)
+        private void DevForm_Shown(object sender, EventArgs e)
         {
-          
         }
 
         private void Anim(Panel p)
@@ -43,6 +27,12 @@ namespace StUtil.Dev.WinForm
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Thread.Sleep(1000);
+            StUtil.Native.Input.Keyboard.Press(Keys.A);
         }
     }
 

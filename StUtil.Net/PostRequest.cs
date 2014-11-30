@@ -78,6 +78,7 @@ namespace StUtil.Net
         {
             this.Data = Encoding.Default.GetBytes(data);
         }
+
         /// <summary>
         /// Builds the request.
         /// </summary>

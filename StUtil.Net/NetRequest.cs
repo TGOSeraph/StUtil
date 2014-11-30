@@ -10,8 +10,8 @@ namespace StUtil.Net
     /// The base class for creating web requests
     /// </summary>
     /// <typeparam name="T">The type of object to return</typeparam>
-	public abstract class NetRequest<T>
-	{
+    public abstract class NetRequest<T>
+    {
         /// <summary>
         /// Gets or sets the cookies.
         /// </summary>
@@ -50,21 +50,23 @@ namespace StUtil.Net
         /// <value>
         /// The URL.
         /// </value>
-		public string URL
-		{
-			get;
-			set;
-		}
+        public string URL
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NetRequest{T}"/> class.
         /// </summary>
         /// <param name="url">The URL.</param>
-		public NetRequest(string url)
-		{
+        public NetRequest(string url)
+        {
             this.TryIgnoreError = true;
-			this.Headers = new Dictionary<string, string>();
-			this.URL = url;
-		}
+            this.Headers = new Dictionary<string, string>();
+            this.URL = url;
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NetRequest{T}"/> class.
         /// </summary>
@@ -75,6 +77,7 @@ namespace StUtil.Net
         {
             this.Cookies = cookies;
         }
+
         /// <summary>
         /// Runs the web request
         /// </summary>
@@ -159,6 +162,7 @@ namespace StUtil.Net
                     case "User-Agent":
                         request.UserAgent = current.Value;
                         break;
+
                     default:
                         request.Headers.Add(current.Key, current.Value);
                         break;
@@ -170,14 +174,13 @@ namespace StUtil.Net
         /// Performs the web request.
         /// </summary>
         /// <param name="param">The parameter.</param>
-		private void Request(object param)
-		{
-			T obj = this.Run();
-			if (param != null)
-			{
-				((Action<T>)param)(obj);
-			}
-		}
-	}
+        private void Request(object param)
+        {
+            T obj = this.Run();
+            if (param != null)
+            {
+                ((Action<T>)param)(obj);
+            }
+        }
+    }
 }
-	

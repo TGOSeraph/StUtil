@@ -29,7 +29,7 @@ namespace StUtil.Data.Generic
         /// </summary>
         /// <param name="min">The minum value in the range</param>
         /// <param name="max">The inclusive maximum value in the range</param>
-        public Range(TNumeric min, TNumeric max) 
+        public Range(TNumeric min, TNumeric max)
             : this(min, max, (TNumeric)Convert.ChangeType(1, typeof(TNumeric)))
         {
         }
@@ -99,7 +99,10 @@ namespace StUtil.Data.Generic
         /// Determines if the range is valid
         /// </summary>
         /// <returns>True if range is valid, else false</returns>
-        public Boolean IsValid() { return Minimum.CompareTo(Maximum) <= 0; }
+        public Boolean IsValid()
+        {
+            return Minimum.CompareTo(Maximum) <= 0;
+        }
 
         /// <summary>
         /// Gets the enumerator for the range

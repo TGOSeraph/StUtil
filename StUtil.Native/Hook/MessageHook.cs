@@ -1,14 +1,9 @@
-﻿using StUtil.Native.Internal;
-using StUtil.Native.Hook;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using StUtil.Extensions;
-using System.Runtime.InteropServices;
+﻿using StUtil.Extensions;
 using StUtil.Generic;
+using StUtil.Native.Internal;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace StUtil.Native.Hook
 {
@@ -17,7 +12,7 @@ namespace StUtil.Native.Hook
         public event EventHandler<EventArgs<Message>> MessageReceived;
 
         public MessageHook(HookMethod hooker)
-            :base(hooker, HookType.Message)
+            : base(hooker, HookType.Message)
         {
         }
 

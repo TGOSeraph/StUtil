@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StUtil.Native.Internal
 {
-    public static partial class NativeStructs
+    public partial class NativeStructs
     {
         /// <summary>
         /// The KBDLLHOOKSTRUCT structure contains information about a low-level keyboard input event.
@@ -128,14 +124,17 @@ namespace StUtil.Native.Internal
             /// Additional information about the message. The exact meaning depends on the message value.
             /// </summary>
             public IntPtr lParam;
+
             /// <summary>
             /// Additional information about the message. The exact meaning depends on the message value.
             /// </summary>
             public IntPtr wParam;
+
             /// <summary>
             /// The message.
             /// </summary>
             public int message;
+
             /// <summary>
             /// A handle to the window to receive the message.
             /// </summary>
