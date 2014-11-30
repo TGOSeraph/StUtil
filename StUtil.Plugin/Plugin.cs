@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-namespace InvokeHelper.Plugin
+namespace StUtil.Plugins
 {
     public abstract class Plugin : MarshalByRefObject, IDisposable
     {

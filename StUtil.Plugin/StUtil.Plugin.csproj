@@ -7,7 +7,7 @@
     <ProjectGuid>{90032673-96F3-4604-8D1C-47C8D19C1DA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StUtil.Plugin</RootNamespace>
+    <RootNamespace>StUtil.Plugins</RootNamespace>
     <AssemblyName>StUtil.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

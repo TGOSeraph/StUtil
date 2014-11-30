@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace InvokeHelper.Plugin
+namespace StUtil.Plugins
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
     public class StatefulAttribute : Attribute

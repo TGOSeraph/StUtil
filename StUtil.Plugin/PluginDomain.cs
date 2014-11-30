@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace InvokeHelper.Plugin
+namespace StUtil.Plugins
 {
     public class PluginDomain<TPlugin> : MarshalByRefObject where TPlugin : MarshalByRefObject
     {
