@@ -12,8 +12,22 @@ namespace StUtil.Generic
         private static Dictionary<MethodInfo, bool> lookup = new Dictionary<MethodInfo, bool>();
 
         private Type type;
-        private object target;
         private ProxyInvoker proxy;
+        public object Target { get; set; }
+
+        /// <summary>
+        /// Gets the invoker.
+        /// </summary>
+        /// <value>
+        /// The invoker.
+        /// </value>
+        protected ProxyInvoker Invoker
+        {
+            get
+            {
+                return proxy;
+            }
+        }
 
         /// <summary>
         /// Creates the specified proxy.
@@ -34,7 +48,7 @@ namespace StUtil.Generic
             : base(typeof(TInvoke))
         {
             this.proxy = proxy;
-            this.target = target;
+            this.Target = target;
             type = typeof(TInvoke);
             if (!invokeLookup.ContainsKey(type))
             {
@@ -78,11 +92,11 @@ namespace StUtil.Generic
                 object result;
                 if (doProxy)
                 {
-                    result = proxy.Invoke(method, target, message.Args, method.ReturnType);
+                    result = proxy.Invoke(method, Target, message.Args, method.ReturnType);
                 }
                 else
                 {
-                    result = method.Invoke(target, message.Args);
+                    result = method.Invoke(Target, message.Args);
                 }
                 return new ReturnMessage(result, null, 0, null, message);
             }
