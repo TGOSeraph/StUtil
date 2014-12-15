@@ -69,6 +69,7 @@
     <Compile Include="Internal\NativeMethods.Processes.cs" />
     <Compile Include="Internal\NativeStructs.Common.cs" />
     <Compile Include="Internal\NativeStructs.Hooks.cs" />
+    <Compile Include="Internal\NativeStructs.Process.cs" />
     <Compile Include="Internal\NativeUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
@@ -95,17 +96,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
   <Target Name="AfterBuild">
-    <Copy SourceFiles="..\StUtil.Native.Injection.Helper\bin\x64\StUtil.Native.Injection.Helper.exe"
-	  DestinationFolder="$(OutputPath)\x64"/>
-    <Copy SourceFiles="..\StUtil.Native.Injection.Helper\bin\x86\StUtil.Native.Injection.Helper.exe"
-	  DestinationFolder="$(OutputPath)\x86"/>
-	  
-    <Copy SourceFiles="..\StUtil.Native.Injection\bin\x64\StUtil.Native.Injection.dll"
-	  DestinationFolder="$(OutputPath)\x64"/>
-    <Copy SourceFiles="..\StUtil.Native.Injection\bin\x86\StUtil.Native.Injection.dll"
-	  DestinationFolder="$(OutputPath)\x86"/>
+    <Copy SourceFiles="..\StUtil.Native.Injection.Helper\bin\x64\StUtil.Native.Injection.Helper.exe" DestinationFolder="$(OutputPath)\x64" />
+    <Copy SourceFiles="..\StUtil.Native.Injection.Helper\bin\x86\StUtil.Native.Injection.Helper.exe" DestinationFolder="$(OutputPath)\x86" />
+    <Copy SourceFiles="..\StUtil.Native.Injection\bin\x64\StUtil.Native.Injection.dll" DestinationFolder="$(OutputPath)\x64" />
+    <Copy SourceFiles="..\StUtil.Native.Injection\bin\x86\StUtil.Native.Injection.dll" DestinationFolder="$(OutputPath)\x86" />
   </Target>
-
 </Project>

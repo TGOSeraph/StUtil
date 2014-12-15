@@ -5,6 +5,12 @@ namespace StUtil.Native.Internal
 {
     public static partial class NativeMethods
     {
+        [DllImport("ntdll.dll")]
+        public static extern int NtQueryInformationProcess(IntPtr processHandle, int processInformationClass, ref NativeStructs.PROCESS_BASIC_INFORMATION processInformation, int processInformationLength, out int returnLength);
+        
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+
         /// <summary>
         /// <para>Opens an existing local process object.</para>
         /// </summary>

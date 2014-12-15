@@ -43,8 +43,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Native.Injection.Hel
 		{F925C1D0-95A3-4CB4-AE62-C77CB41E87B6} = {F925C1D0-95A3-4CB4-AE62-C77CB41E87B6}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Plugin", "StUtil.Plugin\StUtil.Plugin.csproj", "{90032673-96F3-4604-8D1C-47C8D19C1DA9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -269,20 +267,6 @@ Global
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Release|Win32.ActiveCfg = Release|Any CPU
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Release|x64.ActiveCfg = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|ARM.ActiveCfg = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|Win32.ActiveCfg = Release|Any CPU
-		{90032673-96F3-4604-8D1C-47C8D19C1DA9}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
