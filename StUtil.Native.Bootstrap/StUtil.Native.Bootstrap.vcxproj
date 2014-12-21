@@ -179,9 +179,8 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <Target Name="AfterBuild">
-    <Exec Command="cmd.exe /k echo PlatformTarget: $(PlatformTarget)" />
-    <Exec Command="cmd.exe /k echo Platform: $(Platform)" />
     <MSBuild Condition="('$(Platform)' == 'x64' and '$(PlatformTarget)' == 'x64') " Projects="$(MSBuildProjectFile)" Properties="Platform=x86;PlatformTarget=Win32;OutDir=bin\x86;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
     <MSBuild Condition="('$(Platform)' == 'Win32' and '$(PlatformTarget)' == 'x86') " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatformTarget=x64;OutDir=bin\x64;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)StUtil.Native.Process\Resources"></Copy>
   </Target>
 </Project>
