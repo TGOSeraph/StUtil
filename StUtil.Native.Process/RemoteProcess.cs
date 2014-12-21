@@ -11,6 +11,8 @@ namespace StUtil.Native.Process
 {
     public class RemoteProcess : IDisposable
     {
+        private const string BOOTSTRAP_DLL = "StUtil.Native.Bootstrap.{0}.dll";
+
         public int Id
         {
             get
@@ -58,9 +60,18 @@ namespace StUtil.Native.Process
 
         public void LoadDotNetModule(string path, string typeName, string method, string args)
         {
+            bool x64 = Process.Is64Bit();
+
+            string file = string.Format(BOOTSTRAP_DLL, x64 ? "x64" : "x86");
+
+            if (!System.IO.File.Exists(file))
+            {
+                System.IO.File.WriteAllBytes(file, x64 ? Properties.Resources.StUtil_Native_Bootstrap_x64 : Properties.Resources.StUtil_Native_Bootstrap_x86);
+            }
+
             if (BootstrapModule == null)
             {
-                BootstrapModule = LoadNativeModule(@"C:\Users\Administrator\Pictures\Inject0r\Debug\InjectionHelper.dll");
+                BootstrapModule = LoadNativeModule(file);
             }
 
             RemoteMemoryAllocation mPath = RemoteMemoryAllocation.Allocate(Handle, path, Encoding.Unicode);
