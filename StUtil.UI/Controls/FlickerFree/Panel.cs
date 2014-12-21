@@ -10,10 +10,10 @@ namespace StUtil.UI.Controls.FlickerFree
         public Panel()
         {
             this.SetStyle(
-    ControlStyles.AllPaintingInWmPaint |
-    ControlStyles.UserPaint |
-    ControlStyles.DoubleBuffer,
-    true);
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.UserPaint |
+                ControlStyles.DoubleBuffer,
+                true);
         }
     }
 }
