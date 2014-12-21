@@ -1,3 +1,3 @@
 LIBRARY   BTREE
 EXPORTS
-   RemoteInvoke   @1
+   CLRBootstrap   @1

@@ -37,10 +37,31 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationClientsideProviders" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AutomationHelper.cs" />
+    <Compile Include="AutomationSelector.cs" />
+    <Compile Include="Patterns\InvokableElement.cs" />
+    <Compile Include="UIElement.cs" />
+    <Compile Include="Patterns\ExpandableElement.cs" />
+    <Compile Include="IUIElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Patterns\SelectableElement.cs" />
+    <Compile Include="Patterns\ValueElement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
+      <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
+      <Name>StUtil.Native</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

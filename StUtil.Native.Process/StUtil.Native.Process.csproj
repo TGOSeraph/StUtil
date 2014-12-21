@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FF57EF57-9D2D-4E75-A13A-56E0FBA2C2EF}</ProjectGuid>
+    <ProjectGuid>{3FCCAFAD-EAFF-4388-AEF5-38247DC2ED71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StUtil.UI</RootNamespace>
-    <AssemblyName>StUtil.UI</AssemblyName>
+    <RootNamespace>StUtil.Native.Process</RootNamespace>
+    <AssemblyName>StUtil.Native.Process</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,16 +30,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StUtil.Native, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StUtil.Native\bin\Debug\StUtil.Native.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,42 +43,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
-    <Compile Include="Controls\BorderPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\FlickerFree\FlowLayoutPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\FlickerFree\Panel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controls\Theme\ThemeManager.cs" />
-    <Compile Include="Controls\TopDockPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Forms\ControlHostForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FocusChildForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FocusChildForm.designer.cs">
-      <DependentUpon>FocusChildForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FocusParentForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FocusParentForm.Designer.cs">
-      <DependentUpon>FocusParentForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CLRINITARGS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteModule.cs" />
+    <Compile Include="RemoteProcess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
-      <Project>{21ed2160-e626-4af2-b45b-8d185f4b5974}</Project>
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
       <Name>StUtil.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StUtil.Data\StUtil.Data.csproj">
+      <Project>{16005c28-367b-4d6c-ae61-40d591aeb66b}</Project>
+      <Name>StUtil.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
+      <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
+      <Name>StUtil.Native</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\StUtil.Native.Bootstrap.x64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StUtil.Native.Bootstrap.x86.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

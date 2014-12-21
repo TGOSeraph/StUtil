@@ -14,11 +14,11 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\AnyCPU\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,7 +35,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -54,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -117,7 +117,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
-    <MSBuild Condition="('$(PlatformTarget)' == 'anycpu') OR ('$(Platform)' == 'x64' and '$(PlatformTarget)' == 'x64') " Projects="$(MSBuildProjectFile)" Properties="PlatFormTarget=x86;OutputPath=bin\x86;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
-    <MSBuild Condition="('$(PlatformTarget)' == 'anycpu') OR ('$(Platform)' == 'x86' and '$(PlatformTarget)' == 'x86') " Projects="$(MSBuildProjectFile)" Properties="PlatFormTarget=x64;OutputPath=bin\x64;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" '$(Platform)' == 'x86' " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatFormTarget=x64" RunEachTargetSeparately="true" />
   </Target>
 </Project>

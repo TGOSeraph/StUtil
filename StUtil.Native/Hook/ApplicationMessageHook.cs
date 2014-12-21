@@ -1,5 +1,4 @@
-﻿using StUtil.Native.Injection;
-using StUtil.Native.Windows;
+﻿using StUtil.Native.Windows;
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -40,7 +39,7 @@ namespace StUtil.Native.Hook
             }
             else
             {
-                Injector.Inject(Process, ApplicationMessageHook.Implant, this.GetType().Assembly.Location, this.GetType().FullName);
+                //Injector.Inject(Process, ApplicationMessageHook.Implant, this.GetType().Assembly.Location, this.GetType().FullName);
             }
         }
 
