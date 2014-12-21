@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\anycpu\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -117,6 +117,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
-    <MSBuild Condition=" '$(Platform)' == 'x86' " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatFormTarget=x64" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" '$(Platform)' == 'anycpu' " Projects="$(MSBuildProjectFile)" Properties="OutputPath=bin\x86;AssemblyName=$(AssemblyName).x86;Platform=x64;PlatFormTarget=x86" RunEachTargetSeparately="true" />
+    <MSBuild Condition=" '$(Platform)' == 'anycpu' " Projects="$(MSBuildProjectFile)" Properties="OutputPath=bin\x64;AssemblyName=$(AssemblyName).x64;Platform=x64;PlatFormTarget=x64" RunEachTargetSeparately="true" />
   </Target>
 </Project>

@@ -27,13 +27,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -68,13 +68,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(ProjectDir)\bin</OutDir>
+    <OutDir>$(ProjectDir)\bin\x86\</OutDir>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <TargetName>$(ProjectName).$(PlatformShortName)</TargetName>
-    <OutDir>$(ProjectDir)\bin</OutDir>
+    <OutDir>$(ProjectDir)\bin\x64\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -181,7 +181,7 @@
   <Target Name="AfterBuild">
     <Exec Command="cmd.exe /k echo PlatformTarget: $(PlatformTarget)" />
     <Exec Command="cmd.exe /k echo Platform: $(Platform)" />
-    <MSBuild Condition="('$(Platform)' == 'x64' and '$(PlatformTarget)' == 'x64') " Projects="$(MSBuildProjectFile)" Properties="Platform=x86;PlatformTarget=Win32;OutDir=bin;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
-    <MSBuild Condition="('$(Platform)' == 'Win32' and '$(PlatformTarget)' == 'x86') " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatformTarget=x64;OutDir=bin;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
+    <MSBuild Condition="('$(Platform)' == 'x64' and '$(PlatformTarget)' == 'x64') " Projects="$(MSBuildProjectFile)" Properties="Platform=x86;PlatformTarget=Win32;OutDir=bin\x86;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
+    <MSBuild Condition="('$(Platform)' == 'Win32' and '$(PlatformTarget)' == 'x86') " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatformTarget=x64;OutDir=bin\x64;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
   </Target>
 </Project>
