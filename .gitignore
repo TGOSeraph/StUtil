@@ -11,8 +11,9 @@
 *.force
 *.manifest
 *.suo
-*/obj/*
+*.ipch
 *.sdf
 *.opensdf
-/StUtil.Native.Injection/Debug/*
-/StUtil.Native.Injection/x64/Debug
+*/obj/*
+/*/Debug/*
+/StUtil.Native.Bootstrap/bin/*

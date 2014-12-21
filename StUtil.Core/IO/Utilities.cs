@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace StUtil.IO
 {
@@ -46,6 +47,18 @@ namespace StUtil.IO
             string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidReStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
             return dir + "\\" + System.Text.RegularExpressions.Regex.Replace(name, invalidReStr, replace) + ext;
+        }
+
+        /// <summary>
+        /// Normalizes the path.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns>The normalized path</returns>
+        public static string NormalizePath(string path)
+        {
+            return Path.GetFullPath(new Uri(path).LocalPath)
+                       .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                       .ToUpperInvariant();
         }
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Controls\FlickerFree\Panel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Theme\ThemeManager.cs" />
     <Compile Include="Controls\TopDockPanel.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -47,8 +47,6 @@
     <Compile Include="Hook\ApplicationMessageHook.cs" />
     <Compile Include="Hook\GlobalHook.cs" />
     <Compile Include="Hook\HookMethod.cs" />
-    <Compile Include="Injection\InjectionException.cs" />
-    <Compile Include="Injection\Injector.cs" />
     <Compile Include="Input\Hook\KeyboardHook.cs" />
     <Compile Include="Hook\LocalHook.cs" />
     <Compile Include="Input\Hook\MouseHook.cs" />
@@ -71,6 +69,7 @@
     <Compile Include="Internal\NativeStructs.Hooks.cs" />
     <Compile Include="Internal\NativeStructs.Process.cs" />
     <Compile Include="Internal\NativeUtilities.cs" />
+    <Compile Include="MemoryAllocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Windows\Controls\NativeButton.cs" />
@@ -96,10 +95,4 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <Copy SourceFiles="..\StUtil.Native.Injection.Helper\bin\x64\StUtil.Native.Injection.Helper.exe" DestinationFolder="$(OutputPath)\x64" />
-    <Copy SourceFiles="..\StUtil.Native.Injection.Helper\bin\x86\StUtil.Native.Injection.Helper.exe" DestinationFolder="$(OutputPath)\x86" />
-    <Copy SourceFiles="..\StUtil.Native.Injection\bin\x64\StUtil.Native.Injection.dll" DestinationFolder="$(OutputPath)\x64" />
-    <Copy SourceFiles="..\StUtil.Native.Injection\bin\x86\StUtil.Native.Injection.dll" DestinationFolder="$(OutputPath)\x86" />
-  </Target>
 </Project>

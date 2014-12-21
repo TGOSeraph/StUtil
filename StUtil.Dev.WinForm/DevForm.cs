@@ -1,6 +1,9 @@
-﻿using System;
+﻿using StUtil.Extensions;
+using System;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace StUtil.Dev.WinForm
 {
@@ -15,25 +18,100 @@ namespace StUtil.Dev.WinForm
 
         private void DevForm_Shown(object sender, EventArgs e)
         {
+            GenerateScheme(Color.Orange);
         }
 
-        private void Anim(Panel p)
+        public class ThemeColors
         {
-            StUtil.UI.Animation.Animate(UI.Animation.Easing.EaseInOutQuad, (this.Width / 2), TimeSpan.FromSeconds(2), p, "Left").Animated += (s, ev) =>
+            public Color Max { get; set; }
+            public Color Mid { get; set; }
+            public Color Min { get; set; }
+
+            private Color highlight;
+            public Color Highlight
             {
-                StUtil.UI.Animation.Animate(UI.Animation.Easing.EaseInOutQuad, this.Width + p.Location.X, TimeSpan.FromSeconds(2), p, "Left");
-            };
+                get
+                {
+                    return highlight;
+                }
+                set
+                {
+                    highlight = value;
+                    HighlightLight = ControlPaint.Light(highlight);
+                    HighlightLightLight = ControlPaint.LightLight(highlight);
+                    HighlightDark = ControlPaint.Dark(highlight);
+                    HighlightDarkDark = ControlPaint.DarkDark(highlight);
+                    HighlightInverse = highlight.Invert();
+                    HighlightBW = GetBlackOrWhiteContrast(highlight);
+                }
+            }
+            public Color HighlightLight { get; set; }
+            public Color HighlightLightLight { get; set; }
+            public Color HighlightDark { get; set; }
+            public Color HighlightDarkDark { get; set; }
+            public Color HighlightInverse { get; set; }
+            public Color HighlightBW { get; set; }
+
+            private Color background;
+            public Color Background
+            {
+                get
+                {
+                    return background;
+                }
+                set
+                {
+                    background = value;
+                    BackgroundLight = ControlPaint.Light(background);
+                    BackgroundLightLight = ControlPaint.LightLight(background);
+                    BackgroundDark = ControlPaint.Dark(background);
+                    BackgroundDarkDark = ControlPaint.DarkDark(background);
+                    Foreground = GetBlackOrWhiteContrast(background);
+                }
+            }
+            public Color BackgroundLight { get; set; }
+            public Color BackgroundLightLight { get; set; }
+            public Color BackgroundDark { get; set; }
+            public Color BackgroundDarkDark { get; set; }
+            public Color Foreground { get; set; }
+
+            public ThemeColors(Color background, Color highlight)
+            {
+                Max = Color.White;
+                Mid = Color.Gray;
+                Min = Color.Black;
+
+                Highlight = highlight;
+
+                Background = background;
+            }
+
+            public static Color GetBlackOrWhiteContrast(Color color)
+            {
+                var l = 0.2126 * (color.R / 255.0) + 0.7152 * (color.G / 255.0) + 0.0722 * (color.B / 255.0);
+                if (l < 0.6)
+                {
+                    return Color.White;
+                }
+                else
+                {
+                    return Color.Black;
+                }
+            }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        public void GenerateScheme(Color v)
         {
+            ThemeColors tc = new ThemeColors(Color.FromArgb(50, 50, 50), Color.HotPink);
+            this.BackColor = tc.Background;
+            this.ForeColor = tc.Foreground;
+            pnlHighlight.BackColor = tc.Highlight;
+            pnlHighlight.ForeColor = tc.HighlightBW;
+            pnlBorder.BackColor = tc.HighlightLight;
+            pnlContent.BackColor = tc.BackgroundDark;
+            pnlBgBorder.BackColor = tc.BackgroundLight;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Thread.Sleep(1000);
-            StUtil.Native.Input.Keyboard.Press(Keys.A);
-        }
     }
 
     //public class Test : ApplicationMessageHook

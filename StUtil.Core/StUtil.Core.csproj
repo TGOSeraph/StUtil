@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\ByteArrayExtensions.cs" />
     <Compile Include="Core\DelayedInvoke.cs" />
     <Compile Include="Core\PropertyAccessor.cs" />
     <Compile Include="Extensions\CharExtensions.cs" />

@@ -317,8 +317,11 @@ namespace StUtil.Native.Internal
         /// t results in a call to the entry point of each DLL in the process.
         /// <para>Another common use of this function is to inject a thread into a process to query heap or other process information. This can cause the same side effects mentioned in the previous paragraph. Also, the application can deadlock if the thread attempts to obtain ownership of locks that another thread is using.</para>
         /// </remarks>
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttribute, IntPtr dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
+
         [DllImport("Kernel32.dll", SetLastError = true)]
-        public static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, IntPtr dwStackSize, IntPtr lpStartAddress, [MarshalAs(UnmanagedType.AsAny)] object lpParameter, uint dwCreationFlags, out IntPtr lpThreadId);
+        public static extern bool FreeLibrary(IntPtr hModule);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool ReadProcessMemory(
