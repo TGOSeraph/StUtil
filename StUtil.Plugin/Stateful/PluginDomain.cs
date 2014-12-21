@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace StUtil.Plugins
+namespace StUtil.Plugins.Stateful
 {
     public class PluginDomain<TPlugin> : MarshalByRefObject where TPlugin : MarshalByRefObject
     {
@@ -31,6 +31,18 @@ namespace StUtil.Plugins
             {
                 return (TPlugin)Activator.CreateInstance(plugins.First());
             }
+        }
+
+        public IEnumerable<TPlugin> Create()
+        {
+            if (assembly == null)
+            {
+                assembly = Assembly.Load(System.IO.File.ReadAllBytes(assemblyFilePath));
+            }
+            return assembly
+                .GetTypes()
+                .Where(t => typeof(TPlugin).IsAssignableFrom(t))
+                .Select(t => (TPlugin)Activator.CreateInstance(t));
         }
     }
 }

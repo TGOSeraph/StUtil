@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-namespace StUtil.Plugins
+namespace StUtil.Plugins.Stateful
 {
-    public class PluginMarshaler<TPlugin> : StUtil.Generic.ProxyInvoker
+    internal class PluginMarshaler<TPlugin> : StUtil.Generic.ProxyInvoker
     {
         private static MethodInfo reloadMethod;
         private static MethodInfo unloadMethod;
