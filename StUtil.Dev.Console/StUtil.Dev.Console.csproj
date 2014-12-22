@@ -55,6 +55,14 @@
       <Project>{21ed2160-e626-4af2-b45b-8d185f4b5974}</Project>
       <Name>StUtil.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StUtil.Data\StUtil.Data.csproj">
+      <Project>{16005c28-367b-4d6c-ae61-40d591aeb66b}</Project>
+      <Name>StUtil.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.IPC\StUtil.IPC.csproj">
+      <Project>{d619d9fc-c9a9-4bb0-b2b4-3fe82987d6c1}</Project>
+      <Name>StUtil.IPC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
       <Name>StUtil.Native</Name>

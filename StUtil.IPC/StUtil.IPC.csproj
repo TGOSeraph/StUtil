@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,19 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommunicationConnection.cs" />
     <Compile Include="CommunicationServer.cs" />
     <Compile Include="ICommunicationClient.cs" />
     <Compile Include="ICommunicationConnection.cs" />
     <Compile Include="ICommunicationInitialisation.cs" />
     <Compile Include="ICommunicationServer.cs" />
     <Compile Include="IConnectionMessage.cs" />
+    <Compile Include="IPCProcess.cs" />
+    <Compile Include="TextMessage.cs" />
     <Compile Include="NamedPipes\NamedPipeClient.cs" />
     <Compile Include="NamedPipes\NamedPipeConnection.cs" />
     <Compile Include="NamedPipes\NamedPipeInitialisation.cs" />
     <Compile Include="NamedPipes\NamedPipeServer.cs" />
     <Compile Include="Primitives.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializableMessage.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

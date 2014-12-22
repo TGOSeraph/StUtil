@@ -41,6 +41,7 @@ namespace StUtil.IPC
             {
                 return;
             }
+            connections = new List<ICommunicationConnection>();
             OnStart(initArgs);
             while (!_stop)
             {
@@ -51,6 +52,7 @@ namespace StUtil.IPC
                 {
                     OnConnectionReceived(conn);
                 }
+                if (!MultipleStreams) break;
             }
             Stopping = false;
         }

@@ -25,7 +25,7 @@ namespace StUtil.IPC.NamedPipes
         protected override ICommunicationConnection WaitForConnection()
         {
             server.WaitForConnection();
-            
+            return new NamedPipeConnection(server);
         }
     }
 }

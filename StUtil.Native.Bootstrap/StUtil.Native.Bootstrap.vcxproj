@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -181,6 +181,7 @@
   <Target Name="AfterBuild">
     <MSBuild Condition="('$(Platform)' == 'x64' and '$(PlatformTarget)' == 'x64') " Projects="$(MSBuildProjectFile)" Properties="Platform=x86;PlatformTarget=Win32;OutDir=bin\x86;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
     <MSBuild Condition="('$(Platform)' == 'Win32' and '$(PlatformTarget)' == 'x86') " Projects="$(MSBuildProjectFile)" Properties="Platform=x64;PlatformTarget=x64;OutDir=bin\x64;OutputPath=bin;AssemblyName=$(TargetName)" RunEachTargetSeparately="true" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)StUtil.Native.Process\Resources"></Copy>
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)StUtil.Native.Process\Resources">
+    </Copy>
   </Target>
 </Project>
