@@ -73,12 +73,17 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\StUtil.Native.Bootstrap.x64.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\StUtil.Native.Bootstrap.x86.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StUtil.Native.Injection.Helper.x86.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StUtil.Native.Injection.Helper.x64.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

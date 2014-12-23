@@ -12,6 +12,7 @@ namespace StUtil.Native.Process
     public class RemoteProcess : IDisposable
     {
         private const string BOOTSTRAP_DLL = "StUtil.Native.Bootstrap.{0}.dll";
+        private const string INJHELPER_DLL = "StUtil.Native.Injection.Helper.{0}.dll";
 
         public int Id
         {
@@ -58,17 +59,33 @@ namespace StUtil.Native.Process
             }
         }
 
+        private void CreateFile(string file, byte[] data)
+        {
+
+        }
+
         public void LoadDotNetModule(string path, string typeName, string method, string args)
         {
             bool x64 = Process.Is64Bit();
 
-            string file = string.Format(BOOTSTRAP_DLL, x64 ? "x64" : "x86");
-
-            if (!System.IO.File.Exists(file))
+            if (x64)
             {
-                System.IO.File.WriteAllBytes(file, x64 ? Properties.Resources.StUtil_Native_Bootstrap_x64 : Properties.Resources.StUtil_Native_Bootstrap_x86);
+                CreateFile(string.Format(BOOTSTRAP_DLL, "x64"), Properties.Resources.StUtil_Native_Bootstrap_x64);
+                CreateFile(string.Format(INJHELPER_DLL, "x64"), Properties.Resources.StUtil_Native_Injection_Helper_x64);
+            }
+            else
+            {
+                CreateFile(string.Format(BOOTSTRAP_DLL, "x86"), Properties.Resources.StUtil_Native_Bootstrap_x86);
+                CreateFile(string.Format(INJHELPER_DLL, "x86"), Properties.Resources.StUtil_Native_Injection_Helper_x86);
             }
 
+       
+            //TODO: Change this to use the injection helper
+            //  |
+            //  |
+            //  V
+
+            /*
             if (BootstrapModule == null)
             {
                 BootstrapModule = LoadNativeModule(file);
@@ -96,7 +113,7 @@ namespace StUtil.Native.Process
                 mTypeName.Dispose();
                 mMethod.Dispose();
                 mArgs.Dispose();
-            }
+            }*/
         }
 
         public RemoteModule LoadNativeModule(string path)
