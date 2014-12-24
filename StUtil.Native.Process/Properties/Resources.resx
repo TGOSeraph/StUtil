@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="StUtil_Native_Bootstrapper_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StUtil.Native.Bootstrapper.x64.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="StUtil_Native_Bootstrap_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StUtil.Native.Bootstrap.x64.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="StUtil_Native_Bootstrap_x86" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StUtil.Native.Bootstrap.x86.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="StUtil_Native_Injection_Helper_x64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StUtil.Native.Injection.Helper.x64.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="StUtil_Native_Injection_Helper_x86" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StUtil.Native.Injection.Helper.x86.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="StUtil_Native_Bootstrapper_x86" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StUtil.Native.Bootstrapper.x86.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

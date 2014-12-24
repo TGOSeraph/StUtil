@@ -44,7 +44,6 @@
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\ProcessExtensions.cs" />
     <Compile Include="Extensions\ProgressBarExtensions.cs" />
-    <Compile Include="Hook\ApplicationMessageHook.cs" />
     <Compile Include="Hook\GlobalHook.cs" />
     <Compile Include="Hook\HookMethod.cs" />
     <Compile Include="Input\Hook\KeyboardHook.cs" />

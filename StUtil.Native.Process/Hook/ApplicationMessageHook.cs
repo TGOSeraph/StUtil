@@ -1,17 +1,22 @@
-﻿using StUtil.Native.Windows;
+﻿using StUtil.Native.Hook;
+using StUtil.Native.Process;
+using StUtil.Native.Windows;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StUtil.Native.Hook
 {
     public abstract class ApplicationMessageHook
     {
-        public Process Process { get; private set; }
+        public System.Diagnostics.Process Process { get; private set; }
 
-        public ApplicationMessageHook(Process targetProcess)
+        public ApplicationMessageHook(System.Diagnostics.Process targetProcess)
         {
             this.Process = targetProcess;
         }
@@ -39,33 +44,22 @@ namespace StUtil.Native.Hook
             }
             else
             {
-                //Injector.Inject(Process, ApplicationMessageHook.Implant, this.GetType().Assembly.Location, this.GetType().FullName);
+                RemoteProcess p = new RemoteProcess(this.Process);
+                p.Open();
+                p.LoadDotNetModule(Assembly.GetExecutingAssembly().Location, typeof(ApplicationMessageHook).FullName, "Implant", this.GetType().Assembly.Location + ";" + this.GetType().FullName);
             }
         }
 
         public static int Implant(string args)
         {
-            try
-            {
-                string[] split = args.Split(new char[] { ';' }, 2);
-                Assembly asm = Assembly.LoadFrom(split[0]);
+            string[] split = args.Split(new char[] { ';' }, 2);
+            Assembly asm = Assembly.LoadFrom(split[0]);
 
-                Type t = asm.GetType(split[1]);
+            Type t = asm.GetType(split[1]);
 
-                ApplicationMessageHook hook = (ApplicationMessageHook)Activator.CreateInstance(t, Process.GetCurrentProcess());
+            ApplicationMessageHook hook = (ApplicationMessageHook)Activator.CreateInstance(t, System.Diagnostics.Process.GetCurrentProcess());
 
-                hook.Hook();
-            }
-            catch (Exception ex)
-            {
-                byte[] message = System.Text.Encoding.Unicode.GetBytes(ex.ToString());
-                byte[] length = BitConverter.GetBytes(message.Length);
-                IntPtr ptr = Marshal.AllocHGlobal(message.Length + length.Length);
-                Marshal.Copy(length, 0, ptr, length.Length);
-                Marshal.Copy(message, 0, new IntPtr(ptr.ToInt64() + length.Length), message.Length);
-
-                return -ptr.ToInt32();
-            }
+            hook.Hook();
 
             return 1;
         }

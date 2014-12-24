@@ -63,6 +63,10 @@
       <Project>{d619d9fc-c9a9-4bb0-b2b4-3fe82987d6c1}</Project>
       <Name>StUtil.IPC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StUtil.Native.Process\StUtil.Native.Process.csproj">
+      <Project>{3fccafad-eaff-4388-aef5-38247dc2ed71}</Project>
+      <Name>StUtil.Native.Process</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
       <Name>StUtil.Native</Name>

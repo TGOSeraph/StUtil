@@ -7,8 +7,8 @@
     <ProjectGuid>{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StUtil.Native.Injection.Helper</RootNamespace>
-    <AssemblyName>StUtil.Native.Injection.Helper</AssemblyName>
+    <RootNamespace>StUtil.Native.Bootstrapper</RootNamespace>
+    <AssemblyName>StUtil.Native.Bootstrapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -57,6 +57,10 @@
     <ApplicationIcon>Script.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StUtil.Native.Process, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\StUtil.Native.Process\bin\Debug\StUtil.Native.Process.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -102,9 +106,9 @@
       <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
       <Name>StUtil.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StUtil.Native.Process\StUtil.Native.Process.csproj">
-      <Project>{3fccafad-eaff-4388-aef5-38247dc2ed71}</Project>
-      <Name>StUtil.Native.Process</Name>
+    <ProjectReference Include="..\StUtil.IPC\StUtil.IPC.csproj">
+      <Project>{d619d9fc-c9a9-4bb0-b2b4-3fe82987d6c1}</Project>
+      <Name>StUtil.IPC</Name>
     </ProjectReference>
     <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
       <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
@@ -113,8 +117,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
-    <Message Text="### $(Platform) ###" Importance="high" />
-    <MSBuild Condition=" '$(Platform)' == 'x64' " Projects="$(MSBuildProjectFile)" Properties="OutputPath=bin\x86;AssemblyName=StUtil.Native.Injection.Helper.x86;Platform=x86;PlatFormTarget=x86" RunEachTargetSeparately="true" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)StUtil.Native.Process\Resources" />
   </Target>
 </Project>

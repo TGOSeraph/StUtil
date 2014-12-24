@@ -7,23 +7,11 @@ using System.Threading.Tasks;
 namespace StUtil.IPC
 {
     [Serializable]
-    public class TextMessage : SerializableMessage
+    public class TextMessage : ValueMessage<string>
     {
-        public string Text { get; set; }
-
-        public TextMessage(byte[] data)
+        public TextMessage(string methodName) 
+            : base(methodName)
         {
-            Text = System.Text.Encoding.Unicode.GetString(data);
-        }
-
-        public TextMessage(string methodName)
-        {
-            this.Text = methodName;
-        }
-
-        public override string ToString()
-        {
-            return Text;
         }
     }
 }

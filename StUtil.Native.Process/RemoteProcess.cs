@@ -12,7 +12,7 @@ namespace StUtil.Native.Process
     public class RemoteProcess : IDisposable
     {
         private const string BOOTSTRAP_DLL = "StUtil.Native.Bootstrap.{0}.dll";
-        private const string INJHELPER_DLL = "StUtil.Native.Injection.Helper.{0}.dll";
+        private const string BOOTSTRAP_EXE = "StUtil.Native.Bootstrapper.{0}.exe";
 
         public int Id
         {
@@ -59,38 +59,90 @@ namespace StUtil.Native.Process
             }
         }
 
-        private void CreateFile(string file, byte[] data)
+        private string CreateFile(string file, byte[] data)
         {
-
+            if (System.IO.File.Exists(file))
+            {
+                return file;
+            }
+            System.IO.File.WriteAllBytes(file, data);
+            return file;
         }
 
-        public void LoadDotNetModule(string path, string typeName, string method, string args)
+        public IntPtr LoadDotNetModule(string path, string typeName, string method, string args)
         {
             bool x64 = Process.Is64Bit();
-
-            if (x64)
+            if (x64 != Environment.Is64BitProcess)
             {
-                CreateFile(string.Format(BOOTSTRAP_DLL, "x64"), Properties.Resources.StUtil_Native_Bootstrap_x64);
-                CreateFile(string.Format(INJHELPER_DLL, "x64"), Properties.Resources.StUtil_Native_Injection_Helper_x64);
+                string helper = null;
+                //Use helper
+                if (x64)
+                {
+                    helper = CreateFile(string.Format(BOOTSTRAP_EXE, "x64"), Properties.Resources.StUtil_Native_Bootstrapper_x64);
+                }
+                else
+                {
+                    helper = CreateFile(string.Format(BOOTSTRAP_EXE, "x86"), Properties.Resources.StUtil_Native_Bootstrapper_x86);
+                }
+                helper = System.IO.Path.GetFullPath(helper);
+                IPC.NamedPipes.NamedPipeServer server = new IPC.NamedPipes.NamedPipeServer();
+                Guid guid = Guid.NewGuid();
+                IntPtr result = IntPtr.Zero;
+                Exception ex = null; ;
+                server.ConnectionRecieved += (s, e) =>
+                {
+                    IPC.IConnectionMessage msg = e.Value.SendAndReceive(new InjectionMessage
+                    {
+                        File = path,
+                        Type = typeName,
+                        Method = method,
+                        Args = args,
+                        ProcessId = Process.Id
+                    });
+                    if (msg is IPC.ValueMessage<IntPtr>)
+                    {
+                        result = ((IPC.ValueMessage<IntPtr>)msg).Value;
+                    }
+                    else
+                    {
+                        ex = ((IPC.ValueMessage<Exception>)msg).Value;
+                    }
+                };
+                var p = System.Diagnostics.Process.Start(helper, guid.ToString());
+                server.Start(new IPC.NamedPipes.NamedPipeInitialisation(guid.ToString()));
+                if (ex != null)
+                {
+                    throw ex;
+                }
+                else
+                {
+                    return result;
+                }
             }
             else
             {
-                CreateFile(string.Format(BOOTSTRAP_DLL, "x86"), Properties.Resources.StUtil_Native_Bootstrap_x86);
-                CreateFile(string.Format(INJHELPER_DLL, "x86"), Properties.Resources.StUtil_Native_Injection_Helper_x86);
+                return LoadDotNetModuleImpl(path, typeName, method, args);
+            }
+        }
+
+        private IntPtr LoadDotNetModuleImpl(string path, string typeName, string method, string args)
+        {
+            bool x64 = Process.Is64Bit();
+            string file = null;
+            //Export the bootstrapper
+            if (x64)
+            {
+                file = CreateFile(string.Format(BOOTSTRAP_DLL, "x64"), Properties.Resources.StUtil_Native_Bootstrap_x64);
+            }
+            else
+            {
+                file = CreateFile(string.Format(BOOTSTRAP_DLL, "x86"), Properties.Resources.StUtil_Native_Bootstrap_x86);
             }
 
-       
-            //TODO: Change this to use the injection helper
-            //  |
-            //  |
-            //  V
-
-            /*
             if (BootstrapModule == null)
             {
                 BootstrapModule = LoadNativeModule(file);
             }
-
             RemoteMemoryAllocation mPath = RemoteMemoryAllocation.Allocate(Handle, path, Encoding.Unicode);
             RemoteMemoryAllocation mTypeName = RemoteMemoryAllocation.Allocate(Handle, typeName, Encoding.Unicode);
             RemoteMemoryAllocation mMethod = RemoteMemoryAllocation.Allocate(Handle, method, Encoding.Unicode);
@@ -105,7 +157,7 @@ namespace StUtil.Native.Process
                     typeName = mTypeName.MemoryAddress
                 };
 
-                BootstrapModule.Invoke("CLRBootstrap", bootstrap);
+                return BootstrapModule.Invoke("CLRBootstrap", bootstrap);
             }
             finally
             {
@@ -113,7 +165,7 @@ namespace StUtil.Native.Process
                 mTypeName.Dispose();
                 mMethod.Dispose();
                 mArgs.Dispose();
-            }*/
+            }
         }
 
         public RemoteModule LoadNativeModule(string path)
