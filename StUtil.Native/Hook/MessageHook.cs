@@ -18,20 +18,14 @@ namespace StUtil.Native.Hook
 
         protected override bool ProcessEvent(IntPtr wParam, IntPtr lParam)
         {
-            try
+            NativeStructs.CWPSTRUCT msg = (NativeStructs.CWPSTRUCT)Marshal.PtrToStructure(lParam, typeof(NativeStructs.CWPSTRUCT));
+            MessageReceived.RaiseEvent(this, new Message
             {
-                NativeStructs.CWPSTRUCT msg = (NativeStructs.CWPSTRUCT)Marshal.PtrToStructure(lParam, typeof(NativeStructs.CWPSTRUCT));
-                MessageReceived.RaiseEvent(this, new Message
-                {
-                    HWnd = msg.hwnd,
-                    LParam = msg.lParam,
-                    Msg = msg.message,
-                    WParam = msg.wParam
-                });
-            }
-            catch (Exception)
-            {
-            }
+                HWnd = msg.hwnd,
+                LParam = msg.lParam,
+                Msg = msg.message,
+                WParam = msg.wParam
+            });
             return false;
         }
     }
