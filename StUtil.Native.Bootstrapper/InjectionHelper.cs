@@ -19,7 +19,6 @@ namespace StUtil.Native.Bootstrapper
             var msg = conn.Receive() as StUtil.Native.Process.InjectionMessage;
 
             StUtil.Native.Process.RemoteProcess proc = new Process.RemoteProcess(System.Diagnostics.Process.GetProcessById(msg.ProcessId));
-            proc.Open();
             try
             {
                 IntPtr val = proc.LoadDotNetModule(msg.File, msg.Type, msg.Method, msg.Args);
