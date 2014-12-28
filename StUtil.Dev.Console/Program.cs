@@ -4,88 +4,240 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using StUtil.Native.Hook;
+using System.Collections.Generic;
 
 namespace StUtil.Dev.ConsoleTest
 {
     public class Program
     {
+        class WindowSelector
+        {
+
+        }
         public static void Main(string[] args)
         {
-            Process p = Process.GetProcessesByName("notepad").FirstOrDefault() ?? Process.Start(@"C:\Windows\system32\notepad.exe");
-            StUtil.Native.Hook.ApplicationMessageHook hook = new b(p);
-            hook.Hook();
+            string selector = ".windows:active > .notepad:nth-child(2) > #OK + * + * > * .window";
 
+            CssSelectorParser.Parse(selector);
 
-            StUtil.Native.Process.RemoteProcess rp = new Native.Process.RemoteProcess(p);
-            rp.Open();
-            IPC.NamedPipes.NamedPipeServer server = new IPC.NamedPipes.NamedPipeServer();
+            /*
+             * .windows
+             *      .notepad
+             *      .notepad
+             *          #OK
+             *          SOmething
+             *          Something
+             *              Something
+             *                  ...
+             *                      ...
+             *                          .window
+             */
+        }
 
-            string id = Guid.NewGuid().ToString();
-
-            Thread t = new Thread(() =>
+        public class CssSelectableNode
+        {
+            public CssSelectableNode Parent { get; set; }
+            public string Id { get; set; }
+            public string Class { get; set; }
+            public List<CssSelectableNode> Children { get; set; }
+            public int Index
             {
-                server.ConnectionRecieved += (s, e) =>
+                get
                 {
-                    int i = 0;
-                    while (e.Value.IsConnected)
+                    return Parent == null
+                        ? 0
+                        : Parent.Children.IndexOf(this);
+                }
+            }
+
+            public int NumberOfSiblings
+            {
+                get
+                {
+                    return this.Parent == null
+                        ? 0
+                        : Parent.Children.Count - 1;
+                }
+            }
+
+            public CssSelectableNode NextSibling
+            {
+                get
+                {
+                    return this.Parent == null
+                        ? null
+                        : (this.Parent.Children.Count == Index + 1
+                            ? null
+                            : this.Parent.Children[Index + 1]);
+                }
+            }
+
+            public CssSelectableNode PreviousSibling
+            {
+                get
+                {
+                    return this.Parent == null
+                        ? null
+                        : (this.Index == 0
+                            ? null
+                            : this.Parent.Children[Index - 1]);
+                }
+            }
+
+        }
+
+        public class Parser
+        {
+            public string Input { get; set; }
+
+            public string ReadWhile(Func<char, bool> condition)
+            {
+                return ReadWhile((c, i) => condition(c));
+            }
+
+            public string ReadWhile(Func<int, bool> condition)
+            {
+                return ReadWhile((c, i) => condition(i));
+            }
+
+            public string ReadWhile(Func<char, int, bool> condition)
+            {
+                string outp = "";
+                for (int i = 0; i < Input.Length; i++)
+                {
+                    if (!condition(Input[i], i))
                     {
-                        var msg = e.Value.Receive();
-                        if (e.Value.IsConnected && msg != null)
+                        break;
+                    }
+                    outp += Input[i];
+                }
+                Input = Input.Substring(outp.Length);
+                return outp;
+            }
+
+            public string ReadWhile(params char[] chars)
+            {
+                return ReadWhile(delegate(char c) { return Array.IndexOf(chars, c) != -1; });
+            }
+
+            public string ReadUntil(params char[] chars)
+            {
+                return ReadWhile(delegate(char c) { return Array.IndexOf(chars, c) == -1; });
+            }
+
+            public string Read(int count)
+            {
+                string outp = Input.Substring(0, count);
+                Input = Input.Substring(count);
+                return outp;
+            }
+        }
+
+        public class CssSelectorParser
+        {
+            public static CssSelectorParseTree Parse(string selector)
+            {
+                List<CssSelectorNode> nodes = new List<CssSelectorNode>();
+                CssSelectorParseTree parsed = new CssSelectorParseTree(nodes);
+                Parser parser = new Parser { Input = selector };
+
+                while (parser.Input.Length > 0)
+                {
+                    string read = parser.ReadUntil('>', ' ', '+');
+
+                    if (parser.Input.Length > 0)
+                    {
+                        parser.Read(1);
+                        parser.ReadWhile(' ', '\t');
+                    }
+                    if (read.Length == 0) continue;
+
+                    if (read.Contains(':'))
+                    {
+                        //Handle pseudoclass
+                        Parser pseudoParser = new Parser() { Input = read };
+                        read = pseudoParser.ReadUntil(':');
+                        pseudoParser.Read(1);
+                        string type = pseudoParser.ReadUntil('(');
+                        string args = null;
+                        if (pseudoParser.Input.Length > 0)
                         {
-                            Console.WriteLine((++i).ToString() + msg.ToString());
+                            pseudoParser.Read(1);
+                            args = pseudoParser.ReadUntil(')');
+                            pseudoParser.Read(1);
+                        }
+                        nodes.Add(new PseudoCssSelector(read, type, args));
+                    }
+                    else
+                    {
+                        nodes.Add(new CoreCssSelector(read));
+                    }
+                }
+
+                return parsed;
+            }
+        }
+
+        public class CssSelectorParseTree
+        {
+            public IEnumerable<CssSelectorNode> Nodes { get; private set; }
+            public CssSelectorParseTree(List<CssSelectorNode> nodes)
+            {
+                this.Nodes = nodes;
+            }
+        }
+
+        public abstract class CssSelectorNode
+        {
+        }
+
+        public class CoreCssSelector : CssSelectorNode
+        {
+            public string Class { get; set; }
+            public string Id { get; set; }
+
+            public CoreCssSelector(string selector)
+            {
+                Id = Class = "";
+
+                bool id = false;
+                foreach (char c in selector)
+                {
+                    if (c == '.')
+                    {
+                        id = true;
+                    }
+                    else if (c == '#')
+                    {
+                        id = false;
+                    }
+                    else
+                    {
+                        if (id)
+                        {
+                            Id += c;
+                        }
+                        else
+                        {
+                            Class += c;
                         }
                     }
-                    Console.WriteLine("Done");
-                    Console.ReadKey(true);
-                };
-                server.Start(new IPC.NamedPipes.NamedPipeInitialisation(id));
-            });
-            t.Start();
-
-            IntPtr v = rp.LoadDotNetModule(Application.ExecutablePath, typeof(Program).FullName, "Main2", id);
-            if (v.ToInt32() < 0)
-            {
-                Marshal.ThrowExceptionForHR(v.ToInt32());
-            }
-        }
-
-        public static int Main2(string args)
-        {
-            IPC.NamedPipes.NamedPipeClient client = new IPC.NamedPipes.NamedPipeClient();
-            var x = new c(client.Connect(new IPC.NamedPipes.NamedPipeInitialisation(args)));
-            x.Hook();
-            return 1;
-        }
-
-        class b : StUtil.Native.Hook.ApplicationMessageHook
-        {
-            public b(Process p)  : base(p)
-            {
-            }
-
-            protected override void MessageReceived(object sender, Generic.EventArgs<Message> e)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        class c : StUtil.Native.Hook.ApplicationMessageHook
-        {
-            private IPC.ICommunicationConnection conn;
-
-            public c(IPC.ICommunicationConnection conn)
-                : base(Process.GetCurrentProcess())
-            {
-                this.conn = conn;
-            }
-
-            protected override void MessageReceived(object sender, Generic.EventArgs<Message> e)
-            {
-                if (e.Value.Msg < 0x150 && e.Value.Msg > 0x100)
-                {
-                    this.conn.Send(new IPC.ValueMessage<string>(e.Value.ToString()));
                 }
             }
         }
+        public class PseudoCssSelector : CoreCssSelector
+        {
+            public string PseudoClass { get; set; }
+            public string PseudoArgs { get; set; }
+
+            public PseudoCssSelector(string selector, string pseudoClass, string pseudoArgs)
+                : base(selector)
+            {
+                this.PseudoArgs = pseudoArgs;
+                this.PseudoClass = pseudoClass;
+            }
+        }
+
     }
 }
