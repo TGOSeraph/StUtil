@@ -16,7 +16,7 @@ namespace StUtil.Extensions
                 {
                     return false;
                 }
-                hProcess = NativeUtilities.OpenProcess(process, NativeEnums.ProcessAccess.AllAccess);
+                hProcess = NativeUtilities.OpenProcess(process, NativeEnums.ProcessAccess.QueryInformation);
                 bool retVal = false;
                 if (NativeMethods.IsWow64Process(hProcess, out retVal))
                 {
