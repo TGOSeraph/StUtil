@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -144,7 +145,7 @@ namespace StUtil.Native.Process
                 BootstrapModule = LoadNativeModule(file);
             }
             RemoteMemoryAllocation mPath = RemoteMemoryAllocation.Allocate(Handle, path, Encoding.Unicode);
-            RemoteMemoryAllocation mTypeName = RemoteMemoryAllocation.Allocate(Handle, typeName, Encoding.Unicode);
+            RemoteMemoryAllocation mTypeName = RemoteMemoryAllocation.Allocate(Handle,   typeName, Encoding.Unicode);
             RemoteMemoryAllocation mMethod = RemoteMemoryAllocation.Allocate(Handle, method, Encoding.Unicode);
             RemoteMemoryAllocation mArgs = RemoteMemoryAllocation.Allocate(Handle, args, Encoding.Unicode);
             try
@@ -157,7 +158,12 @@ namespace StUtil.Native.Process
                     typeName = mTypeName.MemoryAddress
                 };
 
-                return BootstrapModule.Invoke("CLRBootstrap", bootstrap);
+                IntPtr v = BootstrapModule.Invoke("CLRBootstrap", bootstrap);
+                if (v.ToInt32() < 0)
+                {
+                    Marshal.ThrowExceptionForHR(v.ToInt32());
+                }
+                return v;
             }
             finally
             {
@@ -170,6 +176,7 @@ namespace StUtil.Native.Process
 
         public RemoteModule LoadNativeModule(string path)
         {
+            Open();
             path = StUtil.IO.Utilities.NormalizePath(path);
             var k32 = GetModules().First(m => m.Module.ModuleName.Equals("kernel32.dll", StringComparison.InvariantCultureIgnoreCase));
             IntPtr hMod = k32.Invoke("LoadLibraryA", path, Encoding.ASCII);
