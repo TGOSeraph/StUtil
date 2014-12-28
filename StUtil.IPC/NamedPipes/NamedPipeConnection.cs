@@ -8,6 +8,7 @@ using StUtil.Extensions;
 using System.Threading;
 using StUtil.Generic;
 using System.IO;
+using System.Diagnostics;
 
 namespace StUtil.IPC.NamedPipes
 {
@@ -42,9 +43,14 @@ namespace StUtil.IPC.NamedPipes
             }
             catch (IOException ioEx)
             {
+                System.Windows.Forms.MessageBox.Show(ioEx.ToString());
                 if (ioEx.HResult == -2147024664)
                 {
                     Disconnect();
+                }
+                else
+                {
+                    throw;
                 }
             }
         }
@@ -75,7 +81,6 @@ namespace StUtil.IPC.NamedPipes
         {
             get { return stream.IsConnected; }
         }
-
 
         public IConnectionMessage SendAndReceive(IConnectionMessage message)
         {
