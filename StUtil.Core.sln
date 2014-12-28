@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StUtil.Core", "StUtil.Core\StUtil.Core.csproj", "{23BE9E56-B59D-48C2-9ACA-336B591C8FE4}"
 EndProject
@@ -261,8 +261,8 @@ Global
 		{F925C1D0-95A3-4CB4-AE62-C77CB41E87B6}.Release|x64.ActiveCfg = Release|Win32
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|ARM.ActiveCfg = Debug|x86
-		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Mixed Platforms.Build.0 = Debug|x64
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Win32.ActiveCfg = Debug|x86
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|Win32.Build.0 = Debug|x86
 		{A086670B-51B1-4E99-AAA3-1BE933E9E5A6}.Debug|x64.ActiveCfg = Debug|x64
