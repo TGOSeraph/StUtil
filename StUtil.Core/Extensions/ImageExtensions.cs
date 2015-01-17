@@ -212,5 +212,47 @@ namespace StUtil.Extensions
             Size sz = GetResizedMaintainedAspectRatio(b, maxW, maxH);
             return ResizeImage(b, sz.Width, sz.Height);
         }
+
+        /// <summary>
+        /// Creats a new Bitmap with the brightness adjusted
+        /// </summary>
+        /// <param name="original">The image to adjust the brightness of</param>
+        /// <param name="brightness">A value between -255 and 255 stating the increase in brightness of each pixel</param>
+        /// <returns></returns>
+        public static Bitmap AdjustBrightness(this Bitmap original, int brightness)
+        {
+
+            float finalValue = (float)brightness / 255.0f;
+
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]{
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {finalValue, finalValue, finalValue, 1, 1}
+            });
+
+
+            //create a blank bitmap the same size as original
+            Bitmap newBitmap = new Bitmap(original.Width, original.Height);
+
+            //get a graphics object from the new image
+            Graphics g = Graphics.FromImage(newBitmap);
+
+            //create some image attributes
+            ImageAttributes attributes = new ImageAttributes();
+
+            //set the color matrix attribute
+            attributes.SetColorMatrix(colorMatrix);
+
+            //draw the original image on the new image
+            //using the grayscale color matrix
+            g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height),
+               0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+
+            //dispose the Graphics object
+            g.Dispose();
+            return newBitmap;
+        }
     }
 }
