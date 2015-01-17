@@ -36,10 +36,10 @@ namespace StUtil.Native.Input.Hook
         {
             NativeStructs.MSLLHOOKSTRUCT mouseHookStruct = (NativeStructs.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(NativeStructs.MSLLHOOKSTRUCT));
 
-            //detect button clicked
             MouseButtons button = MouseButtons.None;
             short mouseDelta = 0;
             NativeEnums.WM message = (NativeEnums.WM)wParam;
+
             switch (message)
             {
                 case NativeEnums.WM.LBUTTONDOWN:
@@ -62,6 +62,8 @@ namespace StUtil.Native.Input.Hook
 
                 case NativeEnums.WM.MOUSEWHEEL:
                     mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
+                    break;
+                default:
                     break;
             }
 
