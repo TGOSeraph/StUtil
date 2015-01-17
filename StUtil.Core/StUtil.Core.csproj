@@ -78,6 +78,7 @@
     <Compile Include="Utilities\ColorGenerator.cs" />
     <Compile Include="Utilities\Math.cs" />
     <Compile Include="Utilities\PluginLoader.cs" />
+    <Compile Include="Utilities\SearchHelper.cs" />
     <Compile Include="Utilities\Serialization.cs" />
     <Compile Include="Utilities\StringGenerator.cs" />
     <Compile Include="Utilities\TypeUtilities.cs" />
