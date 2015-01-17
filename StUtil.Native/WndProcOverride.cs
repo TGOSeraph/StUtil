@@ -20,16 +20,16 @@ namespace StUtil.Native
         /// <value>
         /// The handlers.
         /// </value>
-        public List<WndProcHandler> Handlers { get; private set; }
+        public List<BaseWndProcHandler> Handlers { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WndProcOverride"/> class.
         /// </summary>
         /// <param name="target">The target.</param>
-        public WndProcOverride(Control target, params WndProcHandler[] handlers)
+        public WndProcOverride(Control target, params BaseWndProcHandler[] handlers)
         {
             this.Target = target;
-            this.Handlers = new List<WndProcHandler>();
+            this.Handlers = new List<BaseWndProcHandler>();
             if (handlers.Length > 0)
             {
                 this.Handlers.AddRange(handlers);
@@ -41,11 +41,11 @@ namespace StUtil.Native
             Target.HandleCreated += Control_HandleCreated;
         }
 
-        public WndProcOverride(IntPtr hWnd, params WndProcHandler[] handlers)
+        public WndProcOverride(IntPtr hWnd, params BaseWndProcHandler[] handlers)
         {
             Control target = Control.FromHandle(hWnd);
             this.Target = target;
-            this.Handlers = new List<WndProcHandler>();
+            this.Handlers = new List<BaseWndProcHandler>();
             if (handlers.Length > 0)
             {
                 this.Handlers.AddRange(handlers);
@@ -94,7 +94,7 @@ namespace StUtil.Native
         /// <summary>
         /// Gets a click through handler.
         /// </summary>
-        public BaseWndProcHandler CreateClickThroughHandler()
+        public static BaseWndProcHandler CreateClickThroughHandler()
         {
             const int HTTRANSPARENT = -1;
             return new WndProcHandler(delegate(ref Message msg, out bool stopPropagation)
@@ -112,7 +112,7 @@ namespace StUtil.Native
         /// </summary>
         /// <param name="titleBar">The title bar.</param>
         /// <returns></returns>
-        public BaseWndProcHandler CreateTitleBarHandler(Control titleBar)
+        public static BaseWndProcHandler CreateTitleBarHandler(Control titleBar)
         {
             const int HTCAPTION = 2;
             return new WndProcHandler(delegate(ref Message msg, out bool stopPropagation)
