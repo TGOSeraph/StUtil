@@ -63,5 +63,10 @@ namespace StUtil.Native.Windows
         {
             this.Handle = handle;
         }
+
+        public override string ToString()
+        {
+            return "{hWnd: " + Handle.ToString() + ", Class: " + ClassName + ", Text: " + Text + "}";   
+        }
     }
 }
