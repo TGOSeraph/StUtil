@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace StUtil.Native.Internal
@@ -214,7 +215,21 @@ namespace StUtil.Native.Internal
         /// The C++ Programming Language, Second Edition, by Bjarne Stroustrup.</para>
         /// <para>The CallWindowProc function handles Unicode-to-ANSI conversion. You cannot take advantage of this conversion if you call the window procedure directly.</para>
         /// </remarks>
+       
         [DllImport("User32.dll", SetLastError = true)]
         public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+      
+        [DllImport("user32.dll")]
+        public static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
+       
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetWindowRect(IntPtr hWnd, ref NativeStructs.RECT rect);
+       
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetClientRect(IntPtr hWnd, ref NativeStructs.RECT rect);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool PrintWindow(IntPtr hwnd, IntPtr hDC, uint nFlags);
     }
 }

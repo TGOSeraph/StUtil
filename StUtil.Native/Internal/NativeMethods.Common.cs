@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -109,6 +110,10 @@ namespace StUtil.Native.Internal
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
         public static extern bool EnumChildWindows(IntPtr hWndParent, NativeCallbacks.EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool EnumWindows(NativeCallbacks.EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
         /// <summary>
         /// <para>Closes an open object handle.</para>
@@ -236,5 +241,7 @@ namespace StUtil.Native.Internal
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
         public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+
+   
     }
 }

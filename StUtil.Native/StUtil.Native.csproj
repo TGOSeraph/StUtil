@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Extensions\ProcessExtensions.cs" />
     <Compile Include="Extensions\ProgressBarExtensions.cs" />
     <Compile Include="Hook\GlobalHook.cs" />
@@ -77,12 +78,13 @@
     <Compile Include="Windows\Forms\NativeForm.cs" />
     <Compile Include="Hook\MessageHook.cs" />
     <Compile Include="Windows\NativeComponent.cs" />
+    <Compile Include="Windows\ScreenCapture.cs" />
     <Compile Include="Windows\Subclasser.cs" />
     <Compile Include="WndProcHandler.cs" />
     <Compile Include="WndProcOverride.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Internal\NativeMethods.WindowsMessages.cs" />
+    <Compile Include="Internal\NativeMethods.Windows.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Internal\NativeMethods.Input.cs" />
