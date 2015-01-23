@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using StUtil.Native.Hook;
 using System.Collections.Generic;
+using StUtil.Utilities;
 
 namespace StUtil.Dev.ConsoleTest
 {
@@ -17,22 +18,10 @@ namespace StUtil.Dev.ConsoleTest
         }
         public static void Main(string[] args)
         {
-            string selector = ".windows:active > .notepad:nth-child(2) > #OK + * + * > * .window";
+            string selector = "html:5>";
 
             CssSelectorParser.Parse(selector);
 
-            /*
-             * .windows
-             *      .notepad
-             *      .notepad
-             *          #OK
-             *          SOmething
-             *          Something
-             *              Something
-             *                  ...
-             *                      ...
-             *                          .window
-             */
         }
 
         public class CssSelectableNode
@@ -87,52 +76,7 @@ namespace StUtil.Dev.ConsoleTest
 
         }
 
-        public class Parser
-        {
-            public string Input { get; set; }
-
-            public string ReadWhile(Func<char, bool> condition)
-            {
-                return ReadWhile((c, i) => condition(c));
-            }
-
-            public string ReadWhile(Func<int, bool> condition)
-            {
-                return ReadWhile((c, i) => condition(i));
-            }
-
-            public string ReadWhile(Func<char, int, bool> condition)
-            {
-                string outp = "";
-                for (int i = 0; i < Input.Length; i++)
-                {
-                    if (!condition(Input[i], i))
-                    {
-                        break;
-                    }
-                    outp += Input[i];
-                }
-                Input = Input.Substring(outp.Length);
-                return outp;
-            }
-
-            public string ReadWhile(params char[] chars)
-            {
-                return ReadWhile(delegate(char c) { return Array.IndexOf(chars, c) != -1; });
-            }
-
-            public string ReadUntil(params char[] chars)
-            {
-                return ReadWhile(delegate(char c) { return Array.IndexOf(chars, c) == -1; });
-            }
-
-            public string Read(int count)
-            {
-                string outp = Input.Substring(0, count);
-                Input = Input.Substring(count);
-                return outp;
-            }
-        }
+       
 
         public class CssSelectorParser
         {
