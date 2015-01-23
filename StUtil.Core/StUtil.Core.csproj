@@ -72,11 +72,13 @@
     <Compile Include="Generic\Proxy.cs" />
     <Compile Include="Generic\ProxyInvoker.cs" />
     <Compile Include="Imaging\Utilities.cs" />
+    <Compile Include="IO\FileWatcher.cs" />
     <Compile Include="IO\TempFile.cs" />
     <Compile Include="IO\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ColorGenerator.cs" />
     <Compile Include="Utilities\Math.cs" />
+    <Compile Include="Utilities\Parser.cs" />
     <Compile Include="Utilities\PluginLoader.cs" />
     <Compile Include="Utilities\SearchHelper.cs" />
     <Compile Include="Utilities\Serialization.cs" />
