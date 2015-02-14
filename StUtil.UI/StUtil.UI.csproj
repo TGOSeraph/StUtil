@@ -45,7 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
+    <Compile Include="Animation\AnimatedElement.cs" />
+    <Compile Include="Animation\Animator.cs" />
+    <Compile Include="Animation\ColorTweener.cs" />
+    <Compile Include="Animation\FontTweener.cs" />
+    <Compile Include="Animation\NumericTweener.cs" />
+    <Compile Include="Animation\Transition.cs" />
+    <Compile Include="Animation\Tweener.cs" />
     <Compile Include="Controls\BorderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
