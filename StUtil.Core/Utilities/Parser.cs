@@ -29,6 +29,11 @@ namespace StUtil.Utilities
             return Input.Substring(0, count);
         }
 
+        public bool CheckAhead(string text)
+        {
+            return Peek(text.Length) == text;
+        }
+
         public char Read()
         {
             return Read(1)[0];
@@ -86,15 +91,21 @@ namespace StUtil.Utilities
             return ReadWhile((c, i) => Array.IndexOf(chars, c) == -1);
         }
 
-        public string ReadUntil(string text)
+        public string ReadUntil(params string[] words)
         {
-            string read = ReadUntil(text[0]);
-
-            while (Peek(text.Length) != text)
+            char[] find = words.Select(t => t[0]).Distinct().ToArray();
+            string read = "";
+            
+            read = ReadUntil(find);
+            var match = words.Where(w => w[0] == Peek()).FirstOrDefault(w => CheckAhead(w));
+            if (match != null)
             {
-                read += ReadUntil(text[0]);
+                return read;
             }
-            return read;
+            else
+            {
+                return read + Read() + ReadUntil(words);
+            }
         }
     }
 }
