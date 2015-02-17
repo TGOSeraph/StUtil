@@ -254,5 +254,27 @@ namespace StUtil.Extensions
             g.Dispose();
             return newBitmap;
         }
+
+        public static Bitmap Tint(this Image original, float red, float green, float blue)
+        {
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][] {
+		        new float[] {1,0,0,0,0},
+		        new float[] {0,1,0,0,0},
+		        new float[] {0,0,1,0,0},
+		        new float[] {0,0,0,1,0},
+		        new float[] {red / 255,green / 255,blue / 255,0,0}
+	        });
+            Bitmap newBitmap = new Bitmap(original.Width, original.Height);
+            using (Graphics g = Graphics.FromImage(newBitmap))
+            {
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetColorMatrix(colorMatrix);
+                g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+            }
+            return newBitmap;
+        }
     }
+
+
+
 }
