@@ -6,6 +6,12 @@ namespace StUtil.Native.Internal
 {
     public static partial class NativeMethods
     {
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+
+        [DllImport("user32.dll")]
+        public static extern int TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
+
         /// <summary>
         /// Sends the specified message to a window or windows.
         /// The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.

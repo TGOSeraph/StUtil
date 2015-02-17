@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace StUtil.Native.Internal
 {
@@ -51,6 +52,33 @@ namespace StUtil.Native.Internal
             public static implicit operator POINT(System.Drawing.Point p)
             {
                 return new POINT(p.X, p.Y);
+            }
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SIZE
+        {
+            public Int32 cx;
+            public Int32 cy;
+
+            public SIZE(Int32 cx, Int32 cy)
+            {
+                this.cx = cx; this.cy = cy;
+            }
+
+            public SIZE(System.Drawing.Size sz)
+                : this(sz.Width, sz.Height)
+            {
+            }
+
+            public static implicit operator System.Drawing.Size(SIZE sz)
+            {
+                return new System.Drawing.Size(sz.cx, sz.cy);
+            }
+
+            public static implicit operator SIZE(System.Drawing.Size sz)
+            {
+                return new SIZE(sz.Width, sz.Height);
             }
         }
 
