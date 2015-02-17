@@ -54,6 +54,7 @@
     <Compile Include="Input\Keyboard.cs" />
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Internal\NativeConsts.Common.cs" />
+    <Compile Include="Internal\NativeConsts.Graphics.cs" />
     <Compile Include="Internal\NativeEnums.ButtonMessages.cs" />
     <Compile Include="Internal\NativeEnums.Hooks.cs" />
     <Compile Include="Internal\NativeEnums.Input.cs" />
@@ -66,11 +67,14 @@
     <Compile Include="Internal\NativeMethods.Hooks.cs" />
     <Compile Include="Internal\NativeMethods.Processes.cs" />
     <Compile Include="Internal\NativeStructs.Common.cs" />
+    <Compile Include="Internal\NativeStructs.Graphics.cs" />
     <Compile Include="Internal\NativeStructs.Hooks.cs" />
     <Compile Include="Internal\NativeStructs.Process.cs" />
+    <Compile Include="Internal\NativeStructs.Windows.cs" />
     <Compile Include="Internal\NativeUtilities.cs" />
     <Compile Include="MemoryAllocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Twips.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Windows\Controls\NativeButton.cs" />
     <Compile Include="Windows\Controls\NativeStatic.cs" />
@@ -94,6 +98,9 @@
       <Project>{21ed2160-e626-4af2-b45b-8d185f4b5974}</Project>
       <Name>StUtil.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Internal\NativeMethods.Graphics.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
