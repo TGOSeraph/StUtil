@@ -1,9 +1,10 @@
-﻿using StUtil.Native.Internal;
+﻿using StUtil.Native;
+using StUtil.Native.Internal;
 using System;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace StUtil.Native.Controls
+namespace StUtil.UI.Forms
 {
     public partial class FocusParentForm : Form
     {

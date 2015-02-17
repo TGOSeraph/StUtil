@@ -1,4 +1,4 @@
-﻿namespace StUtil.Native.Controls
+﻿namespace StUtil.UI.Forms
 {
     partial class FocusParentForm
     {
