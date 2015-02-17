@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StUtil.Native, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\StUtil.Native\bin\Debug\StUtil.Native.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -68,6 +64,9 @@
     <Compile Include="Controls\TopDockPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\AlphaTransparencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\ControlHostForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +88,10 @@
     <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
       <Project>{21ed2160-e626-4af2-b45b-8d185f4b5974}</Project>
       <Name>StUtil.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StUtil.Native\StUtil.Native.csproj">
+      <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
+      <Name>StUtil.Native</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
