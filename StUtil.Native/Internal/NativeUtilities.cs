@@ -95,5 +95,29 @@ namespace StUtil.Native.Internal
 
             return hProcess;
         }
+
+        public static IntPtr GetWindowLongPtr(IntPtr hWnd, NativeEnums.GWL nIndex)
+        {
+            if (IntPtr.Size == 8)
+            {
+                return NativeMethods.GetWindowLongPtr64(hWnd, (int)nIndex);
+            }
+            else
+            {
+                return NativeMethods.GetWindowLongPtr32(hWnd, (int)nIndex);
+            }
+        }
+
+        public static IntPtr SetWindowLongPtr(IntPtr hWnd, NativeEnums.GWL nIndex, IntPtr dwNewLong)
+        {
+            if (IntPtr.Size == 8)
+            {
+                return NativeMethods.SetWindowLongPtr64(hWnd, (int)nIndex, dwNewLong);
+            }
+            else
+            {
+                return new IntPtr(NativeMethods.SetWindowLongPtr32(hWnd, (int)nIndex, dwNewLong.ToInt32()));
+            }
+        }
     }
 }

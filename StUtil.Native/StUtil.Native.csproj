@@ -61,7 +61,7 @@
     <Compile Include="Internal\NativeEnums.Processes.cs" />
     <Compile Include="Internal\NativeEnums.ProgressBars.cs" />
     <Compile Include="Internal\NativeEnums.StaticMessages.cs" />
-    <Compile Include="Internal\NativeEnums.WindowsMessages.cs" />
+    <Compile Include="Internal\NativeEnums.Windows.cs" />
     <Compile Include="Internal\NativeCallbacks.Common.cs" />
     <Compile Include="Internal\NativeMethods.Common.cs" />
     <Compile Include="Internal\NativeMethods.Hooks.cs" />
