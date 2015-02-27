@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Threading;
 
@@ -135,10 +136,34 @@ namespace StUtil.Net
         {
             using (Stream responseStream = httpWebResponse.GetResponseStream())
             {
-                using (StreamReader streamReader = new StreamReader(responseStream))
+                Stream stream = null;
+                try
                 {
-                    return streamReader.ReadToEnd();
+                    if (httpWebResponse.ContentEncoding.Equals("gzip", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        stream = new GZipStream(responseStream, CompressionMode.Decompress);
+                    }
+                    else if (httpWebResponse.ContentEncoding.Equals("deflate", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        stream = new DeflateStream(responseStream, CompressionMode.Decompress);
+                    }
+                    else
+                    {
+                        stream = responseStream;
+                    }
+                    using (StreamReader streamReader = new StreamReader(stream))
+                    {
+                        return streamReader.ReadToEnd();
+                    }
                 }
+                finally
+                {
+                    if (stream != null)
+                    {
+                        stream.Dispose();
+                    }
+                }
+
             }
         }
 
