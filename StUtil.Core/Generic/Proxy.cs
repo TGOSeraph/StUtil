@@ -15,6 +15,18 @@ namespace StUtil.Generic
         private object target;
         private ProxyInvoker proxy;
 
+        public object Target
+        {
+            get
+            {
+                return target;
+            }
+            set
+            {
+                target = value;
+            }
+        }
+
         /// <summary>
         /// Creates the specified proxy.
         /// </summary>
