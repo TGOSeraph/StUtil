@@ -255,6 +255,11 @@ namespace StUtil.Extensions
             return newBitmap;
         }
 
+        public static Bitmap Tint(this Image original, Color color)
+        {
+            return Tint(original, color.R, color.G, color.B);
+        }
+
         public static Bitmap Tint(this Image original, float red, float green, float blue)
         {
             ColorMatrix colorMatrix = new ColorMatrix(new float[][] {
