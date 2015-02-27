@@ -9,6 +9,8 @@ namespace StUtil.Net.JSON
     /// <typeparam name="T">The type of object to return</typeparam>
     public class GetRequest<T> : StUtil.Net.GetRequest<T>
     {
+        public string JSON { get; private set; }
+
         /// <summary>
         /// The json serializer
         /// </summary>
@@ -40,13 +42,14 @@ namespace StUtil.Net.JSON
         /// <returns></returns>
         protected override T HandleResponse(ref System.Net.HttpWebResponse httpWebResponse)
         {
+            this.JSON = base.GetResponseString(ref httpWebResponse);
             if (typeof(object) == typeof(T))
             {
-                return (T)StUtil.Data.Dynamic.JsonConverter.Deserialize(base.GetResponseString(ref httpWebResponse));
+                return (T)StUtil.Data.Dynamic.JsonConverter.Deserialize(this.JSON);
             }
             else
             {
-                return jss.Deserialize<T>(base.GetResponseString(ref httpWebResponse));
+                return jss.Deserialize<T>(this.JSON);
             }
         }
     }
