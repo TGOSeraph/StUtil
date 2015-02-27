@@ -5,11 +5,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace StUtil.Extensions
 {
     public static class PointExtensions
     {
+        public static Point ClientToScreen(this Point pt, Control ctrl)
+        {
+            return ClientToScreen(pt, ctrl.Handle);
+        }
+
+        public static Point ClientToScreen(this Point pt, Control ctrl, bool includesFrame)
+        {
+            return ClientToScreen(pt, ctrl.Handle, includesFrame);
+        }
+
         public static Point ClientToScreen(this Point pt, IntPtr hWnd)
         {
             return ClientToScreen(pt, hWnd, true);
