@@ -20,3 +20,4 @@
 /StUtil.Native.Bootstrap/x64/Debug
 /StUtil.Native.Bootstrapper/bin
 /StUtil.Native.Injection/x64/Debug
+/StUtil.Native/Extensions/RectangleExtensions.cs

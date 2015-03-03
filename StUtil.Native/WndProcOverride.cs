@@ -1,5 +1,7 @@
-﻿using System;
+﻿using StUtil.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace StUtil.Native
@@ -117,7 +119,9 @@ namespace StUtil.Native
             const int HTCAPTION = 2;
             return new WndProcHandler(delegate(ref Message msg, out bool stopPropagation)
             {
-                if (titleBar.ClientRectangle.Contains(titleBar.PointToClient(Cursor.Position)))
+                Rectangle rect = titleBar.ClientRectangle.ClientToScreen(titleBar);
+
+                if (rect.Contains(Cursor.Position))
                 {
                     msg.Result = new IntPtr(HTCAPTION);
                     stopPropagation = true;
