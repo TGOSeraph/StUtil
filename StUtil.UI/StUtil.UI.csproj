@@ -48,6 +48,9 @@
     <Compile Include="Animation\NumericTweener.cs" />
     <Compile Include="Animation\Transition.cs" />
     <Compile Include="Animation\Tweener.cs" />
+    <Compile Include="Components\HostedComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\BorderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -81,6 +84,12 @@
     </Compile>
     <Compile Include="Forms\FocusParentForm.Designer.cs">
       <DependentUpon>FocusParentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Theme\CustomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Theme\CustomForm.Designer.cs">
+      <DependentUpon>CustomForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
