@@ -10,7 +10,7 @@ namespace StUtil.Native.Internal
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
         [DllImport("user32.dll")]
-        public static extern int TrackPopupMenuEx(IntPtr hmenu, uint fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
+        public static extern int TrackPopupMenuEx(IntPtr hmenu, NativeEnums.TPM fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
 
         /// <summary>
         /// Sends the specified message to a window or windows.
@@ -251,6 +251,6 @@ namespace StUtil.Native.Internal
         public static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, NativeEnums.SWP wFlags);
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int Y, int cx, int cy, NativeEnums.SWP wFlags);
     }
 }

@@ -45,6 +45,7 @@
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Extensions\ProcessExtensions.cs" />
     <Compile Include="Extensions\ProgressBarExtensions.cs" />
+    <Compile Include="Extensions\RectangleExtensions.cs" />
     <Compile Include="Hook\GlobalHook.cs" />
     <Compile Include="Hook\HookMethod.cs" />
     <Compile Include="Input\Hook\KeyboardHook.cs" />
@@ -55,7 +56,7 @@
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Internal\NativeConsts.Common.cs" />
     <Compile Include="Internal\NativeConsts.Graphics.cs" />
-    <Compile Include="Internal\NativeEnums.ButtonMessages.cs" />
+    <Compile Include="Internal\NativeEnums.ControlMessages.cs" />
     <Compile Include="Internal\NativeEnums.Hooks.cs" />
     <Compile Include="Internal\NativeEnums.Input.cs" />
     <Compile Include="Internal\NativeEnums.Processes.cs" />
