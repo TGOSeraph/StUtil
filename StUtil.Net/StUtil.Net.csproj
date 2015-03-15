@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DownloadRequest.cs" />
     <Compile Include="NetRequest.cs" />
     <Compile Include="GetRequest.cs" />
     <Compile Include="HeadRequest.cs" />
@@ -50,6 +52,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StUtil.Core\StUtil.Core.csproj">
+      <Project>{23be9e56-b59d-48c2-9aca-336b591c8fe4}</Project>
+      <Name>StUtil.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StUtil.Data\StUtil.Data.csproj">
       <Project>{16005c28-367b-4d6c-ae61-40d591aeb66b}</Project>
       <Name>StUtil.Data</Name>

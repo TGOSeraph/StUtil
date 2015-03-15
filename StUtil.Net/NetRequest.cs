@@ -57,6 +57,8 @@ namespace StUtil.Net
             set;
         }
 
+        public int Timeout { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NetRequest{T}"/> class.
         /// </summary>
@@ -85,25 +87,39 @@ namespace StUtil.Net
         /// <returns></returns>
         public T Run()
         {
+            HttpWebResponse httpWebResponse = null;
             try
             {
                 HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(this.URL);
+                if (this.Timeout > 0)
+                {
+                    httpWebRequest.Timeout = this.Timeout;
+                }
                 httpWebRequest.CookieContainer = this.Cookies;
                 this.SetHeaders(ref httpWebRequest);
                 this.BuildRequest(ref httpWebRequest);
-                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+
                 return HandleResponse(ref httpWebResponse);
             }
             catch (WebException e)
             {
                 if (e.Response != null)
                 {
-                    HttpWebResponse httpWebResponse = (HttpWebResponse)e.Response;
+                    httpWebResponse = (HttpWebResponse)e.Response;
                     return HandleResponse(ref httpWebResponse);
                 }
                 else
                 {
                     throw;
+                }
+            }
+            finally
+            {
+                if (httpWebResponse != null)
+                {
+                    httpWebResponse.Close();
+                    httpWebResponse.Dispose();
                 }
             }
         }
@@ -128,42 +144,42 @@ namespace StUtil.Net
         protected abstract void BuildRequest(ref HttpWebRequest request);
 
         /// <summary>
+        /// Gets the response stream performing decompression if required
+        /// </summary>
+        /// <param name="httpWebResponse">The HTTP web response.</param>
+        /// <returns></returns>
+        protected virtual Stream GetResponseStream(ref HttpWebResponse httpWebResponse)
+        {
+            Stream responseStream = httpWebResponse.GetResponseStream();
+            Stream stream = null;
+            if (httpWebResponse.ContentEncoding.Equals("gzip", StringComparison.InvariantCultureIgnoreCase))
+            {
+                stream = new GZipStream(responseStream, CompressionMode.Decompress);
+            }
+            else if (httpWebResponse.ContentEncoding.Equals("deflate", StringComparison.InvariantCultureIgnoreCase))
+            {
+                stream = new DeflateStream(responseStream, CompressionMode.Decompress);
+            }
+            else
+            {
+                stream = responseStream;
+            }
+            return stream;
+        }
+
+        /// <summary>
         /// Gets the response string.
         /// </summary>
         /// <param name="httpWebResponse">The HTTP web response.</param>
         /// <returns></returns>
         protected virtual string GetResponseString(ref HttpWebResponse httpWebResponse)
         {
-            using (Stream responseStream = httpWebResponse.GetResponseStream())
+            using (Stream responseStream = GetResponseStream(ref httpWebResponse))
             {
-                Stream stream = null;
-                try
+                using (StreamReader streamReader = new StreamReader(responseStream))
                 {
-                    if (httpWebResponse.ContentEncoding.Equals("gzip", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        stream = new GZipStream(responseStream, CompressionMode.Decompress);
-                    }
-                    else if (httpWebResponse.ContentEncoding.Equals("deflate", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        stream = new DeflateStream(responseStream, CompressionMode.Decompress);
-                    }
-                    else
-                    {
-                        stream = responseStream;
-                    }
-                    using (StreamReader streamReader = new StreamReader(stream))
-                    {
-                        return streamReader.ReadToEnd();
-                    }
+                    return streamReader.ReadToEnd();
                 }
-                finally
-                {
-                    if (stream != null)
-                    {
-                        stream.Dispose();
-                    }
-                }
-
             }
         }
 
