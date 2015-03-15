@@ -40,13 +40,23 @@ namespace StUtil.IO
         /// <returns>A file name with all invalid characters removed</returns>
         public static string MakeValidFileName(string filePath, string replace = "_")
         {
-            string dir = Path.GetDirectoryName(filePath);
-            string name = Path.GetFileNameWithoutExtension(filePath);
-            string ext = Path.GetExtension(filePath);
+            string dir = null;
+            string name = null;
+            string ext = "";
+            try
+            {
+                dir = Path.GetDirectoryName(filePath);
+                name = Path.GetFileNameWithoutExtension(filePath);
+                ext = Path.GetExtension(filePath);
+            }
+            catch (Exception)
+            {
+                name = filePath;
+            }
 
             string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidReStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
-            return dir + "\\" + System.Text.RegularExpressions.Regex.Replace(name, invalidReStr, replace) + ext;
+            return (dir == null ? "" : dir + "\\") + System.Text.RegularExpressions.Regex.Replace(name, invalidReStr, replace) + ext;
         }
 
         /// <summary>
