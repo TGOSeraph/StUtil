@@ -16,5 +16,12 @@ namespace StUtil.Native.Internal
             MiddleUp = 0x0040,
             Absolute = 0x8000
         }
+
+        public enum SendInputEventType : int
+        {
+            InputMouse,
+            InputKeyboard,
+            InputHardware
+        }
     }
 }
