@@ -31,7 +31,14 @@ namespace StUtil.Utilities
             {
                 return Color.FromName(obj.ToString());
             }
-            return Convert.ChangeType(obj, t);
+            try
+            {
+                return Convert.ChangeType(obj, t);
+            }
+            catch (Exception)
+            {
+                return obj;
+            }
         }
 
         /// <summary>

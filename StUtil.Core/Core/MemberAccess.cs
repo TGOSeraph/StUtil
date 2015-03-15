@@ -107,6 +107,16 @@ namespace StUtil.Core
             set(Target, value);
         }
 
+        public TValue Get(TModel target)
+        {
+            return get(target);
+        }
+
+        public void Set(TModel target, TValue value)
+        {
+            set(target, value);
+        }
+
         public static implicit operator TValue(MemberAccess<TModel, TValue> mem)
         {
             return mem.Get();
@@ -114,14 +124,14 @@ namespace StUtil.Core
 
         private void HandleProperty(PropertyInfo prop)
         {
-            get = new Func<TModel, TValue>(o => (TValue)Convert.ChangeType(prop.GetValue(o), typeof(TValue)));
-            set = new Action<TModel, TValue>((o, v) => prop.SetValue(o, Convert.ChangeType(v, typeof(TValue))));
+            get = new Func<TModel, TValue>(o => (TValue)StUtil.Utilities.TypeUtilities.ConvertType(prop.GetValue(o), typeof(TValue)));
+            set = new Action<TModel, TValue>((o, v) => prop.SetValue(o, StUtil.Utilities.TypeUtilities.ConvertType(v, typeof(TValue))));
         }
 
         private void HandleField(FieldInfo field)
         {
-            get = new Func<TModel, TValue>(o => (TValue)Convert.ChangeType(field.GetValue(o), typeof(TValue)));
-            set = new Action<TModel, TValue>((o, v) => field.SetValue(o, Convert.ChangeType(v, typeof(TValue))));
+            get = new Func<TModel, TValue>(o => (TValue)StUtil.Utilities.TypeUtilities.ConvertType(field.GetValue(o), typeof(TValue)));
+            set = new Action<TModel, TValue>((o, v) => field.SetValue(o, StUtil.Utilities.TypeUtilities.ConvertType(v, typeof(TValue))));
         }
 
         private MemberExpression ExpressionToMemberExpression(Expression expression)
