@@ -5,7 +5,7 @@ namespace StUtil.Extensions
     /// <summary>
     /// Extensions for the Dictionary class
     /// </summary>
-    public static class DictionaryExtensions
+    public static class IDictionaryExtensions
     {
         /// <summary>
         /// Add an item to the dictionary, or if the key already exists, update the value
@@ -16,7 +16,7 @@ namespace StUtil.Extensions
         /// <param name="key">The key to add or update</param>
         /// <param name="value">The value to add or update</param>
         /// <returns>True if the key already existed, else false</returns>
-        public static bool AddOrUpdate<T, U>(this Dictionary<T, U> dictionary, T key, U value)
+        public static bool AddOrUpdate<T, U>(this IDictionary<T, U> dictionary, T key, U value)
         {
             if (dictionary.ContainsKey(key))
             {
@@ -40,7 +40,7 @@ namespace StUtil.Extensions
         /// <param name="key">The key to retrieve the value of</param>
         /// <param name="defaultVal">A default value for if the key does not exist</param>
         /// <returns>The value of the key or a default value</returns>
-        public static U GetOrDefault<T, U>(this Dictionary<T, U> dictionary, T key, U defaultVal = default(U))
+        public static U GetOrDefault<T, U>(this IDictionary<T, U> dictionary, T key, U defaultVal = default(U))
         {
             if (dictionary.ContainsKey(key))
             {
