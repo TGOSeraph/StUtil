@@ -44,6 +44,7 @@
     <Compile Include="Generic\BindingList.cs" />
     <Compile Include="Generic\FixedCapacityQueue.cs" />
     <Compile Include="Generic\Pair.cs" />
+    <Compile Include="Generic\Sides.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generic\Range.cs" />
     <Compile Include="Generic\RangeEnumerator.cs" />
