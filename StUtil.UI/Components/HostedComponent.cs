@@ -69,7 +69,7 @@ namespace StUtil.UI.Components
         {
             if (container == null)
             {
-                throw new ArgumentNullException("container");
+                return;
             }
 
             container.Add(this);

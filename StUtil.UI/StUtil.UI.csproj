@@ -48,7 +48,24 @@
     <Compile Include="Animation\NumericTweener.cs" />
     <Compile Include="Animation\Transition.cs" />
     <Compile Include="Animation\Tweener.cs" />
+    <Compile Include="Components\ComponentChildItem.cs" />
+    <Compile Include="Components\ComponentChildItemCollection.cs" />
     <Compile Include="Components\HostedComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ObjectState\Design\StateEventListDropDownEditor.cs" />
+    <Compile Include="Components\ObjectState\Design\StateEventPropertiesEditor.cs" />
+    <Compile Include="Components\ObjectState\Design\StateEventPropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\ObjectState\Design\StateEventPropertiesForm.Designer.cs">
+      <DependentUpon>StateEventPropertiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ObjectState\StateEvent.cs" />
+    <Compile Include="Components\ObjectState\StateEventProperties.cs" />
+    <Compile Include="Components\ObjectState\StateEventProperty.cs" />
+    <Compile Include="Components\ObjectState\StateItem.cs" />
+    <Compile Include="Components\ObjectState\StateManager.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\BorderPanel.cs">
@@ -67,6 +84,8 @@
     <Compile Include="Controls\TopDockPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Design\ControlListDropDownEditor.cs" />
+    <Compile Include="Design\DropDownEditor.cs" />
     <Compile Include="Forms\AlphaTransparencyForm.cs">
       <SubType>Form</SubType>
     </Compile>
