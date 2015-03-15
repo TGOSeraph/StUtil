@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace StUtil.Native.Internal
 {
@@ -118,6 +120,15 @@ namespace StUtil.Native.Internal
             {
                 return new IntPtr(NativeMethods.SetWindowLongPtr32(hWnd, (int)nIndex, dwNewLong.ToInt32()));
             }
+        }
+
+        public static NativeStructs.SCROLLINFO GetScrollInfo(Control ctrl, NativeEnums.SB direction)
+        {
+            NativeStructs.SCROLLINFO info = new NativeStructs.SCROLLINFO();
+            info.cbSize = Marshal.SizeOf(info);
+            info.fMask = (int)NativeEnums.SIF.ALL;
+            NativeMethods.GetScrollInfo(ctrl.Handle, (int)direction, ref info);
+            return info;
         }
     }
 }

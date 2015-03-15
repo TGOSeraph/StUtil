@@ -56,6 +56,7 @@
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Internal\NativeConsts.Common.cs" />
     <Compile Include="Internal\NativeConsts.Graphics.cs" />
+    <Compile Include="Internal\NativeEnums.Common.cs" />
     <Compile Include="Internal\NativeEnums.ControlMessages.cs" />
     <Compile Include="Internal\NativeEnums.Hooks.cs" />
     <Compile Include="Internal\NativeEnums.Input.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Internal\NativeStructs.Common.cs" />
     <Compile Include="Internal\NativeStructs.Graphics.cs" />
     <Compile Include="Internal\NativeStructs.Hooks.cs" />
+    <Compile Include="Internal\NativeStructs.Input.cs" />
     <Compile Include="Internal\NativeStructs.Process.cs" />
     <Compile Include="Internal\NativeStructs.Windows.cs" />
     <Compile Include="Internal\NativeUtilities.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="Windows\Controls\NativeButton.cs" />
     <Compile Include="Windows\Controls\NativeStatic.cs" />
+    <Compile Include="Windows\Controls\ScrollBar.cs" />
     <Compile Include="Windows\Forms\MessageBoxDialog.cs" />
     <Compile Include="Windows\Forms\NativeForm.cs" />
     <Compile Include="Hook\MessageHook.cs" />

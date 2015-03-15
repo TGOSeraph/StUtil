@@ -1360,6 +1360,25 @@ namespace StUtil.Native.Internal
             DEFERERASE = 0x2000,
             ASYNCWINDOWPOS = 0x4000
         }
+
+        public enum SB
+        {
+            HORZ = 0,
+            VERT = 1,
+            CTL = 2,
+            BOTH = 3
+        }
+
+        [Flags]
+        public enum SIF
+        {
+            RANGE = 0x1,
+            PAGE = 0x2,
+            POS = 0x4,
+            DISABLENOSCROLL = 0x8,
+            TRACKPOS = 0x16,
+            ALL = RANGE + PAGE + POS + TRACKPOS
+        }
     }
 
 }

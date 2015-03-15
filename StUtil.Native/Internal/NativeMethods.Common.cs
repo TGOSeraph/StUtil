@@ -242,6 +242,7 @@ namespace StUtil.Native.Internal
         [DllImport("User32.dll", SetLastError = true)]
         public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
 
-   
+        [DllImport("user32.dll")]
+        public static extern bool GetScrollInfo(IntPtr hwnd, int fnBar, ref NativeStructs.SCROLLINFO ScrollInfo);
     }
 }

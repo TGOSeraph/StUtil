@@ -22,5 +22,17 @@ namespace StUtil.Native.Internal
             public IntPtr hWnd, hWndInsertAfter;
             public int x, y, cx, cy, flags;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SCROLLINFO
+        {
+            public int cbSize;
+            public uint fMask;
+            public int nMin;
+            public int nMax;
+            public uint nPage;
+            public int nPos;
+            public int nTrackPos;
+        }
     }
 }
