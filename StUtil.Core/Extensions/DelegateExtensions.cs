@@ -225,5 +225,17 @@ namespace StUtil.Extensions
                 Action.DynamicInvoke(args);
             }
         }
+
+
+        /// <summary>
+        /// Converts the delegate to the specified delegate type.
+        /// </summary>
+        /// <param name="originalDelegate">The original delegate.</param>
+        /// <param name="targetDelegateType">Type of the target delegate.</param>
+        /// <returns></returns>
+        public static Delegate ConvertDelegate(this Delegate originalDelegate, Type targetDelegateType)
+        {
+            return Delegate.CreateDelegate(targetDelegateType, originalDelegate.Target, originalDelegate.Method);
+        }
     }
 }
