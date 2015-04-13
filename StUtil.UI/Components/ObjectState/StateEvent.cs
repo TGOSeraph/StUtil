@@ -15,6 +15,17 @@ namespace StUtil.UI.Components.ObjectState
         [Category("General")]
         public string Event { get; set; }
 
+        [Category("General")]
+        [DefaultValue(true)]
+        public bool Enabled { get; set; }
+
+        [Category("General")]
+        [DefaultValue(true)]
+        public string RequiredState { get; set; }
+
+        [Category("General")]
+        [DefaultValue(typeof(string[]))]
+        public string[] StateList { get; set; }
 
         private StateEventProperties props;
 
@@ -37,6 +48,7 @@ namespace StUtil.UI.Components.ObjectState
         public StateEvent()
         {
             Properties = new StateEventProperties();
+            Enabled = true;
         }
 
         public override string ToString()
