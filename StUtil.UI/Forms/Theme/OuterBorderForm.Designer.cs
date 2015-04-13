@@ -1,6 +1,6 @@
 ﻿namespace StUtil.UI.Forms.Theme
 {
-    partial class CustomForm
+    partial class OuterBorderForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,24 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // CustomForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 391);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CustomForm";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-
+            this.Text = "FormBorderForm";
         }
 
         #endregion
-
-
-
     }
 }
-
