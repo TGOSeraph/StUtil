@@ -50,6 +50,7 @@
     <Compile Include="Animation\Tweener.cs" />
     <Compile Include="Components\ComponentChildItem.cs" />
     <Compile Include="Components\ComponentChildItemCollection.cs" />
+    <Compile Include="Components\FormBorder.cs" />
     <Compile Include="Components\HostedComponent.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -77,10 +78,18 @@
     <Compile Include="Controls\FlickerFree\Panel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\PictureButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\SpinningProgress.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Theme\ThemeManager.cs" />
+    <Compile Include="Controls\Theme\CaptionBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\CaptionBarControl.Designer.cs">
+      <DependentUpon>CaptionBarControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopDockPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -110,6 +119,15 @@
     <Compile Include="Forms\Theme\CustomForm.Designer.cs">
       <DependentUpon>CustomForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Theme\OuterBorderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Theme\OuterBorderForm.Designer.cs">
+      <DependentUpon>OuterBorderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Theme\ShadowBorderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +139,11 @@
       <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
       <Name>StUtil.Native</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Theme\CaptionBarControl.resx">
+      <DependentUpon>CaptionBarControl.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
