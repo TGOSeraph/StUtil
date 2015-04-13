@@ -239,5 +239,18 @@ namespace StUtil.Extensions
         {
             return Color.FromArgb(c.A - a, c.R - r, c.G - g, c.B - b);
         }
+
+        public static Color GetBlackOrWhiteContrast(this Color color, double threshold = 0.6)
+        {
+            var l = 0.2126 * (color.R / 255.0) + 0.7152 * (color.G / 255.0) + 0.0722 * (color.B / 255.0);
+            if (l < threshold)
+            {
+                return Color.White;
+            }
+            else
+            {
+                return Color.Black;
+            }
+        }
     }
 }
