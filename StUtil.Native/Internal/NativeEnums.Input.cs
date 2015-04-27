@@ -23,5 +23,12 @@ namespace StUtil.Native.Internal
             InputKeyboard,
             InputHardware
         }
+
+        public enum KeyEventFlag
+        {
+            KEYEVENTF_KEYDOWN = 0x0000,
+            KEYEVENTF_EXTENDEDKEY = 0x0001,
+            KEYEVENTF_KEYUP = 0x0002,
+        }
     }
 }

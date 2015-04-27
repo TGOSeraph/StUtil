@@ -36,11 +36,11 @@ namespace StUtil.Native.Input
         void LeftUp(Point location);
         void LeftUp(int x, int y);
 
-        void Move(Point location);
-        void Move(int x, int y);
+        void MoveTo(Point location);
+        void MoveTo(int x, int y);
 
-        void MoveRelative(Point location);
-        void MoveRelative(int x, int y);
+        void MoveBy(Point location);
+        void MoveBy(int x, int y);
 
         void RightClick();
 

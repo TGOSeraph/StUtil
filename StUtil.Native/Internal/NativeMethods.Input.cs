@@ -188,5 +188,9 @@ namespace StUtil.Native.Internal
         /// </remarks>
         [DllImport("User32.dll", SetLastError = true)]
         public static extern uint MapVirtualKey(uint uCode, uint uMapType);
+
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint SendInput(uint nInputs, ref NativeStructs.INPUT pInputs, int cbSize);
     }
 }

@@ -13,9 +13,9 @@ namespace StUtil.Native.Input
             get { return false; }
         }
 
-        public override void Move(int x, int y)
+        public override void MoveTo(int x, int y)
         {
-            SendMouseInput(x, y, NativeEnums.MouseEventFlags.MOVE);
+            SendMouseInput(x, y, NativeEnums.MouseEventFlags.Move);
         }
 
         protected override void ButtonDown(MouseButtons button, int x, int y)
@@ -24,15 +24,15 @@ namespace StUtil.Native.Input
             switch (button)
             {
                 case MouseButtons.Left:
-                    flag = NativeEnums.MouseEventFlags.LEFTDOWN;
+                    flag = NativeEnums.MouseEventFlags.LeftDown;
                     break;
 
                 case MouseButtons.Right:
-                    flag = NativeEnums.MouseEventFlags.RIGHTDOWN;
+                    flag = NativeEnums.MouseEventFlags.RightDown;
                     break;
 
                 case MouseButtons.Middle:
-                    flag = NativeEnums.MouseEventFlags.MIDDLEDOWN;
+                    flag = NativeEnums.MouseEventFlags.MiddleDown;
                     break;
 
                 default:
@@ -47,15 +47,15 @@ namespace StUtil.Native.Input
             switch (button)
             {
                 case MouseButtons.Left:
-                    flag = NativeEnums.MouseEventFlags.LEFTUP;
+                    flag = NativeEnums.MouseEventFlags.LeftUp;
                     break;
 
                 case MouseButtons.Right:
-                    flag = NativeEnums.MouseEventFlags.RIGHTUP;
+                    flag = NativeEnums.MouseEventFlags.RightUp;
                     break;
 
                 case MouseButtons.Middle:
-                    flag = NativeEnums.MouseEventFlags.MIDDLEUP;
+                    flag = NativeEnums.MouseEventFlags.MiddleUp;
                     break;
 
                 default:
@@ -75,7 +75,7 @@ namespace StUtil.Native.Input
             mouseInput.mkhi.mi.dy = NativeUtilities.CalculateAbsoluteCoordinateY(y);
             mouseInput.mkhi.mi.mouseData = 0;
 
-            mouseInput.mkhi.mi.dwFlags = flag | NativeEnums.MouseEventFlags.ABSOLUTE;
+            mouseInput.mkhi.mi.dwFlags = flag | NativeEnums.MouseEventFlags.Absolute;
             NativeMethods.SendInput(1, ref mouseInput, Marshal.SizeOf(new NativeStructs.INPUT()));
         }
 

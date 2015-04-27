@@ -135,9 +135,9 @@ namespace StUtil.Native.Input
             MouseInputProvider.LeftUp(location);
         }
 
-        public void Move(System.Drawing.Point location)
+        public void MoveTo(System.Drawing.Point location)
         {
-            MouseInputProvider.Move(location);
+            MouseInputProvider.MoveTo(location);
         }
 
         public void RightClick()
@@ -205,19 +205,19 @@ namespace StUtil.Native.Input
             MouseInputProvider.LeftUp(x, y);
         }
 
-        public void Move(int x, int y)
+        public void MoveTo(int x, int y)
         {
-            MouseInputProvider.Move(x, y);
+            MouseInputProvider.MoveTo(x, y);
         }
 
-        public void MoveRelative(System.Drawing.Point location)
+        public void MoveBy(System.Drawing.Point location)
         {
-            MouseInputProvider.MoveRelative(location);
+            MouseInputProvider.MoveBy(location);
         }
 
-        public void MoveRelative(int x, int y)
+        public void MoveBy(int x, int y)
         {
-            MouseInputProvider.MoveRelative(x, y);
+            MouseInputProvider.MoveBy(x, y);
         }
 
         public void RightClick(int x, int y)

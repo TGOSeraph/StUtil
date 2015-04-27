@@ -71,6 +71,12 @@
     <Compile Include="Controls\BorderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\CustomScrollbar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CustomScrollbar.Designer.cs">
+      <DependentUpon>CustomScrollbar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FlickerFree\FlowLayoutPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -121,6 +127,11 @@
       <Project>{279a9cd8-3a5f-430f-a2cb-e9b5b97bd7dc}</Project>
       <Name>StUtil.Native</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\CustomScrollbar.resx">
+      <DependentUpon>CustomScrollbar.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,6 +7,12 @@ namespace StUtil.Native.Internal
 {
     public static partial class NativeMethods
     {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern short VkKeyScan(char ch);
+
+        [DllImport("user32.dll")]
+        public static extern int GetSystemMetrics(NativeEnums.SystemMetric smIndex);
+
         /// <summary>
         /// Retrieves the thread identifier of the calling thread.
         /// </summary>

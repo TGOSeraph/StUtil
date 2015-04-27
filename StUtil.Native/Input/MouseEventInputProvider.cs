@@ -15,9 +15,9 @@ namespace StUtil.Native.Input
             get { return false; }
         }
 
-        public override void Move(int x, int y)
+        public override void MoveTo(int x, int y)
         {
-            NativeMethods.mouse_event((uint)(NativeEnums.MouseEventFlags.MOVE | NativeEnums.MouseEventFlags.ABSOLUTE), (uint)NativeUtilities.CalculateAbsoluteCoordinateX(x), (uint)NativeUtilities.CalculateAbsoluteCoordinateY(y), 0, IntPtr.Zero);
+            NativeMethods.mouse_event((uint)(NativeEnums.MouseEventFlags.Move | NativeEnums.MouseEventFlags.Absolute), (uint)NativeUtilities.CalculateAbsoluteCoordinateX(x), (uint)NativeUtilities.CalculateAbsoluteCoordinateY(y), 0, IntPtr.Zero);
         }
 
         protected override void ButtonDown(System.Windows.Forms.MouseButtons button, int x, int y)
@@ -26,18 +26,18 @@ namespace StUtil.Native.Input
             switch (button)
             {
                 case System.Windows.Forms.MouseButtons.Left:
-                    flag = NativeEnums.MouseEventFlags.LEFTDOWN;
+                    flag = NativeEnums.MouseEventFlags.LeftDown;
                     break;
                 case System.Windows.Forms.MouseButtons.Right:
-                    flag = NativeEnums.MouseEventFlags.RIGHTDOWN;
+                    flag = NativeEnums.MouseEventFlags.RightDown;
                     break;
                 case System.Windows.Forms.MouseButtons.Middle:
-                    flag = NativeEnums.MouseEventFlags.MIDDLEDOWN;
+                    flag = NativeEnums.MouseEventFlags.MiddleDown;
                     break;
                 default:
                     throw new NotImplementedException(button.ToString());
             }
-            NativeMethods.mouse_event((uint)(flag | NativeEnums.MouseEventFlags.ABSOLUTE), (uint)NativeUtilities.CalculateAbsoluteCoordinateX(x), (uint)NativeUtilities.CalculateAbsoluteCoordinateY(y), 0, IntPtr.Zero);
+            NativeMethods.mouse_event((uint)(flag | NativeEnums.MouseEventFlags.Absolute), (uint)NativeUtilities.CalculateAbsoluteCoordinateX(x), (uint)NativeUtilities.CalculateAbsoluteCoordinateY(y), 0, IntPtr.Zero);
         }
 
         protected override void ButtonUp(System.Windows.Forms.MouseButtons button, int x, int y)
@@ -46,18 +46,18 @@ namespace StUtil.Native.Input
             switch (button)
             {
                 case System.Windows.Forms.MouseButtons.Left:
-                    flag = NativeEnums.MouseEventFlags.LEFTUP;
+                    flag = NativeEnums.MouseEventFlags.LeftUp;
                     break;
                 case System.Windows.Forms.MouseButtons.Right:
-                    flag = NativeEnums.MouseEventFlags.RIGHTUP;
+                    flag = NativeEnums.MouseEventFlags.RightUp;
                     break;
                 case System.Windows.Forms.MouseButtons.Middle:
-                    flag = NativeEnums.MouseEventFlags.MIDDLEUP;
+                    flag = NativeEnums.MouseEventFlags.MiddleUp;
                     break;
                 default:
                     throw new NotImplementedException(button.ToString());
             }
-            NativeMethods.mouse_event((uint)(flag | NativeEnums.MouseEventFlags.ABSOLUTE), (uint)NativeUtilities.CalculateAbsoluteCoordinateX(x), (uint)NativeUtilities.CalculateAbsoluteCoordinateY(y), 0, IntPtr.Zero);
+            NativeMethods.mouse_event((uint)(flag | NativeEnums.MouseEventFlags.Absolute), (uint)NativeUtilities.CalculateAbsoluteCoordinateX(x), (uint)NativeUtilities.CalculateAbsoluteCoordinateY(y), 0, IntPtr.Zero);
         }
     }
 }

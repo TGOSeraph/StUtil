@@ -40,9 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dynamic\DynamicEventBinder.cs" />
-    <Compile Include="Dynamic\DynamicReflectionBase.cs" />
-    <Compile Include="Dynamic\DynamicReflector.cs" />
     <Compile Include="Dynamic\JsonConverter.cs" />
     <Compile Include="Generic\BindingList.cs" />
     <Compile Include="Generic\FixedCapacityQueue.cs" />

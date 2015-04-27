@@ -130,5 +130,15 @@ namespace StUtil.Native.Internal
             NativeMethods.GetScrollInfo(ctrl.Handle, (int)direction, ref info);
             return info;
         }
+
+        public static int CalculateAbsoluteCoordinateX(int x)
+        {
+            return (x * 65536) / NativeMethods.GetSystemMetrics(NativeEnums.SystemMetric.SM_CXSCREEN);
+        }
+
+        public static int CalculateAbsoluteCoordinateY(int y)
+        {
+            return (y * 65536) / NativeMethods.GetSystemMetrics(NativeEnums.SystemMetric.SM_CYSCREEN);
+        }
     }
 }

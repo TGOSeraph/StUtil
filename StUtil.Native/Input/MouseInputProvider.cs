@@ -114,23 +114,23 @@ namespace StUtil.Native.Input
             Up(MouseButtons.Left, x, y);
         }
 
-        public void Move(Point location)
+        public void MoveTo(Point location)
         {
-            Move(location.X, location.Y);
+            MoveTo(location.X, location.Y);
         }
 
-        public abstract void Move(int x, int y);
+        public abstract void MoveTo(int x, int y);
 
-        public void MoveRelative(Point location)
+        public void MoveBy(Point location)
         {
-            MoveRelative(location.X, location.Y);
+            MoveBy(location.X, location.Y);
         }
 
-        public void MoveRelative(int x, int y)
+        public void MoveBy(int x, int y)
         {
             Point pos = Cursor.Position;
             pos.Offset(x, y);
-            Move(pos);
+            MoveTo(pos);
         }
 
         public void RightClick()

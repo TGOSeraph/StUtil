@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\NativeComponentExtensions.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Extensions\ProcessExtensions.cs" />
     <Compile Include="Extensions\ProgressBarExtensions.cs" />
@@ -52,8 +53,22 @@
     <Compile Include="Hook\LocalHook.cs" />
     <Compile Include="Input\Hook\MouseHook.cs" />
     <Compile Include="Hook\WindowsHook.cs" />
+    <Compile Include="Input\IKeyboardInputProvider.cs" />
+    <Compile Include="Input\IMouseInputProvider.cs" />
+    <Compile Include="Input\InputHelper.cs" />
     <Compile Include="Input\Keyboard.cs" />
+    <Compile Include="Input\KeyboardEventInputProvider.cs" />
+    <Compile Include="Input\KeyboardInputMethod.cs" />
+    <Compile Include="Input\KeyboardInputProvider.cs" />
+    <Compile Include="Input\KeyboardMessageInputProvider.cs" />
+    <Compile Include="Input\KeyboardSendKeysInputProvider.cs" />
+    <Compile Include="Input\MessageDispatchMethod.cs" />
     <Compile Include="Input\Mouse.cs" />
+    <Compile Include="Input\MouseEventInputProvider.cs" />
+    <Compile Include="Input\MouseInputMethod.cs" />
+    <Compile Include="Input\MouseInputProvider.cs" />
+    <Compile Include="Input\MouseMessageInputProvider.cs" />
+    <Compile Include="Input\MouseSendInputProvider.cs" />
     <Compile Include="Internal\NativeConsts.Common.cs" />
     <Compile Include="Internal\NativeConsts.Graphics.cs" />
     <Compile Include="Internal\NativeEnums.Common.cs" />

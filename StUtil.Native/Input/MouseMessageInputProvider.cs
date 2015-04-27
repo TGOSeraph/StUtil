@@ -42,7 +42,7 @@ namespace StUtil.Native.Input
             }
         }
 
-        public override void Move(int x, int y)
+        public override void MoveTo(int x, int y)
         {
             DispatchMessage(InputMessage.WM_MOUSEMOVE, IntPtr.Zero, new IntPtr(StUtil.Native.Internal.NativeUtilities.MakeLParam(x, y)));
         }

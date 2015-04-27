@@ -52,5 +52,13 @@ namespace StUtil.Native.Windows.Controls
             this.Maximum = inf.nMax;
             this.Position = inf.nTrackPos;
         }
+
+        public void ScrollTo(int value)
+        {
+            NativeStructs.SCROLLINFO inf = new NativeStructs.SCROLLINFO();
+            inf.fMask = (uint)NativeEnums.SIF.POS;
+            inf.nPos = value;
+            NativeMethods.SetScrollInfo(this.TargetControl.Handle, (int)(Orientation == ScrollOrientation.VerticalScroll ? NativeEnums.SB.VERT : NativeEnums.SB.HORZ), ref inf, true);
+        }
     }
 }

@@ -6,12 +6,20 @@ namespace StUtil.Native.Internal
 {
     public static partial class NativeMethods
     {
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 
         [DllImport("user32.dll")]
         public static extern int TrackPopupMenuEx(IntPtr hmenu, NativeEnums.TPM fuFlags, int x, int y, IntPtr hwnd, IntPtr lptpm);
 
+        [DllImport("user32.dll", SetLastError = false)]
+        public static extern IntPtr GetDesktopWindow();
+        
         /// <summary>
         /// Sends the specified message to a window or windows.
         /// The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message.
@@ -221,16 +229,16 @@ namespace StUtil.Native.Internal
         /// The C++ Programming Language, Second Edition, by Bjarne Stroustrup.</para>
         /// <para>The CallWindowProc function handles Unicode-to-ANSI conversion. You cannot take advantage of this conversion if you call the window procedure directly.</para>
         /// </remarks>
-       
+
         [DllImport("User32.dll", SetLastError = true)]
         public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-      
+
         [DllImport("user32.dll")]
         public static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
-       
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowRect(IntPtr hWnd, ref NativeStructs.RECT rect);
-       
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetClientRect(IntPtr hWnd, ref NativeStructs.RECT rect);
 
@@ -252,5 +260,8 @@ namespace StUtil.Native.Internal
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
         public static extern IntPtr SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int Y, int cx, int cy, NativeEnums.SWP wFlags);
+
+        [DllImport("user32.dll")]
+        public static extern int SetScrollInfo(IntPtr hwnd, int fnBar, [In] ref NativeStructs.SCROLLINFO lpsi, bool fRedraw);
     }
 }
