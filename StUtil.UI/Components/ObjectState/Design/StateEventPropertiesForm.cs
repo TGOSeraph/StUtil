@@ -39,14 +39,25 @@ namespace StUtil.UI.Components.ObjectState.Design
             customObj = new CustomObjectType(this.values.Properties.ToDictionary(k => k.PropertyName, k => k.Value));
             customObj.Properties.AddRange(Target.GetType().GetProperties().Select(p => new CustomProperty
             {
-                Desc = p
+                Description = p
                     .GetCustomAttributes(typeof(DescriptionAttribute), true)
                     .Select(a => ((DescriptionAttribute)a).Description)
+                    .FirstOrDefault(),
+                Category = p
+                    .GetCustomAttributes(typeof(CategoryAttribute), true)
+                    .Select(a => ((CategoryAttribute)a).Category)
                     .FirstOrDefault(),
                 Name = p.Name,
                 Type = p.PropertyType,
                 Value = p.GetValue(Target)
             }));
+            customObj.Properties.Add(new CustomProperty() {
+                Description = "ObjectState",
+                Name = "$ObjectState",
+                Type = typeof(string),
+                Value = null,
+                Category = " Object State"
+            });
 
             propertyGrid1.SelectedObject = customObj;
 
@@ -85,7 +96,7 @@ namespace StUtil.UI.Components.ObjectState.Design
                 public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
                 {
                     var stdProps = base.GetProperties(context, value, attributes);
-                    CustomObjectType obj = value as CustomObjectType;
+                    CustomObjectType obj = (CustomObjectType)value;
                     List<CustomProperty> customProps = obj == null ? null : obj.Properties;
                     PropertyDescriptor[] props = new PropertyDescriptor[stdProps.Count + (customProps == null ? 0 : customProps.Count)];
                     stdProps.CopyTo(props, 0);
@@ -108,8 +119,8 @@ namespace StUtil.UI.Components.ObjectState.Design
                 {
                     this.prop = prop;
                 }
-                public override string Category { get { return "Dynamic"; } }
-                public override string Description { get { return prop.Desc; } }
+                public override string Category { get { return prop.Category ?? "Dynamic"; } }
+                public override string Description { get { return prop.Description; } }
                 public override string Name { get { return prop.Name; } }
                 public override bool ShouldSerializeValue(object component)
                 {
@@ -138,7 +149,8 @@ namespace StUtil.UI.Components.ObjectState.Design
         public class CustomProperty
         {
             public string Name { get; set; }
-            public string Desc { get; set; }
+            public string Description { get; set; }
+            public string Category { get; set; }
             public object Value { get; set; }
             public Type Type { get; set; }
         }

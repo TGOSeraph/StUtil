@@ -50,6 +50,7 @@
     <Compile Include="Animation\Tweener.cs" />
     <Compile Include="Components\ComponentChildItem.cs" />
     <Compile Include="Components\ComponentChildItemCollection.cs" />
+    <Compile Include="Components\FormBorder.cs" />
     <Compile Include="Components\HostedComponent.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -83,10 +84,18 @@
     <Compile Include="Controls\FlickerFree\Panel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\PictureButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\SpinningProgress.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Theme\ThemeManager.cs" />
+    <Compile Include="Controls\Theme\CaptionBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Theme\CaptionBarControl.Designer.cs">
+      <DependentUpon>CaptionBarControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TopDockPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -115,6 +124,15 @@
     </Compile>
     <Compile Include="Forms\Theme\CustomForm.Designer.cs">
       <DependentUpon>CustomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Theme\OuterBorderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Theme\OuterBorderForm.Designer.cs">
+      <DependentUpon>OuterBorderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Theme\ShadowBorderForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

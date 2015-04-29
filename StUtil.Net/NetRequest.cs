@@ -131,10 +131,7 @@ namespace StUtil.Net
         public void RunAsync(Action<T> callback)
         {
             Thread thread = new Thread(new ParameterizedThreadStart(this.Request));
-            thread.Start(new object[]
-			{
-				callback
-			});
+            thread.Start(callback);
         }
 
         /// <summary>
